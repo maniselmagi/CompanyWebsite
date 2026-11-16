@@ -16,9 +16,10 @@ export interface PortfolioItem {
   title: string;
   tagline: string;
   domain: string;
-  category: 'Enterprise SaaS' | 'AI & ML' | 'Cloud Infrastructure' | 'Fintech & Mobile';
-  isDemonstration: boolean;
-  demonstrationNotice: string;
+  category: 'Commercial Kiosk Systems' | 'Custom Software' | 'Web Applications' | 'Mobile & Touch UI';
+  isRealProject: boolean;
+  status: 'Production-Ready Prototype' | 'In Active Development' | 'Completed';
+  liveDemoUrl?: string;
   summary: string;
   challenge: string;
   solution: string;
@@ -30,6 +31,13 @@ export interface PortfolioItem {
   architectureLayers: {
     layer: string;
     detail: string;
+  }[];
+  completedFeatures: string[];
+  inProgressFeatures: string[];
+  realScreenshots?: {
+    title: string;
+    description: string;
+    image: string;
   }[];
   mockupData: {
     systemStatus: string;
@@ -61,13 +69,12 @@ export interface CoreValue {
   metric: string;
 }
 
-export interface VerifiedEngagementNote {
+export interface EngineeringStandard {
   id: string;
-  clientIndustry: string;
-  geographicRegion: string;
-  scopeSummary: string;
-  verifiedFeedback: string;
-  complianceNotice: string;
-  engagementYear: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  commitment: string;
+  iconName: string;
 }
 

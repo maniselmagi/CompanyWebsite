@@ -9,4 +9,15 @@ export default defineConfig({
     tailwindcss(),
   ],
   base: './',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes('node_modules/three')) {
+            return 'three';
+          }
+        }
+      }
+    }
+  }
 })

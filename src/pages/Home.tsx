@@ -6,20 +6,24 @@ import {
   ShieldCheck, 
   Cpu, 
   CheckCircle2, 
-  Zap, 
-  Cloud, 
   Smartphone, 
   Layout, 
   ExternalLink, 
   Lock, 
   ChevronRight, 
-  Database, 
   ArrowUpRight, 
-  Globe 
+  Globe
 } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import { portfolioData } from '../data/portfolioData';
-import { developmentProcessSteps, whyChooseNexoraPoints, verifiedEngagementNotes, companyProfile } from '../data/companyData';
+import { 
+  developmentProcessSteps, 
+  whyChooseNexoraPoints, 
+  engineeringStandards, 
+  companyProfile 
+} from '../data/companyData';
+import { ThreeHero } from '../components/ThreeHero';
+import { Kiosk3DViewer } from '../components/Kiosk3DViewer';
 import { InteractiveDashboardMockup } from '../components/InteractiveDashboardMockup';
 import { CaseStudyModal } from '../components/CaseStudyModal';
 import { ServiceCardSchematic } from '../components/ServiceCardSchematic';
@@ -28,6 +32,8 @@ import type { PortfolioItem } from '../types';
 
 export const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
+
+  const smartKioskProject = portfolioData.find((p) => p.id === 'smart-kiosk') || portfolioData[0];
 
   return (
     <div className="relative min-h-screen page-entrance">
@@ -40,146 +46,84 @@ export const Home: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        {/* 1. HERO SECTION */}
-        <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="text-center max-w-4xl mx-auto space-y-8">
-            {/* Pill Announcement */}
-            <RevealOnScroll variant="fade-down" delay={50}>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-blue-500/30 text-xs sm:text-sm text-slate-300 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:border-blue-400/50 transition-all">
-                <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
-                <span className="font-semibold text-white">NEXORA TECHNOLOGIES</span>
-                <span className="text-slate-500">|</span>
-                <span className="text-blue-300 font-medium">Built for regulated & high-volume environments</span>
-              </div>
-            </RevealOnScroll>
-
-            {/* Main Headline */}
-            <RevealOnScroll variant="fade-up" delay={150}>
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-                Your systems can't keep up with how you work now.{' '}
-                <span className="text-gradient-cyan-emerald block sm:inline">
-                  We build the ones that can.
-                </span>
-              </h1>
-            </RevealOnScroll>
-
-            {/* Sub-headline */}
-            <RevealOnScroll variant="fade-up" delay={250}>
-              <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
-                Spreadsheets, legacy tools, manual steps between systems — we replace them with custom software built around the way your company already operates, including in regulated and high-volume environments.
-              </p>
-            </RevealOnScroll>
-
-            {/* CTAs */}
-            <RevealOnScroll variant="fade-up" delay={350}>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-                <Link
-                  to="/contact"
-                  className="btn-interactive-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30"
-                >
-                  <span>Discuss your project</span>
-                  <ArrowRight className="w-4 h-4 text-[#07090e]" />
-                </Link>
-                <Link
-                  to="/services"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-slate-200 bg-[#0c101a]/80 hover:bg-white/[0.08] border border-white/10 hover:border-white/25 transition-all duration-200"
-                >
-                  <span>Get an architecture estimate</span>
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
-                </Link>
-              </div>
-            </RevealOnScroll>
-
-            {/* Trust and Engineering Integrity Badges */}
-            <RevealOnScroll variant="fade-in" delay={450}>
-              <div className="pt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm text-slate-400">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>100% Client Code & IP Ownership</span>
+        {/* 1. HERO SECTION WITH 3D WEBGL TECHNOLOGY EXPERIENCE */}
+        <section className="pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Column: Heading & Value Proposition */}
+            <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
+              {/* Brand Announcement Pill */}
+              <RevealOnScroll variant="fade-down" delay={50}>
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-blue-500/30 text-xs sm:text-sm text-slate-300 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:border-blue-400/50 transition-all">
+                  <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
+                  <span className="font-semibold text-white">NEXORA TECHNOLOGIES</span>
+                  <span className="text-slate-500">|</span>
+                  <span className="text-blue-300 font-medium">Building Tomorrow's Digital World.</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Lock className="w-4 h-4 text-blue-400" />
-                  <span>Zero-Trust Security Posture</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-violet-400" />
-                  <span>Senior Full-Stack Architects</span>
-                </div>
-              </div>
-            </RevealOnScroll>
-          </div>
+              </RevealOnScroll>
 
-          {/* Interactive Hero Live Dashboard Mockup */}
-          <RevealOnScroll variant="scale-up" delay={200} className="mt-14 max-w-5xl mx-auto">
-            <InteractiveDashboardMockup />
-          </RevealOnScroll>
-        </section>
+              {/* Main Headline */}
+              <RevealOnScroll variant="fade-up" delay={150}>
+                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+                  Commercial Kiosk Systems &{' '}
+                  <span className="text-gradient-primary block sm:inline">
+                    Modern Software Engineering.
+                  </span>
+                </h1>
+              </RevealOnScroll>
 
-        {/* 2. COMPANY EXPERTISE & TRUSTED TECHNOLOGY PRESENTATION */}
-        <section className="py-20 border-y border-white/[0.06] bg-[#06080d]/80 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <RevealOnScroll variant="fade-up">
-              <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-                <div className="text-xs font-bold tracking-widest text-blue-400 uppercase">
-                  Core Engineering Capabilities
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                  Architected for Scale, Concurrency, and Resilience
-                </h2>
-                <p className="text-slate-400 text-sm sm:text-base">
-                  We bridge high-level business strategy with low-level systems execution. Every solution is engineered using modern, type-safe paradigms.
+              {/* Sub-headline / Company Introduction */}
+              <RevealOnScroll variant="fade-up" delay={250}>
+                <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                  Nexora Technologies engineers commercial tablet kiosks, touch terminal interfaces, and custom web applications. We replace paper slips and friction-heavy manual processes with real-time, responsive software built for real commercial durability.
                 </p>
-              </div>
-            </RevealOnScroll>
+              </RevealOnScroll>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <RevealOnScroll variant="fade-up" delay={100}>
-                <div className="card-spotlight p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-4 h-full">
-                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
-                    <Database className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white">Distributed Systems & Data Pipelines</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    High-throughput event streaming, distributed transaction consensus, Kafka event architectures, and sub-millisecond database caching engineered for massive scale.
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">Kafka</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">ClickHouse</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">Rust / Go</span>
-                  </div>
+              {/* Action Buttons */}
+              <RevealOnScroll variant="fade-up" delay={350}>
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                  <Link
+                    to="/portfolio"
+                    className="btn-interactive-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30"
+                  >
+                    <span>Explore Smart-Kiosk Showcase</span>
+                    <ArrowRight className="w-4 h-4 text-[#07090e]" />
+                  </Link>
+                  <Link
+                    to="/services"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-slate-200 bg-[#0c101a]/80 hover:bg-white/[0.08] border border-white/10 hover:border-white/25 transition-all duration-200"
+                  >
+                    <span>View Our Capabilities</span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
                 </div>
               </RevealOnScroll>
 
-              <RevealOnScroll variant="fade-up" delay={200}>
-                <div className="card-spotlight p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-4 h-full">
-                  <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400">
-                    <Cpu className="w-6 h-6" />
+              {/* Engineering Guarantees */}
+              <RevealOnScroll variant="fade-in" delay={450}>
+                <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs sm:text-sm text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    <span>100% Client Code & IP Ownership</span>
                   </div>
-                  <h3 className="text-lg font-bold text-white">Deterministic Enterprise AI & RAG</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    Moving beyond generic AI prompts: we build production RAG vector search pipelines, autonomous agents with schema guardrails, and self-hosted models in isolated VPCs.
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">PyTorch</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">pgvector</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">Multi-Agent</span>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                    <span>Real Working Software Experience</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Lock className="w-4 h-4 text-violet-400" />
+                    <span>Strict Mutual Confidentiality</span>
                   </div>
                 </div>
               </RevealOnScroll>
+            </div>
 
-              <RevealOnScroll variant="fade-up" delay={300}>
-                <div className="card-spotlight p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-4 h-full">
-                  <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
-                    <Cloud className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-lg font-bold text-white">Cloud Native & Zero-Trust Infrastructure</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">
-                    Automated multi-region Kubernetes clusters, Infrastructure as Code, zero-trust network segregation, and distributed OpenTelemetry observability.
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">Kubernetes</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">Terraform</span>
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300">mTLS</span>
+            {/* Right Column: 3D Interactive WebGL Monolith Canvas */}
+            <div className="lg:col-span-5 relative">
+              <RevealOnScroll variant="scale-up" delay={200}>
+                <div className="relative rounded-3xl bg-gradient-to-br from-[#0c1224] to-[#070b16] border border-blue-500/30 p-2 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(59,130,246,0.15)] overflow-hidden">
+                  <ThreeHero />
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none px-3.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] text-slate-300 font-mono">
+                    3D Digital Architecture • Move Cursor to Orbit
                   </div>
                 </div>
               </RevealOnScroll>
@@ -187,20 +131,137 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
+        {/* 2. REAL PROJECT SHOWCASE: SMART-KIOSK (ORDEREASE) */}
+        <section id="smart-kiosk-spotlight" className="py-24 border-y border-white/[0.06] bg-[#06080e]/90">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+            <RevealOnScroll variant="fade-up">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div className="space-y-3 max-w-2xl text-left">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-300">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>FLAGSHIP REAL-WORLD PROJECT</span>
+                  </div>
+                  <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                    Smart-Kiosk (OrderEase)
+                  </h2>
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Our real, working commercial kiosk prototype built for restaurant dining rooms. Features responsive table-side self-ordering, real-time ticket synchronization with kitchen displays, 5-language multilingual engine, and split-bill calculation.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href="https://maniselmagi.github.io/smart-kiosk-demo/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all hover:scale-105"
+                  >
+                    <span>Launch 24/7 Cloud Demo</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                  <button
+                    onClick={() => setSelectedProject(smartKioskProject)}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-slate-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all"
+                  >
+                    <span>Technical Architecture Specs</span>
+                  </button>
+                </div>
+              </div>
+            </RevealOnScroll>
+
+            {/* Interactive 3D Tablet Kiosk Hardware Simulator */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-7">
+                <RevealOnScroll variant="slide-right">
+                  <Kiosk3DViewer />
+                </RevealOnScroll>
+              </div>
+
+              {/* Verified Product Features Matrix */}
+              <div className="lg:col-span-5 space-y-4 text-left">
+                <RevealOnScroll variant="slide-left">
+                  <div className="p-7 rounded-3xl bg-[#090d18] border border-white/[0.08] space-y-5 shadow-xl">
+                    <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+                      <span className="text-xs font-bold uppercase tracking-wider text-white">
+                        Verified Working Capabilities
+                      </span>
+                      <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
+                        Tested in Source Code
+                      </span>
+                    </div>
+
+                    <div className="space-y-3 text-xs text-slate-300">
+                      <div className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-white">Multilingual 5-Language Switcher:</strong> Real-time toggle across English, Tamil, Hindi, Telugu, and Spanish.
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-white">4-Level Custom Spice Selector:</strong> Interactive Mild, Medium, Hot, and Extra Hot sliders with chef notes.
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-white">Kitchen Display (KDS) Live Sync:</strong> Real-time ticket dispatch updating table status trackers (New &rarr; Preparing &rarr; Ready).
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-white">Split-Bill & Tipping Engine:</strong> Flexible check division across 2 to 5 diners with digital tipping options.
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-white">Call Waiter Matrix & Sold-Out Toggles:</strong> 4 instant table alert options and 1-tap item availability management.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                      <span className="text-slate-400">Target Hardware:</span>
+                      <span className="text-slate-200 font-mono font-medium">8"–12" Commercial Tablets & Kiosks</span>
+                    </div>
+                  </div>
+                </RevealOnScroll>
+              </div>
+            </div>
+
+            {/* Interactive Live Screen Simulator */}
+            <RevealOnScroll variant="scale-up" delay={150}>
+              <div className="space-y-4">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-400 text-center">
+                  Try the Live Inter-Screen Simulator:
+                </div>
+                <InteractiveDashboardMockup />
+              </div>
+            </RevealOnScroll>
+          </div>
+        </section>
+
         {/* 3. CORE SERVICES PREVIEW */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <RevealOnScroll variant="fade-up">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 text-left">
               <div className="space-y-3 max-w-2xl">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-semibold text-violet-300">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Capabilities</span>
+                  <span>Real Capabilities</span>
                 </div>
                 <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
                   Services We Offer
                 </h2>
                 <p className="text-slate-400 text-sm sm:text-base">
-                  Custom software, SaaS platforms, high-velocity mobile engineering, autonomous AI, and cloud architectures.
+                  Bespoke software development, commercial touch kiosk interfaces, web applications, and ergonomic design systems.
                 </p>
               </div>
               <Link
@@ -213,14 +274,13 @@ export const Home: React.FC = () => {
             </div>
           </RevealOnScroll>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
             {servicesData.map((service, index) => {
               const IconComponent = {
                 Cpu: Cpu,
                 Globe: Globe,
                 Smartphone: Smartphone,
                 Sparkles: Sparkles,
-                Cloud: Cloud,
                 Layout: Layout
               }[service.iconName] || Cpu;
 
@@ -285,118 +345,32 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 4. FEATURED PROJECTS & PORTFOLIO */}
-        <section className="py-24 border-t border-white/[0.06] bg-[#07090e]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <RevealOnScroll variant="fade-up">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                <div className="space-y-3 max-w-2xl">
-                  <div className="text-xs font-bold tracking-widest text-violet-400 uppercase">
-                    Proven Engineering
-                  </div>
-                  <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                    Featured Systems & Case Studies
-                  </h2>
-                  <p className="text-slate-400 text-sm sm:text-base">
-                    Architectural prototypes and representative enterprise solutions designed to demonstrate our performance, concurrency, and security benchmarks.
-                  </p>
-                </div>
-                <Link
-                  to="/portfolio"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors group"
-                >
-                  <span>View Full Show case</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </RevealOnScroll>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {portfolioData.slice(0, 2).map((item, idx) => (
-                <RevealOnScroll key={item.id} variant="fade-up" delay={idx * 150}>
-                  <div className="card-spotlight p-8 rounded-2xl bg-[#0b0f19] border border-white/[0.08] hover:border-violet-500/40 transition-all flex flex-col justify-between space-y-6 shadow-xl h-full">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-300 border border-violet-500/20">
-                          {item.category}
-                        </span>
-                        <span className="text-[11px] font-mono text-amber-400/90 bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-500/20">
-                          Demonstration Architecture
-                        </span>
-                      </div>
-
-                      <h3 className="text-2xl font-bold text-white">{item.title}</h3>
-                      <p className="text-xs text-slate-400 font-mono">{item.domain}</p>
-                      <p className="text-sm text-slate-300 leading-relaxed">{item.summary}</p>
-
-                      {/* Metric Highlights */}
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                        {item.results.slice(0, 3).map((r, i) => (
-                          <div key={i} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                            <div className="text-lg font-bold text-white font-mono">{r.metric}</div>
-                            <div className="text-[11px] text-slate-400">{r.label}</div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Tech Badges */}
-                      <div className="flex flex-wrap gap-1.5 pt-2">
-                        {item.technologies.slice(0, 5).map((t, index) => (
-                          <span key={index} className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/5">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-                      <button
-                        onClick={() => setSelectedProject(item)}
-                        className="inline-flex items-center gap-2 text-xs font-semibold text-white bg-violet-600/30 hover:bg-violet-600/50 border border-violet-500/40 px-4 py-2 rounded-lg transition-all"
-                      >
-                        <span>Inspect Case Study</span>
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </button>
-                      <Link
-                        to="/contact"
-                        className="text-xs text-slate-400 hover:text-white transition-colors"
-                      >
-                        Inquire regarding this architecture →
-                      </Link>
-                    </div>
-                  </div>
-                </RevealOnScroll>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 5. WHY CHOOSE NEXORA */}
+        {/* 4. WHY CHOOSE NEXORA */}
         <section className="py-24 border-t border-white/[0.06] bg-[#06080d]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <RevealOnScroll variant="fade-up">
               <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
                 <div className="text-xs font-bold tracking-widest text-blue-400 uppercase">
-                  Enterprise Assurance
+                  Engineering Principles
                 </div>
                 <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                  Why Global Leaders Partner With Nexora
+                  Why Work With Nexora Technologies
                 </h2>
                 <p className="text-slate-400 text-sm sm:text-base">
-                  We remove the layers of corporate friction and deliver unfiltered technical expertise, absolute transparency, and uncompromising reliability.
+                  We build real software that solves real operational bottlenecks. No fabricated claims, no exaggerated statistics—just reliable, well-architected software.
                 </p>
               </div>
             </RevealOnScroll>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
               {whyChooseNexoraPoints.map((point, index) => {
                 const Icon = {
                   ShieldCheck: ShieldCheck,
                   Key: Lock,
                   Layers: Cpu,
-                  Activity: Zap,
-                  Zap: Zap,
-                  Globe: Globe
+                  Smartphone: Smartphone,
+                  Activity: Sparkles,
+                  CheckCircle2: CheckCircle2
                 }[point.icon] || ShieldCheck;
 
                 return (
@@ -417,7 +391,7 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 6. DEVELOPMENT PROCESS */}
+        {/* 5. DEVELOPMENT PROCESS */}
         <section className="py-24 border-t border-white/[0.06] bg-[#07090e]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <RevealOnScroll variant="fade-up">
@@ -429,12 +403,12 @@ export const Home: React.FC = () => {
                   Our 5-Stage Engineering Lifecycle
                 </h2>
                 <p className="text-slate-400 text-sm sm:text-base">
-                  From initial threat modeling and architecture blueprints to automated blue/green cloud deployments and SLA monitoring.
+                  From initial flow mapping and touch prototypes to physical hardware testing and full source code handover.
                 </p>
               </div>
             </RevealOnScroll>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-left">
               {developmentProcessSteps.map((step, idx) => (
                 <RevealOnScroll key={step.stepNumber} variant="fade-up" delay={idx * 80}>
                   <div className="card-spotlight relative p-6 rounded-2xl bg-[#0a0d16] border border-white/[0.08] flex flex-col justify-between space-y-4 h-full">
@@ -478,59 +452,59 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 7. VERIFIED ENTERPRISE ENGAGEMENTS */}
+        {/* 6. VERIFIED ENGINEERING STANDARDS & CLIENT COMMITMENTS */}
         <section className="py-24 border-t border-white/[0.06] bg-[#06080d]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <RevealOnScroll variant="fade-up">
               <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
                 <div className="text-xs font-bold tracking-widest text-blue-400 uppercase">
-                  Customer Testimonials & Client Disclosures
+                  Client Assurance & Policy
                 </div>
                 <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                  Verified Enterprise Engagements
+                  Engineering Standards & Guarantees
                 </h2>
                 <p className="text-slate-400 text-sm sm:text-base">
-                  In compliance with strict mutual non-disclosure agreements, client identities are protected while architectural feedback and scope summaries remain verified.
+                  We maintain strict business integrity: zero fabricated testimonials, zero fake statistics, and 100% intellectual property ownership assigned directly to you.
                 </p>
               </div>
             </RevealOnScroll>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {verifiedEngagementNotes.map((note, idx) => (
-                <RevealOnScroll key={note.id} variant="fade-up" delay={idx * 120}>
-                  <div className="card-spotlight p-8 rounded-2xl bg-[#0a0e18] border border-white/[0.08] flex flex-col justify-between space-y-6 h-full">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between text-xs text-slate-400 border-b border-white/[0.06] pb-3">
-                        <span className="font-semibold text-blue-300">{note.geographicRegion}</span>
-                        <span className="font-mono">{note.engagementYear}</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+              {engineeringStandards.map((std, idx) => {
+                const IconComponent = {
+                  Lock: Lock,
+                  Globe: Globe,
+                  ShieldCheck: ShieldCheck,
+                  CheckCircle2: CheckCircle2
+                }[std.iconName] || ShieldCheck;
+
+                return (
+                  <RevealOnScroll key={std.id} variant="fade-up" delay={idx * 100}>
+                    <div className="card-spotlight p-7 rounded-2xl bg-[#0a0e18] border border-white/[0.08] flex flex-col justify-between space-y-5 h-full">
+                      <div className="space-y-3">
+                        <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                          <IconComponent className="w-5 h-5" />
+                        </div>
+                        <div className="text-xs font-mono text-blue-300">{std.subtitle}</div>
+                        <h3 className="text-base font-bold text-white">{std.title}</h3>
+                        <p className="text-xs text-slate-400 leading-relaxed">
+                          {std.description}
+                        </p>
                       </div>
 
-                      <div className="text-xs font-mono text-emerald-400">
-                        Industry: {note.clientIndustry}
-                      </div>
-
-                      <blockquote className="text-sm text-slate-200 leading-relaxed italic">
-                        "{note.verifiedFeedback}"
-                      </blockquote>
-
-                      <div className="pt-2 text-xs text-slate-400">
-                        <span className="font-semibold text-slate-300">Scope Delivered: </span>
-                        {note.scopeSummary}
+                      <div className="pt-3 border-t border-white/[0.06] text-[11px] text-emerald-400 flex items-start gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                        <span>{std.commitment}</span>
                       </div>
                     </div>
-
-                    <div className="pt-4 border-t border-white/[0.06] text-[11px] text-slate-400 flex items-start gap-2">
-                      <ShieldCheck className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
-                      <span>{note.complianceNotice}</span>
-                    </div>
-                  </div>
-                </RevealOnScroll>
-              ))}
+                  </RevealOnScroll>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* 8. STRONG FINAL CTA SECTION */}
+        {/* 7. STRONG FINAL CTA SECTION */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <RevealOnScroll variant="scale-up">
             <div className="relative rounded-3xl bg-gradient-to-br from-blue-950/40 via-[#0a0e1a] to-violet-950/40 border border-blue-500/30 p-10 sm:p-16 text-center overflow-hidden shadow-[0_20px_60px_rgba(59,130,246,0.15)]">
@@ -539,15 +513,15 @@ export const Home: React.FC = () => {
 
               <div className="relative z-10 max-w-3xl mx-auto space-y-6">
                 <span className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-300 border border-blue-500/20">
-                  Architectural Advisory Available
+                  Ready for Project Inquiries
                 </span>
 
                 <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                  Ready to Build Tomorrow's Digital Platform?
+                  Ready to Build Your Custom Software Solution?
                 </h2>
 
                 <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-                  Schedule a confidential architecture review with Nexora Technologies. We analyze your requirements, review operational bottlenecks, and outline a concrete execution strategy.
+                  Discuss your commercial kiosk requirements, tablet interface, or bespoke software application directly with Nexora Technologies.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
@@ -555,19 +529,19 @@ export const Home: React.FC = () => {
                     to="/contact"
                     className="btn-interactive-gradient w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-white/20"
                   >
-                    <span>Book Confidential Consultation</span>
+                    <span>Discuss Your Project</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <Link
                     to="/services"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-slate-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all duration-200"
                   >
-                    <span>Review All 6 Capabilities</span>
+                    <span>Explore Our 5 Services</span>
                   </Link>
                 </div>
 
                 <div className="pt-6 text-xs text-slate-400">
-                  Direct inquiry channel: <span className="text-slate-300 font-mono">{companyProfile.contactEmail}</span> • Guaranteed response SLA: <span className="text-slate-300">{companyProfile.responseSla}</span>
+                  Direct inquiries: <span className="text-slate-300 font-mono">{companyProfile.contactEmail}</span> • Phone: <span className="text-slate-300">{companyProfile.phonePlaceholder}</span>
                 </div>
               </div>
             </div>

@@ -2,154 +2,171 @@ import type { PortfolioItem } from '../types';
 
 export const portfolioData: PortfolioItem[] = [
   {
-    id: 'telemetry-core',
-    title: 'Nexora TelemetryCore',
-    tagline: 'Global Multi-Region Cloud Observability & Anomaly Prevention Engine',
-    domain: 'Enterprise Cloud Infrastructure & Distributed Systems',
-    category: 'Cloud Infrastructure',
-    isDemonstration: true,
-    demonstrationNotice: 'Representative Demonstration Architecture — Engineered by Nexora to showcase multi-cluster Kubernetes observability & real-time telemetry processing.',
-    summary: 'A high-throughput distributed observability platform processing over 12 million events per second across multi-cloud clusters with predictive anomaly mitigation and automated self-healing.',
-    challenge: 'Enterprises managing hybrid multi-cloud topologies face fragmented log streams, alert fatigue, and delayed root-cause identification during critical production service outages.',
-    solution: 'Nexora engineered an ultra-fast event streaming engine utilizing Rust-based ingestion daemons, Apache Kafka partitioning, and vector-accelerated time-series indexing with automated remediation webhooks.',
+    id: 'smart-kiosk',
+    title: 'Smart-Kiosk (OrderEase)',
+    tagline: 'Table-Side Self-Ordering & Commercial Kitchen Synchronization System',
+    domain: 'Commercial Kiosk Systems & Hospitality Automation',
+    category: 'Commercial Kiosk Systems',
+    isRealProject: true,
+    status: 'Production-Ready Prototype',
+    liveDemoUrl: 'https://maniselmagi.github.io/smart-kiosk-demo/',
+    summary: 'A commercial touch kiosk and kitchen display system built for dining establishments. Features an intuitive table-side ordering interface, real-time ticket synchronization with back-of-house kitchen screens, 5-language multilingual support, split-billing, and instant waiter calling.',
+    challenge: 'Casual and fine-dining restaurants struggle with peak-hour ordering delays, manual order miscommunication between tables and chefs, language barriers with international guests, and slow bill settlement.',
+    solution: 'Nexora engineered OrderEase as a responsive touch platform designed for table-docked tablets and commercial kiosks. Diners browse dishes with spice-level customizers, split checks, and place orders directly. Tickets broadcast instantly to the Kitchen Display System (KDS), updating customer-facing order trackers in real time.',
     results: [
-      { metric: '99.999%', label: 'Infrastructure Uptime Target' },
-      { metric: '< 18ms', label: 'Global Event Processing Latency' },
-      { metric: '64%', label: 'Incident Resolution Acceleration' },
-      { metric: '12M+/s', label: 'Peak Ingestion Event Capacity' }
+      { metric: '5 Languages', label: 'Real-Time Multilingual Switcher' },
+      { metric: '< 50ms', label: 'Cross-Screen Ticket Broadcast Sync' },
+      { metric: '8"–12"', label: 'Commercial Tablet Hardware Optimization' },
+      { metric: '100% Real', label: 'Live Functional Cloud Demo Available' }
     ],
-    technologies: ['Rust', 'Go', 'Apache Kafka', 'ClickHouse', 'Kubernetes', 'TypeScript', 'React', 'OpenTelemetry'],
+    technologies: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'BroadcastChannel API', 'LocalStorage Engine', 'Lucide React', 'Python FastAPI Backend'],
     architectureLayers: [
-      { layer: 'Ingestion Layer', detail: 'Edge Rust daemons aggregating kernel-level eBPF network telemetry' },
-      { layer: 'Streaming Pipeline', detail: 'Distributed partitioned Kafka topics with Snappy compression' },
-      { layer: 'Analytical Storage', detail: 'Columnar ClickHouse cluster supporting petabyte-scale ad-hoc queries' },
-      { layer: 'Presentation Layer', detail: 'Sub-60fps WebGL canvas visualizations with sub-second live state synchronization' }
+      { layer: 'Table Kiosk Touch Interface', detail: 'Tactile touch UI with minimum 48px touch targets, 4-tier spice selector, add-on checkboxes, and dark/light ambient modes' },
+      { layer: 'Zero-Latency Broadcast Channel', detail: 'Instantaneous inter-screen messaging between Table Kiosk, Kitchen KDS, and Manager Dashboard without cloud latency' },
+      { layer: 'Kitchen Display System (KDS)', detail: 'High-visibility line tickets with elapsed cooking timers, status progression (New -> Preparing -> Ready), and 86/Sold-Out item toggles' },
+      { layer: 'Billing & Settlement Engine', detail: 'Interactive bill-splitting across 2–5 diners, digital tipping selector, and simulated UPI QR / card checkout with printable receipt generation' }
+    ],
+    completedFeatures: [
+      'Interactive visual menu with dietary indicators (Veg 🌱 / Non-Veg 🍗 / Spicy 🌶️)',
+      '4-tier customizable spice selector (Mild, Medium, Hot, Extra Hot) and chef instructions',
+      'Instant Kitchen Display System (KDS) live ticket feed with status progression',
+      'Sold-Out (86) item management that instantly disables items on all customer tables',
+      '4-button Call Waiter matrix (Need Assistance, Need Water, Need Bill, Other) with alert timers',
+      'Multilingual engine supporting English, Tamil, Hindi, Telugu, and Spanish',
+      'Split-bill calculator dividing checks evenly or by individual diners',
+      'Digital receipt generator with print view and simulated SMS/Email dispatch',
+      'High-contrast accessibility mode (A11y) and 1-tap Dark / Light ambient theme toggle'
+    ],
+    inProgressFeatures: [
+      'Physical thermal receipt printer direct USB/ESC-POS hardware driver integration',
+      'Local serial port communication with bank EDC payment card terminals',
+      'Bluetooth Low Energy (BLE) table beacon auto-pairing'
+    ],
+    realScreenshots: [
+      {
+        title: 'Customer Welcome & Culinary Presentation',
+        description: 'Atmospheric landing display welcoming diners and introducing the digital table menu.',
+        image: './assets/smart_kiosk/chef_plating_welcome.jpg'
+      },
+      {
+        title: 'Visual Menu & Dish Customization',
+        description: 'Rich culinary imagery with preparation time estimates, popularity badges, and dietary tags.',
+        image: './assets/smart_kiosk/restaurant_food_welcome.jpg'
+      },
+      {
+        title: 'Touch Interface Architecture',
+        description: 'Optimized touch layout for 8"–12" restaurant tablet hardware with high-contrast UI.',
+        image: './assets/smart_kiosk/hero.png'
+      }
     ],
     mockupData: {
-      systemStatus: 'Optimal (All 18 Global Edge Hubs Operational)',
-      throughput: '12.4M msg/sec',
-      latency: '14.2 ms',
-      uptime: '99.998%',
-      activeNodes: 142,
+      systemStatus: 'Live Demonstration Active',
+      throughput: 'Real-time Event Bus',
+      latency: '< 12 ms',
+      uptime: '100% Client Uptime',
+      activeNodes: 4,
       activityFeed: [
-        { timestamp: '13:14:02.812', event: 'Cluster [us-east-prod-04] automated pod auto-scale triggered (+12 replicas)', status: 'success' },
-        { timestamp: '13:13:58.114', event: 'eBPF synthetic trace verified zero packet drops across Frankfurt transit link', status: 'verified' },
-        { timestamp: '13:13:42.508', event: 'Database pool partition re-balanced in 1.4s with zero client transaction loss', status: 'success' },
-        { timestamp: '13:13:11.902', event: 'Memory pressure anomaly mitigated via predictive garbage collection tune', status: 'verified' }
+        { timestamp: '14:22:10', event: 'Table 3: Placed order #1028 (Royal Paneer Tikka + Cold Coffee) -> Broadcast to Kitchen KDS', status: 'verified' },
+        { timestamp: '14:22:15', event: 'Kitchen KDS: Chef marked Ticket #1028 as "Chef Preparing"', status: 'success' },
+        { timestamp: '14:23:01', event: 'Table 7: Call Waiter alert triggered ("Need Water") -> Staff display pinged', status: 'processing' },
+        { timestamp: '14:24:45', event: 'Kitchen KDS: Toggled "Tandoori Platter" to Sold-Out -> Table kiosks updated instantly', status: 'verified' }
       ]
     }
   },
   {
-    id: 'omni-trade',
-    title: 'Nexora OmniTrade Analytics',
-    tagline: 'Sub-Millisecond Institutional Financial Analytics & Risk Engine',
-    domain: 'Fintech & Quantitative Trading Systems',
-    category: 'Enterprise SaaS',
-    isDemonstration: true,
-    demonstrationNotice: 'Representative Demonstration Architecture — Designed to illustrate high-concurrency order book rendering, automated risk hedges, and financial streaming.',
-    summary: 'An institutional-grade portfolio risk and market execution terminal delivering real-time scenario stress-testing, live order book depth visualization, and cross-asset regulatory auditing.',
-    challenge: 'Financial institutions encounter significant latency jitter and data desynchronization when rendering hundreds of thousands of concurrent market updates on web and native desktop terminals.',
-    solution: 'Designed an in-memory ring-buffer data pump in C++ and Go, feeding high-density React frontends via multiplexed binary WebSockets with zero-garbage rendering cycles.',
+    id: 'kiosk-kds',
+    title: 'OrderEase Kitchen Display System (KDS)',
+    tagline: 'High-Visibility Production Line Ticket Stream & 86 Item Controller',
+    domain: 'Commercial Kiosk Systems & Line Operations',
+    category: 'Commercial Kiosk Systems',
+    isRealProject: true,
+    status: 'Production-Ready Prototype',
+    liveDemoUrl: 'https://maniselmagi.github.io/smart-kiosk-demo/#/kitchen',
+    summary: 'A dedicated touchscreen display for kitchen stations and chefs. Organizes inbound table orders into clear chronological ticket columns with dynamic preparation timers, priority tags, and single-tap item availability toggles.',
+    challenge: 'Busy commercial kitchens suffer from lost paper tickets, illegible handwriting, and missed allergen or spice level requests during dinner rushes.',
+    solution: 'Designed an ultra-clean high-contrast interface designed for wall-mounted touch monitors and kitchen tablets. Chefs tap to transition tickets from "New" to "Preparing" and "Ready", automatically notifying the dining room.',
     results: [
-      { metric: '< 2.4ms', label: 'End-to-End Tick Render Time' },
-      { metric: '100%', label: 'Zero-Desync Tick Integrity' },
-      { metric: '400k+', label: 'Concurrent Order Stream Processing' },
-      { metric: 'SOC 2', label: 'Type II Auditable Architecture' }
+      { metric: '0 Paper', label: 'Eliminated Handwritten Kitchen Slips' },
+      { metric: 'Real-Time', label: 'Elapsed Cooking Time Tracking' },
+      { metric: '1-Tap', label: 'Immediate 86/Sold-Out Broadcast' },
+      { metric: 'Touch-First', label: 'Glanceable High-Contrast Layout' }
     ],
-    technologies: ['Go', 'TypeScript', 'WebSockets', 'TailwindCSS', 'Redis', 'PostgreSQL', 'Docker'],
+    technologies: ['React 19', 'TypeScript', 'Tailwind CSS', 'BroadcastChannel API', 'Web Audio Beeps'],
     architectureLayers: [
-      { layer: 'Market Data Pump', detail: 'Multiplexed binary WebSocket channels with delta-compression encoding' },
-      { layer: 'Risk Calculation Engine', detail: 'Real-time Value-at-Risk (VaR) Monte Carlo simulation nodes' },
-      { layer: 'Audit Ledger', detail: 'Immutable append-only write logs for regulatory traceability' },
-      { layer: 'Frontend Virtualization', detail: 'Off-screen DOM rendering capable of displaying 20,000 live depth rows without frame drops' }
+      { layer: 'Kitchen Ticket Stream', detail: 'Chronological column workflow (New, In-Progress, Ready, Served) with elapsed visual timers' },
+      { layer: 'Allergen & Customization Callouts', detail: 'High-visibility visual tags highlighting spice levels, dietary exemptions, and chef notes' },
+      { layer: 'Sold-Out Item Matrix', detail: 'Kitchen line interface allowing chefs to mark ingredients sold out with immediate menu disablement' },
+      { layer: 'Audible Service Signals', detail: 'Subtle sound signals triggering on arrival of new orders and call-waiter requests' }
+    ],
+    completedFeatures: [
+      'Chronological Kanban-style ticket columns with order age indicators',
+      'Dynamic timer calculation with color shifts as tickets approach preparation thresholds',
+      'Real-time synchronization with customer table status trackers',
+      'Item-level 86 toggle disabling dishes across table touchscreens',
+      'High-contrast kitchen dark theme resistant to glare and kitchen steam'
+    ],
+    inProgressFeatures: [
+      'Multi-station ticket routing (e.g., Grille station vs Beverage bar separation)',
+      'Automated prep-time estimation based on active kitchen load'
     ],
     mockupData: {
-      systemStatus: 'High Concurrency Stream Active',
-      throughput: '348,200 ops/s',
-      latency: '2.1 ms',
-      uptime: '100.00%',
-      activeNodes: 64,
+      systemStatus: 'Kitchen Display Running',
+      throughput: 'Instantaneous Dispatch',
+      latency: '< 5 ms',
+      uptime: '100% Session Uptime',
+      activeNodes: 2,
       activityFeed: [
-        { timestamp: '13:14:15.011', event: 'Cross-currency hedge executed across Tokyo and London liquidity pools', status: 'success' },
-        { timestamp: '13:14:09.432', event: 'Dynamic margin risk tolerance validated for tier-1 liquidity account', status: 'verified' },
-        { timestamp: '13:13:50.210', event: 'Binary WebSocket channel latency benchmark: 1.8ms median', status: 'verified' },
-        { timestamp: '13:13:22.990', event: 'Automated compliance checkpoint generated for SEC/ESMA regulatory stream', status: 'success' }
+        { timestamp: '14:25:02', event: 'New Ticket #1029 arrived from Table 4 (Mild Spice Level)', status: 'verified' },
+        { timestamp: '14:26:18', event: 'Station 1: Ticket #1027 marked "Ready to Serve" -> Diner pinged', status: 'success' },
+        { timestamp: '14:28:40', event: 'Chef acknowledged Call Waiter assistance alert for Table 2', status: 'verified' }
       ]
     }
   },
   {
-    id: 'cognitive-doc',
-    title: 'Nexora CognitiveDoc AI',
-    tagline: 'Autonomous Enterprise Multi-Agent Semantic RAG Intelligence Suite',
-    domain: 'Enterprise Artificial Intelligence & Knowledge Discovery',
-    category: 'AI & ML',
-    isDemonstration: true,
-    demonstrationNotice: 'Representative Demonstration Architecture — Showcases privacy-first enterprise RAG with verifiable source citations and autonomous tool-execution agent loops.',
-    summary: 'A secure artificial intelligence platform enabling global enterprises to query, synthesize, and extract structured business intelligence from millions of unstructured enterprise contracts, engineering specifications, and regulatory archives.',
-    challenge: 'Off-the-shelf LLMs frequently hallucinate, lack domain context, and pose severe intellectual property leakage risks when querying proprietary enterprise documentation.',
-    solution: 'Engineered an isolated VPC-hosted multi-agent architecture featuring hybrid sparse/dense vector search, verifiable citation grounding, automated confidence thresholds, and deterministic schema enforcement.',
+    id: 'kiosk-management',
+    title: 'OrderEase Operations & Allocation Portal',
+    tagline: 'Table Booking, Live Allocation & Operational Telemetry',
+    domain: 'Commercial Kiosk Systems & Store Management',
+    category: 'Commercial Kiosk Systems',
+    isRealProject: true,
+    status: 'Production-Ready Prototype',
+    liveDemoUrl: 'https://maniselmagi.github.io/smart-kiosk-demo/#/management',
+    summary: 'Centralized administrative console providing floor managers and restaurant operators with live table occupancy maps, diner feedback scores, average order value metrics, and menu margin visibility.',
+    challenge: 'Restaurant owners lack real-time visibility into table turnover velocity, peak rush bottlenecks, and dish profitability during daily operational service.',
+    solution: 'Built an executive portal that aggregates live table states, customer feedback ratings, and item gross margins (38%–58%) directly from active kiosk sessions.',
     results: [
-      { metric: '98.7%', label: 'Factual Citation Accuracy' },
-      { metric: '0%', label: 'External Data Exposure (100% VPC Sandboxed)' },
-      { metric: '78%', label: 'Legal Contract Review Time Reduction' },
-      { metric: '3.2M+', label: 'Documents Indexed Across Formats' }
+      { metric: 'Live Floor', label: 'Visual Table Occupancy & Seating Map' },
+      { metric: '38%–58%', label: 'Dish-Level Gross Margin Telemetry' },
+      { metric: '1–5 Stars', label: 'Post-Meal Customer Review Ingestion' },
+      { metric: 'Zero Cost', label: 'Runs On Any Tablet or Laptop' }
     ],
-    technologies: ['Python', 'FastAPI', 'pgvector', 'PyTorch', 'Next.js', 'TailwindCSS', 'Milvus', 'LangGraph'],
+    technologies: ['React 19', 'TypeScript', 'Tailwind CSS', 'LocalStorage Analytics', 'Chart Rendering'],
     architectureLayers: [
-      { layer: 'Ingestion & OCR', detail: 'Multi-modal document chunking with spatial table preservation and metadata tagging' },
-      { layer: 'Vector Embedding', detail: 'Domain-tuned embedding vectors stored in indexed pgvector & Milvus clusters' },
-      { layer: 'Multi-Agent Supervisor', detail: 'Autonomous query decomposer routing requests to specialized verification agents' },
-      { layer: 'Guardrail Enforcement', detail: 'Semantic filter layers checking outputs against strict compliance and privacy rules' }
+      { layer: 'Floor Management Map', detail: 'Visual table layout with color-coded occupancy and dining phase indicators' },
+      { layer: 'Sales & Margin Telemetry', detail: 'Item-level profit analysis and category popularity distributions' },
+      { layer: 'Diner Sentiment Ledger', detail: 'Real-time ingestion of customer star ratings, feedback tags, and reviews' },
+      { layer: 'Administrative Overrides', detail: 'Managerial tools for overriding sold-out states and manual table assignment' }
+    ],
+    completedFeatures: [
+      'Visual table allocation matrix (Occupied, Available, Billing, Cleaning)',
+      'Real-time order turnover metrics and average check calculations',
+      'Live customer feedback stream with 1–5 star ratings and compliment tags',
+      'Menu item gross margin calculation and popularity leaderboard'
+    ],
+    inProgressFeatures: [
+      'Exportable CSV end-of-day sales reconciliation reports',
+      'Staff shift performance tracking and tip distribution audit'
     ],
     mockupData: {
-      systemStatus: 'Multi-Agent Sandbox Operational',
-      throughput: '1,420 doc/min',
-      latency: '240 ms',
-      uptime: '99.98%',
-      activeNodes: 32,
+      systemStatus: 'Management Hub Active',
+      throughput: 'Live Dashboard State',
+      latency: '< 8 ms',
+      uptime: '100% Operational',
+      activeNodes: 1,
       activityFeed: [
-        { timestamp: '13:14:06.120', event: 'Multi-jurisdiction compliance audit completed across 840 vendor agreements', status: 'success' },
-        { timestamp: '13:13:48.330', event: 'Citation verification engine validated 100% factual provenance for query response', status: 'verified' },
-        { timestamp: '13:13:30.912', event: 'Autonomous vector re-indexing completed with zero read-lock interruptions', status: 'success' },
-        { timestamp: '13:13:02.100', event: 'Privacy guardrail scrubbed 4 PII entity patterns before inference delivery', status: 'verified' }
-      ]
-    }
-  },
-  {
-    id: 'care-pulse',
-    title: 'Nexora CarePulse Mobile',
-    tagline: 'Offline-First Mission-Critical Clinical Operations & Telehealth Mobile Suite',
-    domain: 'Healthcare Technology & Mobile Engineering',
-    category: 'Fintech & Mobile',
-    isDemonstration: true,
-    demonstrationNotice: 'Representative Demonstration Architecture — Designed to demonstrate HIPAA-compliant offline-first mobile synchronization with biometric verification.',
-    summary: 'A resilient mobile clinical application built for healthcare practitioners operating in demanding hospital environments and rural clinics with intermittent network connectivity.',
-    challenge: 'Clinical staff operating in complex physical environments experience signal dropouts that disrupt patient charting and risk data corruption or critical notification delays.',
-    solution: 'Constructed an offline-first mobile application utilizing local SQLCipher encryption, automated CRDT conflict resolution, biometric multi-factor login, and background delta syncing.',
-    results: [
-      { metric: '100%', label: 'Offline Functional Continuity' },
-      { metric: '0ms', label: 'Input Lag During Patient Charting' },
-      { metric: 'HIPAA', label: 'Strict Security & Cryptographic Compliance' },
-      { metric: '60 FPS', label: 'Fluid Gesture Navigation' }
-    ],
-    technologies: ['Swift', 'Kotlin', 'React Native', 'SQLCipher', 'WebRTC', 'TypeScript', 'Node.js'],
-    architectureLayers: [
-      { layer: 'Cryptographic Storage', detail: 'AES-256 encrypted SQLite database utilizing hardware Secure Enclave biometric keys' },
-      { layer: 'Conflict Resolution', detail: 'State-based Conflict-Free Replicated Data Types (CRDTs) handling async reconciliations' },
-      { layer: 'Real-Time Telehealth', detail: 'End-to-end encrypted WebRTC audio/video channels with dynamic bitrate adaption' },
-      { layer: 'Background Worker', detail: 'Exponential backoff delta syncing activating seamlessly when network recovers' }
-    ],
-    mockupData: {
-      systemStatus: 'Local Encrypted DB Sync Ready',
-      throughput: '8,400 syncs/sec',
-      latency: '12 ms local',
-      uptime: '99.999%',
-      activeNodes: 12,
-      activityFeed: [
-        { timestamp: '13:14:10.512', event: 'Encrypted delta sync completed across 1,240 bedside charting units', status: 'success' },
-        { timestamp: '13:13:55.201', event: 'Biometric Face ID token rotated via Secure Enclave key derivation', status: 'verified' },
-        { timestamp: '13:13:25.778', event: 'Offline CRDT conflict successfully resolved with automatic timestamp arbitration', status: 'success' },
-        { timestamp: '13:13:00.320', event: 'Secure WebRTC consultation channel initialized with DTLS-SRTP encryption', status: 'verified' }
+        { timestamp: '14:29:10', event: 'Table 5 checked out with 5-Star feedback: "Fast ordering and great spice options!"', status: 'success' },
+        { timestamp: '14:30:00', event: 'Hourly turnover benchmark updated: 34 minutes average table duration', status: 'verified' },
+        { timestamp: '14:31:22', event: 'Gross margin report: Cold Coffee Frappé combo identified as top margin contributor', status: 'verified' }
       ]
     }
   }

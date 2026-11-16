@@ -8,7 +8,6 @@ import {
   Globe, 
   Smartphone, 
   Sparkles, 
-  Cloud, 
   Layout, 
   CheckCircle2, 
   ArrowRight, 
@@ -24,20 +23,20 @@ export const Services: React.FC = () => {
 
   const faqs = [
     {
+      q: 'Can Nexora customize the Smart-Kiosk software for our specific dining or retail operations?',
+      a: 'Yes. We specialize in tailoring menus, visual layouts, language packs, spice and combo customizers, POS integrations, and kitchen display workflows around your exact operational routines.'
+    },
+    {
+      q: 'How do you test software on physical commercial tablets and kiosk hardware?',
+      a: 'We test directly on physical 8", 10", and 12" Android tablets and commercial kiosk mounts. We validate minimum 48px touch targets, multi-touch stability, orientation adaptation, and screen contrast in varied ambient lighting conditions.'
+    },
+    {
       q: 'How does Nexora guarantee intellectual property protection and code ownership?',
-      a: 'All intellectual property, proprietary software source code, designs, tokens, and deployment scripts are 100% owned by the client from day one. Formal IP assignment covenants are executed prior to sprint kickoff.'
+      a: 'All intellectual property, proprietary software source code, designs, tokens, and build configurations are 100% owned by the client from day one. Formal IP assignment covenants are executed prior to sprint kickoff.'
     },
     {
-      q: 'What is your typical project kickoff and delivery lifecycle?',
-      a: 'We begin with a 1–2 week architectural discovery and threat modeling phase, followed by bi-weekly agile development sprints. Clients receive staging builds every two weeks with automated test reports.'
-    },
-    {
-      q: 'Do you work with existing in-house engineering teams or build greenfield systems?',
-      a: 'Both. We frequently embed as specialized senior architectural pods to assist in-house teams with complex scaling or greenfield initiatives, as well as take turnkey ownership of new enterprise platforms.'
-    },
-    {
-      q: 'What are your enterprise security and data privacy standards?',
-      a: 'Our systems adhere to SOC 2 Type II, ISO 27001, and HIPAA compliance frameworks where applicable. All code undergoes automated SAST/DAST vulnerability scans and cryptographic code signing.'
+      q: 'Can the kiosk application operate reliably during intermittent internet hiccups?',
+      a: 'Yes. Our kiosk architecture utilizes offline-first caching, LocalStorage state persistence, and local inter-screen BroadcastChannel messaging. Diners can continue to navigate menus and build orders even if outside internet connectivity fluctuates.'
     }
   ];
 
@@ -56,21 +55,21 @@ export const Services: React.FC = () => {
           <div className="text-center max-w-4xl mx-auto space-y-6 pt-8">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>FULL-LIFECYCLE ENGINEERING SERVICES</span>
+              <span>TOUCH SYSTEMS & SOFTWARE ENGINEERING SERVICES</span>
             </div>
             <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-              Engineered for Concurrency, Scalability &{' '}
+              Engineered for Touch Terminals, Fluid Performance &{' '}
               <span className="text-gradient-primary">
-                Mission Success.
+                Operational Reliability.
               </span>
             </h1>
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
-              Six focused enterprise services designed to deliver tangible competitive advantages. From distributed backends to autonomous AI and ergonomic design systems.
+              Five focused engineering services. From commercial restaurant kiosks to bespoke business software, responsive web applications, and ergonomic design systems.
             </p>
           </div>
         </RevealOnScroll>
 
-        {/* 6 Services Deep Dive */}
+        {/* 5 Services Deep Dive */}
         <div className="space-y-16">
           {servicesData.map((service, index) => {
             const Icon = {
@@ -78,7 +77,6 @@ export const Services: React.FC = () => {
               Globe: Globe,
               Smartphone: Smartphone,
               Sparkles: Sparkles,
-              Cloud: Cloud,
               Layout: Layout
             }[service.iconName] || Cpu;
 
@@ -90,7 +88,7 @@ export const Services: React.FC = () => {
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                     {/* Left Column (Main Information) */}
-                    <div className="lg:col-span-7 space-y-6">
+                    <div className="lg:col-span-7 space-y-6 text-left">
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
                           <Icon className="w-6 h-6" />
@@ -118,11 +116,11 @@ export const Services: React.FC = () => {
                           <span>Core Operational Bottlenecks Solved</span>
                         </div>
                         <p className="text-xs text-slate-300 leading-relaxed">
-                          Eliminates legacy latency bottlenecks, single-points-of-failure, unmaintainable technical debt, and desynchronized operational silos through modern reactive architectures.
+                          Eliminates manual ordering errors, paper slip friction, complex user onboarding, and unmaintainable technical debt through clean, modern software architecture.
                         </p>
                       </div>
 
-                      {/* Embedded UI Schematic (as in screenshot 3) */}
+                      {/* Embedded UI Schematic */}
                       <div className="space-y-2">
                         <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
                           Live Architectural Schematic:
@@ -163,7 +161,7 @@ export const Services: React.FC = () => {
                     </div>
 
                     {/* Right Column (Benefits & Direct CTA Card) */}
-                    <div className="lg:col-span-5 space-y-6">
+                    <div className="lg:col-span-5 space-y-6 text-left">
                       <div className="p-7 rounded-2xl bg-gradient-to-br from-[#0c111d] to-[#07090e] border border-blue-500/25 space-y-6">
                         <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
                           <span className="text-xs font-bold uppercase tracking-wider text-white">
@@ -206,13 +204,13 @@ export const Services: React.FC = () => {
 
         {/* Technical FAQ Accordion */}
         <RevealOnScroll variant="fade-up">
-          <section className="max-w-4xl mx-auto space-y-8 pt-8">
+          <section className="max-w-4xl mx-auto space-y-8 pt-8 text-left">
             <div className="text-center space-y-3">
               <div className="text-xs font-bold tracking-widest text-blue-400 uppercase">
                 Frequently Asked Questions
               </div>
               <h2 className="text-3xl font-extrabold text-white tracking-tight">
-                Enterprise Collaboration & Engagement Details
+                Commercial Touch Systems & Development Inquiries
               </h2>
             </div>
 
@@ -244,17 +242,17 @@ export const Services: React.FC = () => {
         <RevealOnScroll variant="scale-up">
           <section className="text-center py-12 space-y-6">
             <h2 className="text-3xl font-extrabold text-white">
-              Have a Specific Architectural Challenge?
+              Have a Specific Software or Kiosk Project?
             </h2>
             <p className="text-slate-400 text-sm max-w-xl mx-auto">
-              Our principal engineers are ready to review your specifications and propose a concrete technical path forward.
+              Our software engineers are ready to review your specifications and propose a concrete technical path forward.
             </p>
             <div className="pt-2">
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all hover:scale-105"
               >
-                <span>Submit Architectural RFP</span>
+                <span>Discuss Your Project</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

@@ -64,13 +64,13 @@ export const About: React.FC = () => {
             <RevealOnScroll variant="fade-up" delay={100}>
               <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  At <span className="text-white font-semibold">NEXORA TECHNOLOGIES</span>, we engineer software that cannot afford to fail. In an era where modern commerce, financial systems, and global healthcare rely entirely on software infrastructure, fragility is not an option.
+                  At <span className="text-white font-semibold">NEXORA TECHNOLOGIES</span>, we engineer software that cannot afford to fail. From commercial touch kiosks operating in busy restaurant dining rooms to custom web platforms handling real-time transactions, software stability is essential.
                 </p>
                 <p>
-                  Unlike traditional agency models that treat software engineering as an outsourced assembly line, Nexora operates as a strategic engineering partner. Our teams comprise senior full-stack architects, distributed systems specialists, and AI researchers who take end-to-end ownership of client systems.
+                  Unlike traditional agency models that treat software engineering as an outsourced assembly line, Nexora operates as a strategic engineering partner. Our teams build clean, maintainable systems using modern React, TypeScript, Vite, and Python, taking end-to-end technical ownership.
                 </p>
                 <p>
-                  From low-latency distributed telemetry engines to multi-agent artificial intelligence pipelines, our systems are built with zero-trust security postures, automated continuous integration, and complete intellectual property ownership transferred directly to our clients.
+                  Our work is grounded in real-world commercial software—exemplified by our <strong>Smart-Kiosk (OrderEase)</strong> system. Every project is built with strict type safety, zero fabricated claims, and 100% intellectual property ownership transferred directly to our clients.
                 </p>
               </div>
             </RevealOnScroll>
@@ -181,10 +181,10 @@ export const About: React.FC = () => {
               </div>
               <h3 className="text-2xl font-bold text-white">Our Mission</h3>
               <p className="text-slate-300 text-sm leading-relaxed">
-                To eliminate technical friction for international businesses by delivering enterprise software, custom artificial intelligence, and cloud platforms engineered with uncompromising craftsmanship, transparent communication, and rapid turnaround.
+                To eliminate technical friction for businesses by delivering commercial kiosk systems, touch terminal applications, and custom web platforms engineered with uncompromising craftsmanship, transparent communication, and rapid turnaround.
               </p>
               <div className="pt-2 text-xs font-mono text-violet-400">
-                Focus: Measurable Impact & Zero Technical Debt
+                Focus: Real Working Software & Zero Technical Debt
               </div>
             </div>
           </RevealOnScroll>

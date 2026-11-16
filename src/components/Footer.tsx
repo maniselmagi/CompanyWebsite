@@ -99,22 +99,19 @@ export const Footer: React.FC = () => {
             <h3 className="text-xs font-bold tracking-wider text-white uppercase">Core Services</h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/services" className="hover:text-blue-400 transition-colors">Custom Software</Link>
+                <Link to="/services#kiosk-systems" className="hover:text-blue-400 transition-colors">Smart-Kiosk Systems</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-blue-400 transition-colors">Web Applications</Link>
+                <Link to="/services#custom-software" className="hover:text-blue-400 transition-colors">Custom Software</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-blue-400 transition-colors">Mobile Engineering</Link>
+                <Link to="/services#web-applications" className="hover:text-blue-400 transition-colors">Web Applications</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-blue-400 transition-colors">AI & Machine Learning</Link>
+                <Link to="/services#mobile-app-development" className="hover:text-blue-400 transition-colors">Tablet & Mobile Apps</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-blue-400 transition-colors">Cloud Solutions</Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-blue-400 transition-colors">UI/UX Systems</Link>
+                <Link to="/services#ui-ux-design" className="hover:text-blue-400 transition-colors">UI/UX Design Systems</Link>
               </li>
             </ul>
           </div>

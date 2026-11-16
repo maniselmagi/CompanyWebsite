@@ -391,13 +391,12 @@ export const Contact: React.FC = () => {
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-[#0c101a] border border-white/[0.1] text-sm text-white focus:outline-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/40 transition-all"
                   >
-                    <option value="Custom Enterprise Software">Custom Enterprise Software</option>
+                    <option value="Smart-Kiosk & Touch Systems">Smart-Kiosk & Touch Terminal Systems</option>
+                    <option value="Custom Software Development">Custom Software Development</option>
                     <option value="Web Application Development">Web Application Development</option>
-                    <option value="Mobile App Development">Mobile App Development</option>
-                    <option value="AI & Machine Learning">AI & Machine Learning Systems</option>
-                    <option value="Cloud Solutions & DevOps">Cloud Solutions & Infrastructure</option>
-                    <option value="UI/UX Systems Design">UI/UX Design Systems</option>
-                    <option value="Architecture Audit & RFP">Architecture Audit & Technical RFP</option>
+                    <option value="Mobile & Tablet App Development">Mobile & Tablet App Development</option>
+                    <option value="UI/UX & Product Design">UI/UX & Product Design Systems</option>
+                    <option value="Technical Consultation & Architecture">Technical Consultation & Scope Review</option>
                   </select>
                 </div>
 

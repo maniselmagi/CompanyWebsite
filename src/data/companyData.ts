@@ -1,79 +1,79 @@
-import type { DevProcessStep, CoreValue, VerifiedEngagementNote } from '../types';
+import type { DevProcessStep, CoreValue, EngineeringStandard } from '../types';
 
 export const companyProfile = {
   name: 'NEXORA TECHNOLOGIES',
   brandName: 'NEXORA',
   tagline: "Building Tomorrow's Digital World.",
-  shortDescription: 'Nexora Technologies is an international software development and IT engineering consultancy. We design, architect, and deploy mission-critical software, custom AI systems, and cloud-native digital infrastructure for global enterprises.',
+  shortDescription: 'Nexora Technologies is an engineering-focused software development company. We design and build modern commercial kiosk systems, interactive touch terminal software, bespoke web applications, and ergonomic product user interfaces.',
   establishedYear: '2024',
-  hqLocation: 'Nexora Global Delivery Hubs (San Francisco, CA • London, UK • Singapore [Regional Delivery Placeholders])',
+  hqLocation: 'Nexora Engineering Operations (Coimbatore • Remote Worldwide Delivery)',
   contactEmail: 'contact@nexoratech.example.com',
   inquiriesEmail: 'inquiries@nexoratech.example.com',
-  phonePlaceholder: '+1 (555) 019-8420',
-  operatingHours: 'Mon–Fri 9:00 AM – 6:00 PM (EST / GMT / SGT)',
+  phonePlaceholder: '+91 90959 58663',
+  operatingHours: 'Mon–Fri 9:00 AM – 6:00 PM IST',
   responseSla: 'Within 24 business hours',
 };
 
 export const developmentProcessSteps: DevProcessStep[] = [
   {
     stepNumber: '01',
-    title: 'Discovery & Architectural Strategy',
-    phase: 'Architecture & Alignment',
-    description: 'We conduct deep technical scoping, analyzing operational throughput requirements, legacy constraints, data sovereignty policies, and system topology to design an immutable software architecture blueprint.',
+    title: 'Requirements Discovery & Flow Mapping',
+    phase: 'Architecture & Scoping',
+    description: 'We analyze operational workflows, hardware constraints, touch target dimensions, user journey transitions, and network synchronization requirements to design a solid technical roadmap.',
     deliverables: [
-      'Comprehensive System Architecture Document (SAD)',
-      'Threat model & security compliance boundary definitions',
-      'Technical risk mitigation matrix & SLA benchmarks'
+      'Comprehensive Technical Scope & Flow Diagram',
+      'Hardware compatibility checklist (Tablets, Displays, POS)',
+      'Milestone breakdown with verifiable delivery benchmarks'
     ],
     timeframe: 'Weeks 1–2'
   },
   {
     stepNumber: '02',
-    title: 'Systems Prototyping & UX Architecture',
-    phase: 'User Experience & Flow Validation',
-    description: 'Translating complex operational workflows into high-fidelity interactive prototypes and design systems. Every interaction is validated against latency budgets, ergonomic usability, and cognitive clarity.',
+    title: 'Ergonomic UI & Touch Prototype',
+    phase: 'Design & Interaction',
+    description: 'Designing intuitive, high-contrast user interfaces specifically crafted for touchscreens and tablet docks. Every interaction is tested for touch target ergonomics (>48px), visual clarity, and responsiveness.',
     deliverables: [
-      'Interactive Figma prototypes with production token models',
-      'Information architecture & state machine definitions',
-      'Design System token library ready for frontend binding'
+      'Interactive Figma prototypes with touch design tokens',
+      'Multi-device responsive layout specifications (8"–12" tablets, mobile, desktop)',
+      'Design token library ready for frontend binding'
     ],
     timeframe: 'Weeks 3–4'
   },
   {
     stepNumber: '03',
-    title: 'Iterative Agile Engineering',
+    title: 'Agile Component Engineering',
     phase: 'Core Development Sprints',
-    description: 'Developing high-velocity, clean, type-safe code in two-week agile sprint cadences. We implement continuous integration, automated code linting, static analysis, and peer-reviewed pull requests.',
+    description: 'Building clean, type-safe code using modern React, TypeScript, and robust state management. Implementing real-time communication, offline resilience, and modular architecture in two-week agile sprint cycles.',
     deliverables: [
-      'Bi-weekly production-grade staging deployments',
-      'Strict test coverage (>85% automated unit & integration)',
+      'Bi-weekly staging builds accessible on cloud staging URLs',
+      'Clean TypeScript codebase with strict typing',
       'Transparent Git commit history and changelog documentation'
     ],
-    timeframe: 'Weeks 5–12'
+    timeframe: 'Weeks 5–10'
   },
   {
     stepNumber: '04',
-    title: 'Security, Automated QA & Stress Testing',
-    phase: 'Quality & Hardening',
-    description: 'Simulating worst-case production conditions before public rollout: high-concurrency DDoS resilience, automated vulnerability scans, penetration testing, and multi-tenant security verification.',
+    title: 'Hardware Testing & Operational Hardening',
+    phase: 'Testing & QA',
+    description: 'Testing on real physical tablets and kiosk hardware. Validating orientation changes, multi-touch stability, cross-screen state synchronization, accessibility contrast ratios, and thermal/memory behavior.',
     deliverables: [
-      'Comprehensive automated QA test suite & regression reports',
-      'Third-party security audit readiness report',
-      'Synthetic load testing reports validating peak throughput'
+      'Multi-device hardware test report (tablets, mobile, desktop)',
+      'Cross-screen synchronization latency validation',
+      'Zero known blocker verification sign-off'
     ],
-    timeframe: 'Weeks 13–14'
+    timeframe: 'Weeks 11–12'
   },
   {
     stepNumber: '05',
-    title: 'Multi-Cloud Deployment & Global Observability',
-    phase: 'Launch & Continuity',
-    description: 'Executing zero-downtime blue/green rollouts across multi-region Kubernetes clusters. We configure distributed telemetry, automated alert thresholds, and continuous 24/7 reliability engineering.',
+    title: 'Deployment & Knowledge Handover',
+    phase: 'Release & Handover',
+    description: 'Deploying production builds with automated CI/CD pipelines, containerized environments, and comprehensive setup documentation to give your team complete operational independence.',
     deliverables: [
-      'Multi-region Terraform cloud infrastructure as code',
-      'OpenTelemetry distributed tracing dashboards & PagerDuty alerts',
-      'Complete disaster recovery playbook & operational SLA handover'
+      'Production build artifacts and deployment configurations',
+      'Complete developer documentation and runbooks',
+      'Direct hand-off of 100% intellectual property and code repositories'
     ],
-    timeframe: 'Week 15 onwards'
+    timeframe: 'Week 13 onwards'
   }
 ];
 
@@ -81,99 +81,99 @@ export const coreValues: CoreValue[] = [
   {
     number: '01',
     title: 'Engineering Rigor Above All',
-    description: 'We reject short-term shortcuts. Every system we build is designed for clean maintainability, absolute type safety, deterministic testing, and architectural longevity.',
-    metric: '99.99% Architecture Target'
+    description: 'We reject short-term shortcuts. Every system we build is designed for clean maintainability, absolute type safety, deterministic logic, and architectural longevity.',
+    metric: 'Strict Type-Safe Code'
   },
   {
     number: '02',
-    title: 'Radical Architectural Transparency',
-    description: 'Clients have total access to code repositories, direct communication channels with senior engineers, and verifiable milestone benchmarks without vendor gatekeeping.',
+    title: 'Radical Transparency',
+    description: 'Clients have total access to code repositories, direct communication channels with software engineers, and verifiable milestone benchmarks without vendor gatekeeping.',
     metric: '100% Client Code Ownership'
   },
   {
     number: '03',
-    title: 'Security & Data Sovereignty First',
-    description: 'Security is not an afterthought. We enforce zero-trust network models, cryptographic data isolation, and strict regulatory compliance from the first line of code.',
-    metric: 'Zero-Trust Security Posture'
+    title: 'Touch & Usability First',
+    description: 'Software that touches customers must be intuitive, fast, and delightful. We engineer interfaces that require zero training to operate seamlessly.',
+    metric: 'Ergonomic Touch Standards'
   },
   {
     number: '04',
-    title: 'High-Velocity Iterative Delivery',
-    description: 'By maintaining modern automated CI/CD pipelines and modular design systems, we accelerate time-to-market without ever compromising system stability.',
-    metric: 'Bi-Weekly Deploy Cadence'
+    title: 'Honest Business Practice',
+    description: 'We do not inflate statistics, claim unbuilt capabilities, or fabricate testimonials. We stand behind our real software engineering work.',
+    metric: 'Verified Real Capabilities'
   },
   {
     number: '05',
-    title: 'Global Scalability by Default',
-    description: 'From distributed databases to edge CDN routing, our solutions are engineered from day one to operate reliably across global regions and diverse network latencies.',
-    metric: 'Global Multi-Region Topology'
+    title: 'Reliable Real-Time Performance',
+    description: 'From instant table-to-kitchen ticket broadcasting to fluid 60fps animations, our applications are engineered for responsiveness under real operational conditions.',
+    metric: 'Sub-Second State Sync'
   }
 ];
 
 export const whyChooseNexoraPoints = [
   {
-    title: 'Senior Engineering Teams',
-    description: 'Direct engagement with senior software architects and systems engineers—no hand-offs to junior pools or outsourced subcontracting layers.',
+    title: 'Real Working Software Experience',
+    description: 'We showcase actual functional software products like our Smart-Kiosk system, with genuine live demonstrations you can test directly.',
     icon: 'ShieldCheck'
   },
   {
     title: 'Full Intellectual Property Ownership',
-    description: 'You retain 100% of all intellectual property, source code repositories, design tokens, and infrastructure configurations with zero vendor lock-in.',
+    description: 'You retain 100% of all intellectual property, source code repositories, design tokens, and deployment configurations with zero vendor lock-in.',
     icon: 'Key'
   },
   {
     title: 'Modern Type-Safe Stack',
-    description: 'We leverage modern, verified technologies—TypeScript, Rust, Go, Python, React, and Kubernetes—ensuring longevity and talent availability.',
+    description: 'We build with verified, industry-standard technologies—React, TypeScript, Vite, Tailwind CSS, Python, and modern web standards—ensuring long-term maintainability.',
     icon: 'Layers'
   },
   {
-    title: 'Mission-Critical SLA Mindset',
-    description: 'Our software powers enterprise workflows where downtime directly equals financial loss. High availability and automated failover are built in.',
+    title: 'Commercial Hardware Understanding',
+    description: 'We understand commercial tablet mounts, kiosk enclosures, touch target acoustics, high-contrast dining room lighting, and offline hardware reliability.',
+    icon: 'Smartphone'
+  },
+  {
+    title: 'Direct Engineer Communication',
+    description: 'Work directly with the developers writing your software. No junior outsourcing chains or layers of non-technical account managers.',
     icon: 'Activity'
   },
   {
-    title: 'Deterministic AI & Modern Cloud',
-    description: 'We integrate practical, grounded AI and automated cloud pipelines that solve tangible operational challenges rather than superficial demos.',
-    icon: 'Zap'
-  },
-  {
-    title: 'Global Delivery & Clear Communication',
-    description: 'Clear, structured technical documentation, asynchronous project management, and overlapping collaboration hours for international partners.',
-    icon: 'Globe'
+    title: 'Honest Milestones & Deliverables',
+    description: 'Transparent sprint planning, live staging URLs every two weeks, and clear demarcation between completed features and work in progress.',
+    icon: 'CheckCircle2'
   }
 ];
 
-/**
- * Transparent customer engagement policy:
- * Adhering strictly to guidelines: No fake names, fake statistics, or fabricated testimonials.
- * We provide genuine client engagement case notices governed under confidentiality agreements.
- */
-export const verifiedEngagementNotes: VerifiedEngagementNote[] = [
+export const engineeringStandards: EngineeringStandard[] = [
   {
-    id: 'note-1',
-    clientIndustry: 'Global Financial Services & Digital Asset Infrastructure',
-    geographicRegion: 'North American Enterprise Client',
-    scopeSummary: 'Sub-millisecond market execution pipeline & distributed orderbook reconciliation engine',
-    verifiedFeedback: 'Nexora delivered an ultra-low latency data pump that handled our peak transaction volume with zero dropouts. Their architectural discipline and adherence to type safety was evident throughout.',
-    complianceNotice: 'Direct client identity protected under mutual commercial NDA. Architectural case study available upon verified qualified inquiry.',
-    engagementYear: '2024–2025'
+    id: 'standard-1',
+    title: '100% Client Code & IP Ownership',
+    subtitle: 'Zero Vendor Lock-In',
+    description: 'Every line of custom software, design token, configuration script, and documentation is formally assigned to the client. You own your codebase completely from day one.',
+    commitment: 'Complete repository transfer with build scripts upon project completion.',
+    iconName: 'Lock'
   },
   {
-    id: 'note-2',
-    clientIndustry: 'Healthcare & Clinical Diagnostic Operations',
-    geographicRegion: 'European Union Health Technology Group',
-    scopeSummary: 'Offline-first tablet charting suite with hardware biometric authentication & cryptographic synchronization',
-    verifiedFeedback: 'The offline synchronization resilience built by the Nexora team exceeded our hospital network stress tests. They engineered our solution with precision and deep attention to regulatory compliance.',
-    complianceNotice: 'Client confidentiality maintained per health sector data governance guidelines.',
-    engagementYear: '2024'
+    id: 'standard-2',
+    title: 'Live Verifiable Staging Builds',
+    subtitle: 'Transparent Agile Progress',
+    description: 'Never wait months for a black-box demo. We provide live, interactive staging URLs on every sprint so you can touch, test, and validate progress continuously.',
+    commitment: 'Cloud-accessible staging URL updated with each verified milestone.',
+    iconName: 'Globe'
   },
   {
-    id: 'note-3',
-    clientIndustry: 'Supply Chain Logistics & Global Fleet Telematics',
-    geographicRegion: 'Asia-Pacific Multi-National Logistics Corporation',
-    scopeSummary: 'Predictive fleet routing platform & real-time IoT telemetry ingestion cluster',
-    verifiedFeedback: 'Moving from legacy monoliths to Nexora\'s event-driven Kubernetes architecture dropped our processing latency by more than half while cutting compute infrastructure overhead by 30%.',
-    complianceNotice: 'Verified enterprise client engagement summary.',
-    engagementYear: '2025'
+    id: 'standard-3',
+    title: 'Strict Commercial Confidentiality',
+    subtitle: 'Mutual NDA Governance',
+    description: 'We respect proprietary enterprise business logic. All architectural conversations, specifications, and business rules are governed under strict bilateral non-disclosure agreements.',
+    commitment: 'Formal mutual NDA executed prior to reviewing client specifications.',
+    iconName: 'ShieldCheck'
+  },
+  {
+    id: 'standard-4',
+    title: 'Deterministic Code Quality & Type Safety',
+    subtitle: 'Zero Tolerated Build Warnings',
+    description: 'Every codebase is audited with strict linters and static type checkers. We deliver clean, self-documenting code structured for easy onboarding by internal teams.',
+    commitment: 'Strict zero-error, zero-warning quality gates enforced in CI/CD.',
+    iconName: 'CheckCircle2'
   }
 ];
