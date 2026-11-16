@@ -12,6 +12,8 @@ import {
   Server
 } from 'lucide-react';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const Footer: React.FC = () => {
   return (
     <footer className="relative bg-[#05070a] border-t border-white/[0.08] text-slate-400 overflow-hidden">
@@ -166,7 +168,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="text-center sm:text-right">
-            © {new Date().getFullYear()} {companyProfile.name}. All rights reserved. <span className="text-slate-400">"{companyProfile.tagline}"</span>
+            © {CURRENT_YEAR} {companyProfile.name}. All rights reserved. <span className="text-slate-400">"{companyProfile.tagline}"</span>
           </div>
         </div>
       </div>

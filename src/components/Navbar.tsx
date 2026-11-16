@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Logo } from './Logo';
 import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 
@@ -14,7 +14,6 @@ const navItems = [
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,10 +23,7 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <header 
@@ -112,6 +108,7 @@ export const Navbar: React.FC = () => {
               <NavLink
                 key={item.path}
                 to={item.path}
+                onClick={closeMobileMenu}
                 className={({ isActive }) =>
                   `flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-all ${
                     isActive
@@ -128,6 +125,7 @@ export const Navbar: React.FC = () => {
             <div className="pt-4 border-t border-white/10">
               <NavLink
                 to="/contact"
+                onClick={closeMobileMenu}
                 className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-blue-600/20"
               >
                 <Sparkles className="w-4 h-4" />
@@ -140,4 +138,3 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
-
