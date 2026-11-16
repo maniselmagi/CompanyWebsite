@@ -7,7 +7,7 @@ const navItems = [
   { name: 'Home', path: '/' },
   { name: 'About Us', path: '/about' },
   { name: 'Services', path: '/services' },
-  { name: 'Portfolio', path: '/portfolio' },
+  { name: 'Show case', path: '/portfolio' },
   { name: 'Contact Us', path: '/contact' },
 ];
 
@@ -57,21 +57,8 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Desktop Right Action & Status */}
-          <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-400 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-              <span>Global Hubs Active</span>
-            </div>
-
-            <NavLink
-              to="/contact"
-              className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 shadow-[0_0_20px_rgba(59,130,246,0.35)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 border border-white/20"
-            >
-              <span>Start Project</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </NavLink>
-          </div>
+          {/* Right Spacer for Symmetrical Desktop Centering */}
+          <div className="hidden md:block w-36 lg:w-44" />
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-3 md:hidden">

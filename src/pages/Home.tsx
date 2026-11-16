@@ -305,7 +305,7 @@ export const Home: React.FC = () => {
                   to="/portfolio"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-violet-400 hover:text-violet-300 transition-colors group"
                 >
-                  <span>View Full Portfolio</span>
+                  <span>View Full Show case</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
