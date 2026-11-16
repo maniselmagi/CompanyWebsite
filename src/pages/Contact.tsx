@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { companyProfile } from '../data/companyData';
 import { GithubIcon, LinkedinIcon, TwitterIcon } from '../components/SocialIcons';
+import { RevealOnScroll } from '../components/RevealOnScroll';
 import { 
   Mail, 
   MapPin, 
@@ -120,134 +121,139 @@ export const Contact: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header - Inspired by Screenshot 1 */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 pt-8">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-xs font-semibold text-purple-300">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Get In Touch</span>
+        <RevealOnScroll variant="fade-up">
+          <div className="text-center max-w-3xl mx-auto space-y-4 pt-8">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-xs font-semibold text-purple-300">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Get In Touch</span>
+            </div>
+            <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+              Let's Build the{' '}
+              <span className="text-gradient-purple-pink">
+                Future Together
+              </span>
+            </h1>
+            <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              Have questions about Nexora Technologies? Want to see an architectural walkthrough? Our senior engineering team is ready to help you transform your software operations.
+            </p>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-            Let's Build the{' '}
-            <span className="text-gradient-purple-pink">
-              Future Together
-            </span>
-          </h1>
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Have questions about Nexora Technologies? Want to see an architectural walkthrough? Our senior engineering team is ready to help you transform your software operations.
-          </p>
-        </div>
+        </RevealOnScroll>
 
         {/* Contact Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Get In Touch Card (5 Cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-3xl bg-[#090d16] border border-white/[0.08] space-y-6 shadow-xl">
-              <h2 className="text-xl font-bold text-white">Get in touch</h2>
-              
-              <div className="space-y-4">
-                {/* Email Us */}
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
-                    <Mail className="w-5 h-5" />
+            <RevealOnScroll variant="slide-right">
+              <div className="p-8 rounded-3xl bg-[#090d16] border border-white/[0.08] space-y-6 shadow-xl">
+                <h2 className="text-xl font-bold text-white">Get in touch</h2>
+                
+                <div className="space-y-4">
+                  {/* Email Us */}
+                  <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4 hover:border-purple-500/40 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white">Email us</div>
+                      <a 
+                        href={`mailto:${companyProfile.contactEmail}`} 
+                        className="text-xs sm:text-sm font-semibold text-purple-300 hover:text-purple-200 transition-colors block mt-0.5"
+                      >
+                        {companyProfile.contactEmail}
+                      </a>
+                      <div className="text-[11px] text-slate-400 mt-0.5">
+                        Monitored by Principal Solutions Architects
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-xs font-bold text-white">Email us</div>
+
+                  {/* Call Us */}
+                  <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4 hover:border-blue-500/40 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white">Call us</div>
+                      <div className="text-xs sm:text-sm font-semibold text-blue-300 block mt-0.5">
+                        {companyProfile.phonePlaceholder}
+                      </div>
+                      <div className="text-[11px] text-slate-400 mt-0.5">
+                        {companyProfile.operatingHours}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Visit Us */}
+                  <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4 hover:border-violet-500/40 transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-violet-500/15 border border-violet-500/30 flex items-center justify-center text-violet-400 shrink-0">
+                      <MapPin className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white">Visit us</div>
+                      <div className="text-xs sm:text-sm font-semibold text-violet-300 block mt-0.5">
+                        Nexora Global Delivery Hubs
+                      </div>
+                      <div className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                        {companyProfile.hqLocation}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Security & NDA Assurance */}
+                <div className="p-4 rounded-xl bg-blue-950/20 border border-blue-500/20 space-y-1.5 text-xs text-slate-300">
+                  <div className="flex items-center gap-2 text-emerald-400 font-semibold">
+                    <Lock className="w-3.5 h-3.5" />
+                    <span>Confidentiality & Mutual NDA</span>
+                  </div>
+                  <p className="text-slate-400 leading-relaxed text-[11px]">
+                    All architectural discussions are governed by strict confidentiality. 100% IP ownership transfers directly to you.
+                  </p>
+                </div>
+
+                {/* Social Channels */}
+                <div className="pt-2 border-t border-white/[0.08]">
+                  <div className="text-xs font-mono text-slate-400 mb-3 uppercase tracking-wider">
+                    Verified Social Channels
+                  </div>
+                  <div className="flex items-center gap-3">
                     <a 
-                      href={`mailto:${companyProfile.contactEmail}`} 
-                      className="text-xs sm:text-sm font-semibold text-purple-300 hover:text-purple-200 transition-colors block mt-0.5"
+                      href="https://github.com" 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all hover:scale-105"
                     >
-                      {companyProfile.contactEmail}
+                      <GithubIcon className="w-4 h-4" />
+                      <span>GitHub</span>
                     </a>
-                    <div className="text-[11px] text-slate-400 mt-0.5">
-                      Monitored by Principal Solutions Architects
-                    </div>
-                  </div>
-                </div>
-
-                {/* Call Us */}
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-white">Call us</div>
-                    <div className="text-xs sm:text-sm font-semibold text-blue-300 block mt-0.5">
-                      {companyProfile.phonePlaceholder}
-                    </div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">
-                      {companyProfile.operatingHours}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Visit Us */}
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-violet-500/15 border border-violet-500/30 flex items-center justify-center text-violet-400 shrink-0">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-white">Visit us</div>
-                    <div className="text-xs sm:text-sm font-semibold text-violet-300 block mt-0.5">
-                      Nexora Global Delivery Hubs
-                    </div>
-                    <div className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
-                      {companyProfile.hqLocation}
-                    </div>
+                    <a 
+                      href="https://linkedin.com" 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all hover:scale-105"
+                    >
+                      <LinkedinIcon className="w-4 h-4 text-blue-400" />
+                      <span>LinkedIn</span>
+                    </a>
+                    <a 
+                      href="https://twitter.com" 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all hover:scale-105"
+                    >
+                      <TwitterIcon className="w-4 h-4 text-sky-400" />
+                      <span>Twitter / X</span>
+                    </a>
                   </div>
                 </div>
               </div>
-
-              {/* Security & NDA Assurance */}
-              <div className="p-4 rounded-xl bg-blue-950/20 border border-blue-500/20 space-y-1.5 text-xs text-slate-300">
-                <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                  <Lock className="w-3.5 h-3.5" />
-                  <span>Confidentiality & Mutual NDA</span>
-                </div>
-                <p className="text-slate-400 leading-relaxed text-[11px]">
-                  All architectural discussions are governed by strict confidentiality. 100% IP ownership transfers directly to you.
-                </p>
-              </div>
-
-              {/* Social Channels */}
-              <div className="pt-2 border-t border-white/[0.08]">
-                <div className="text-xs font-mono text-slate-400 mb-3 uppercase tracking-wider">
-                  Verified Social Channels
-                </div>
-                <div className="flex items-center gap-3">
-                  <a 
-                    href="https://github.com" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span>GitHub</span>
-                  </a>
-                  <a 
-                    href="https://linkedin.com" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
-                  >
-                    <LinkedinIcon className="w-4 h-4 text-blue-400" />
-                    <span>LinkedIn</span>
-                  </a>
-                  <a 
-                    href="https://twitter.com" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
-                  >
-                    <TwitterIcon className="w-4 h-4 text-sky-400" />
-                    <span>Twitter / X</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+            </RevealOnScroll>
           </div>
 
           {/* Right Column: Send Us a Message Card (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#0a0d16] border border-white/[0.08] shadow-2xl relative">
+            <RevealOnScroll variant="slide-left">
+              <div className="p-8 sm:p-10 rounded-3xl bg-[#0a0d16] border border-white/[0.08] shadow-2xl relative">
               <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
 
               {/* Status Alert if Form is Validated */}
@@ -459,6 +465,7 @@ export const Contact: React.FC = () => {
                 </div>
               </form>
             </div>
+            </RevealOnScroll>
           </div>
         </div>
       </div>

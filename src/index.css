@@ -50,6 +50,74 @@
   }
 }
 
+/* Page Entrance Animation */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-entrance {
+  animation: pageFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Ambient Breathing Background Glow */
+@keyframes ambientGlowPulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.06) translate3d(0, -6px, 0);
+  }
+}
+
+.animate-ambient-glow {
+  animation: ambientGlowPulse 10s ease-in-out infinite;
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-subtle-float {
+  animation: subtleFloat 5s ease-in-out infinite;
+}
+
+/* Interactive Card & Button Polish */
+.btn-interactive-primary {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-interactive-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(52, 211, 153, 0.45);
+}
+.btn-interactive-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-interactive-gradient {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-interactive-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(59, 130, 246, 0.5);
+}
+.btn-interactive-gradient:active {
+  transform: scale(0.98);
+}
+
 /* Glassmorphism & visual depth utilities */
 .glass-panel {
   background: rgba(12, 16, 26, 0.75);
@@ -72,14 +140,14 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.card-spotlight {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.glass-card-hover:hover {
+.card-spotlight:hover {
   transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.35);
-  box-shadow: 0 16px 36px -12px rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 16px 36px -12px rgba(59, 130, 246, 0.22);
 }
 
 /* Gradients */

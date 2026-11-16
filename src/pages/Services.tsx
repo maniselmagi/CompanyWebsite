@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { servicesData } from '../data/servicesData';
 import { ServiceCardSchematic } from '../components/ServiceCardSchematic';
+import { RevealOnScroll } from '../components/RevealOnScroll';
 import { 
   Cpu, 
   Globe, 
@@ -51,21 +52,23 @@ export const Services: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
         {/* Header */}
-        <div className="text-center max-w-4xl mx-auto space-y-6 pt-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>FULL-LIFECYCLE ENGINEERING SERVICES</span>
+        <RevealOnScroll variant="fade-up" duration={700}>
+          <div className="text-center max-w-4xl mx-auto space-y-6 pt-8">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>FULL-LIFECYCLE ENGINEERING SERVICES</span>
+            </div>
+            <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+              Engineered for Concurrency, Scalability &{' '}
+              <span className="text-gradient-primary">
+                Mission Success.
+              </span>
+            </h1>
+            <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+              Six focused enterprise services designed to deliver tangible competitive advantages. From distributed backends to autonomous AI and ergonomic design systems.
+            </p>
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-            Engineered for Concurrency, Scalability &{' '}
-            <span className="text-gradient-primary">
-              Mission Success.
-            </span>
-          </h1>
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
-            Six focused enterprise services designed to deliver tangible competitive advantages. From distributed backends to autonomous AI and ergonomic design systems.
-          </p>
-        </div>
+        </RevealOnScroll>
 
         {/* 6 Services Deep Dive */}
         <div className="space-y-16">
@@ -80,178 +83,183 @@ export const Services: React.FC = () => {
             }[service.iconName] || Cpu;
 
             return (
-              <section 
-                key={service.id}
-                id={service.id}
-                className="scroll-mt-28 p-8 sm:p-12 rounded-3xl bg-[#090d16] border border-white/[0.08] hover:border-blue-500/30 transition-all duration-300 shadow-xl space-y-8"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-                  {/* Left Column (Main Information) */}
-                  <div className="lg:col-span-7 space-y-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <span className="text-xs font-mono text-slate-400">Service 0{index + 1}</span>
-                        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                          {service.title}
-                        </h2>
-                      </div>
-                    </div>
-
-                    <p className="text-sm font-medium text-blue-400">
-                      {service.subtitle}
-                    </p>
-
-                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                      {service.fullDescription}
-                    </p>
-
-                    {/* Customer Problems Solved */}
-                    <div className="p-4 rounded-xl bg-amber-500/[0.04] border border-amber-500/20 space-y-2">
-                      <div className="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                        <AlertTriangle className="w-3.5 h-3.5" />
-                        <span>Core Operational Bottlenecks Solved</span>
-                      </div>
-                      <p className="text-xs text-slate-300 leading-relaxed">
-                        Eliminates legacy latency bottlenecks, single-points-of-failure, unmaintainable technical debt, and desynchronized operational silos through modern reactive architectures.
-                      </p>
-                    </div>
-
-                    {/* Embedded UI Schematic (as in screenshot 3) */}
-                    <div className="space-y-2">
-                      <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                        Live Architectural Schematic:
-                      </div>
-                      <ServiceCardSchematic serviceId={service.id} />
-                    </div>
-
-                    {/* Key Capabilities */}
-                    <div className="space-y-3 pt-2">
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
-                        <Layers className="w-3.5 h-3.5 text-blue-400" />
-                        <span>Core Capabilities & Deliverables</span>
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                        {service.keyCapabilities.map((cap, i) => (
-                          <div key={i} className="flex items-start gap-2 text-xs text-slate-300 bg-white/[0.02] p-2.5 rounded-lg border border-white/[0.05]">
-                            <span className="text-blue-400 font-bold">•</span>
-                            <span>{cap}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Architecture Highlights */}
-                    <div className="space-y-2 pt-2">
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">
-                        Architectural Standards
-                      </h3>
-                      <ul className="space-y-1.5 text-xs text-slate-400">
-                        {service.architectureHighlights.map((arch, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <span className="text-emerald-400">✓</span>
-                            <span>{arch}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Right Column (Benefits & Direct CTA Card) */}
-                  <div className="lg:col-span-5 space-y-6">
-                    <div className="p-7 rounded-2xl bg-gradient-to-br from-[#0c111d] to-[#07090e] border border-blue-500/25 space-y-6">
-                      <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-                        <span className="text-xs font-bold uppercase tracking-wider text-white">
-                          Business Advantages
-                        </span>
-                        <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                      </div>
-
-                      <div className="space-y-3">
-                        {service.benefits.map((benefit, i) => (
-                          <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                            <span>{benefit}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="pt-4 border-t border-white/[0.08] space-y-2 text-xs">
-                        <div className="flex items-center gap-2 text-slate-400">
-                          <Clock className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                          <span>{service.deliveryTimeline}</span>
+              <RevealOnScroll key={service.id} variant="fade-up" delay={index % 2 === 0 ? 0 : 100}>
+                <section 
+                  id={service.id}
+                  className="scroll-mt-28 p-8 sm:p-12 rounded-3xl bg-[#090d16] border border-white/[0.08] hover:border-blue-500/40 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 shadow-xl space-y-8"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    {/* Left Column (Main Information) */}
+                    <div className="lg:col-span-7 space-y-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                          <Icon className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <span className="text-xs font-mono text-slate-400">Service 0{index + 1}</span>
+                          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                            {service.title}
+                          </h2>
                         </div>
                       </div>
 
-                      <Link
-                        to="/contact"
-                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all duration-200"
-                      >
-                        <span>Inquire About {service.title}</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
+                      <p className="text-sm font-medium text-blue-400">
+                        {service.subtitle}
+                      </p>
+
+                      <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                        {service.fullDescription}
+                      </p>
+
+                      {/* Customer Problems Solved */}
+                      <div className="p-4 rounded-xl bg-amber-500/[0.04] border border-amber-500/20 space-y-2">
+                        <div className="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                          <AlertTriangle className="w-3.5 h-3.5" />
+                          <span>Core Operational Bottlenecks Solved</span>
+                        </div>
+                        <p className="text-xs text-slate-300 leading-relaxed">
+                          Eliminates legacy latency bottlenecks, single-points-of-failure, unmaintainable technical debt, and desynchronized operational silos through modern reactive architectures.
+                        </p>
+                      </div>
+
+                      {/* Embedded UI Schematic (as in screenshot 3) */}
+                      <div className="space-y-2">
+                        <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                          Live Architectural Schematic:
+                        </div>
+                        <ServiceCardSchematic serviceId={service.id} />
+                      </div>
+
+                      {/* Key Capabilities */}
+                      <div className="space-y-3 pt-2">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+                          <Layers className="w-3.5 h-3.5 text-blue-400" />
+                          <span>Core Capabilities & Deliverables</span>
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                          {service.keyCapabilities.map((cap, i) => (
+                            <div key={i} className="flex items-start gap-2 text-xs text-slate-300 bg-white/[0.02] p-2.5 rounded-lg border border-white/[0.05]">
+                              <span className="text-blue-400 font-bold">•</span>
+                              <span>{cap}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Architecture Highlights */}
+                      <div className="space-y-2 pt-2">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">
+                          Architectural Standards
+                        </h3>
+                        <ul className="space-y-1.5 text-xs text-slate-400">
+                          {service.architectureHighlights.map((arch, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <span className="text-emerald-400">✓</span>
+                              <span>{arch}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Right Column (Benefits & Direct CTA Card) */}
+                    <div className="lg:col-span-5 space-y-6">
+                      <div className="p-7 rounded-2xl bg-gradient-to-br from-[#0c111d] to-[#07090e] border border-blue-500/25 space-y-6">
+                        <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+                          <span className="text-xs font-bold uppercase tracking-wider text-white">
+                            Business Advantages
+                          </span>
+                          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                        </div>
+
+                        <div className="space-y-3">
+                          {service.benefits.map((benefit, i) => (
+                            <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                              <span>{benefit}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="pt-4 border-t border-white/[0.08] space-y-2 text-xs">
+                          <div className="flex items-center gap-2 text-slate-400">
+                            <Clock className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                            <span>{service.deliveryTimeline}</span>
+                          </div>
+                        </div>
+
+                        <Link
+                          to="/contact"
+                          className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all duration-200"
+                        >
+                          <span>Inquire About {service.title}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              </RevealOnScroll>
             );
           })}
         </div>
 
         {/* Technical FAQ Accordion */}
-        <section className="max-w-4xl mx-auto space-y-8 pt-8">
-          <div className="text-center space-y-3">
-            <div className="text-xs font-bold tracking-widest text-blue-400 uppercase">
-              Frequently Asked Questions
-            </div>
-            <h2 className="text-3xl font-extrabold text-white tracking-tight">
-              Enterprise Collaboration & Engagement Details
-            </h2>
-          </div>
-
-          <div className="space-y-3">
-            {faqs.map((faq, idx) => (
-              <div 
-                key={idx}
-                className="rounded-xl bg-[#090d16] border border-white/[0.08] overflow-hidden"
-              >
-                <button
-                  onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-semibold text-white hover:text-blue-300 transition-colors"
-                >
-                  <span>{faq.q}</span>
-                  <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${activeFaq === idx ? 'rotate-180' : ''}`} />
-                </button>
-                {activeFaq === idx && (
-                  <div className="px-5 pb-5 text-sm text-slate-300 leading-relaxed border-t border-white/[0.05] pt-3">
-                    {faq.a}
-                  </div>
-                )}
+        <RevealOnScroll variant="fade-up">
+          <section className="max-w-4xl mx-auto space-y-8 pt-8">
+            <div className="text-center space-y-3">
+              <div className="text-xs font-bold tracking-widest text-blue-400 uppercase">
+                Frequently Asked Questions
               </div>
-            ))}
-          </div>
-        </section>
+              <h2 className="text-3xl font-extrabold text-white tracking-tight">
+                Enterprise Collaboration & Engagement Details
+              </h2>
+            </div>
+
+            <div className="space-y-3">
+              {faqs.map((faq, idx) => (
+                <div 
+                  key={idx}
+                  className="rounded-xl bg-[#090d16] border border-white/[0.08] overflow-hidden"
+                >
+                  <button
+                    onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+                    className="w-full p-5 text-left flex items-center justify-between text-sm sm:text-base font-semibold text-white hover:text-blue-300 transition-colors"
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${activeFaq === idx ? 'rotate-180' : ''}`} />
+                  </button>
+                  {activeFaq === idx && (
+                    <div className="px-5 pb-5 text-sm text-slate-300 leading-relaxed border-t border-white/[0.05] pt-3">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        </RevealOnScroll>
 
         {/* Bottom CTA */}
-        <section className="text-center py-12 space-y-6">
-          <h2 className="text-3xl font-extrabold text-white">
-            Have a Specific Architectural Challenge?
-          </h2>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">
-            Our principal engineers are ready to review your specifications and propose a concrete technical path forward.
-          </p>
-          <div className="pt-2">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all"
-            >
-              <span>Submit Architectural RFP</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
+        <RevealOnScroll variant="scale-up">
+          <section className="text-center py-12 space-y-6">
+            <h2 className="text-3xl font-extrabold text-white">
+              Have a Specific Architectural Challenge?
+            </h2>
+            <p className="text-slate-400 text-sm max-w-xl mx-auto">
+              Our principal engineers are ready to review your specifications and propose a concrete technical path forward.
+            </p>
+            <div className="pt-2">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all hover:scale-105"
+              >
+                <span>Submit Architectural RFP</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </section>
+        </RevealOnScroll>
       </div>
     </div>
   );
