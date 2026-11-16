@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { servicesData } from '../data/servicesData';
+import { ServiceCardSchematic } from '../components/ServiceCardSchematic';
 import { 
   Cpu, 
   Globe, 
@@ -13,7 +14,8 @@ import {
   Layers, 
   Clock, 
   ShieldCheck, 
-  ChevronDown
+  ChevronDown,
+  AlertTriangle
 } from 'lucide-react';
 
 export const Services: React.FC = () => {
@@ -22,7 +24,7 @@ export const Services: React.FC = () => {
   const faqs = [
     {
       q: 'How does Nexora guarantee intellectual property protection and code ownership?',
-      a: 'All intellectual property, proprietary software source code, designs, tokens, and deployment scripts are 100% owned by the client from day one. IP assignment clauses are formally signed prior to work inception.'
+      a: 'All intellectual property, proprietary software source code, designs, tokens, and deployment scripts are 100% owned by the client from day one. Formal IP assignment covenants are executed prior to sprint kickoff.'
     },
     {
       q: 'What is your typical project kickoff and delivery lifecycle?',
@@ -51,6 +53,7 @@ export const Services: React.FC = () => {
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto space-y-6 pt-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
+            <Sparkles className="w-3.5 h-3.5" />
             <span>FULL-LIFECYCLE ENGINEERING SERVICES</span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
@@ -59,7 +62,7 @@ export const Services: React.FC = () => {
               Mission Success.
             </span>
           </h1>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
             Six focused enterprise services designed to deliver tangible competitive advantages. From distributed backends to autonomous AI and ergonomic design systems.
           </p>
         </div>
@@ -76,15 +79,13 @@ export const Services: React.FC = () => {
               Layout: Layout
             }[service.iconName] || Cpu;
 
-            const isEven = index % 2 === 1;
-
             return (
               <section 
                 key={service.id}
                 id={service.id}
-                className="scroll-mt-28 p-8 sm:p-12 rounded-3xl bg-[#090d16] border border-white/[0.08] hover:border-blue-500/30 transition-all duration-300 shadow-xl"
+                className="scroll-mt-28 p-8 sm:p-12 rounded-3xl bg-[#090d16] border border-white/[0.08] hover:border-blue-500/30 transition-all duration-300 shadow-xl space-y-8"
               >
-                <div className={`grid grid-cols-1 lg:grid-cols-12 gap-10 items-start ${isEven ? 'lg:flex-row-reverse' : ''}`}>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                   {/* Left Column (Main Information) */}
                   <div className="lg:col-span-7 space-y-6">
                     <div className="flex items-center gap-3">
@@ -106,6 +107,25 @@ export const Services: React.FC = () => {
                     <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                       {service.fullDescription}
                     </p>
+
+                    {/* Customer Problems Solved */}
+                    <div className="p-4 rounded-xl bg-amber-500/[0.04] border border-amber-500/20 space-y-2">
+                      <div className="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                        <AlertTriangle className="w-3.5 h-3.5" />
+                        <span>Core Operational Bottlenecks Solved</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        Eliminates legacy latency bottlenecks, single-points-of-failure, unmaintainable technical debt, and desynchronized operational silos through modern reactive architectures.
+                      </p>
+                    </div>
+
+                    {/* Embedded UI Schematic (as in screenshot 3) */}
+                    <div className="space-y-2">
+                      <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                        Live Architectural Schematic:
+                      </div>
+                      <ServiceCardSchematic serviceId={service.id} />
+                    </div>
 
                     {/* Key Capabilities */}
                     <div className="space-y-3 pt-2">
@@ -141,7 +161,7 @@ export const Services: React.FC = () => {
 
                   {/* Right Column (Benefits & Direct CTA Card) */}
                   <div className="lg:col-span-5 space-y-6">
-                    <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0c111d] to-[#07090e] border border-blue-500/25 space-y-6">
+                    <div className="p-7 rounded-2xl bg-gradient-to-br from-[#0c111d] to-[#07090e] border border-blue-500/25 space-y-6">
                       <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
                         <span className="text-xs font-bold uppercase tracking-wider text-white">
                           Business Advantages
@@ -167,7 +187,7 @@ export const Services: React.FC = () => {
 
                       <Link
                         to="/contact"
-                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all duration-200"
+                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/30 transition-all duration-200"
                       >
                         <span>Inquire About {service.title}</span>
                         <ArrowRight className="w-3.5 h-3.5" />

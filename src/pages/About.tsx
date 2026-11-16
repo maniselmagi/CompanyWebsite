@@ -5,7 +5,10 @@ import {
   Compass, 
   ArrowRight, 
   CheckCircle2,
-  Terminal
+  Terminal,
+  ShieldCheck,
+  Lock,
+  Sparkles
 } from 'lucide-react';
 import { coreValues } from '../data/companyData';
 
@@ -23,6 +26,7 @@ export const About: React.FC = () => {
         {/* Hero / Header */}
         <div className="text-center max-w-4xl mx-auto space-y-6 pt-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
+            <Sparkles className="w-3.5 h-3.5" />
             <span>ABOUT NEXORA TECHNOLOGIES</span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
@@ -31,12 +35,12 @@ export const About: React.FC = () => {
               Global Scale.
             </span>
           </h1>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
             Founded with the conviction that enterprise software must be robust, type-safe, and built without architectural compromise. We turn complex computational challenges into durable digital competitive advantage.
           </p>
         </div>
 
-        {/* Company Introduction Presentation */}
+        {/* Company Introduction Presentation with 3D Isometric Visual (Inspired by Screenshot 4) */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
             <div className="text-xs font-bold tracking-widest text-blue-400 uppercase">
@@ -57,47 +61,84 @@ export const About: React.FC = () => {
               </p>
             </div>
 
-            <div className="pt-4 flex flex-wrap gap-4 text-xs font-mono text-slate-300">
-              <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] flex items-center gap-2">
+            <div className="pt-4 flex flex-wrap gap-3 text-xs font-mono text-slate-300">
+              <div className="px-3.5 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 <span>100% In-House Senior Engineers</span>
               </div>
-              <div className="px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-blue-400" />
-                <span>Zero Subcontracting Gateways</span>
+              <div className="px-3.5 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-blue-400" />
+                <span>Zero Subcontracting Layers</span>
+              </div>
+              <div className="px-3.5 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center gap-2">
+                <Lock className="w-4 h-4 text-violet-400" />
+                <span>Strict Mutual NDA Governance</span>
               </div>
             </div>
           </div>
 
+          {/* Right Visual: Isometric Geometric System Schematic */}
           <div className="lg:col-span-5">
-            <div className="p-8 rounded-2xl bg-[#0c101a] border border-blue-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.6)] space-y-6">
+            <div className="p-8 rounded-3xl bg-[#0a0e18] border border-blue-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.7)] space-y-6 relative overflow-hidden">
               <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
                 <div className="flex items-center gap-2 font-mono text-xs text-slate-300">
                   <Terminal className="w-4 h-4 text-blue-400" />
-                  <span>nexora_charter.config</span>
+                  <span>nexora_architecture_spec.ts</span>
                 </div>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400">
-                  Immutable
+                  Type-Safe
                 </span>
               </div>
 
-              <div className="space-y-4 font-mono text-xs text-slate-300 leading-relaxed">
-                <div>
-                  <span className="text-blue-400">const</span> enterprisePrinciples = &#123;
-                </div>
-                <div className="pl-4 space-y-1.5 text-slate-300">
-                  <div><span className="text-violet-400">codeOwnership:</span> '100% Client Retained',</div>
-                  <div><span className="text-violet-400">vendorLockIn:</span> 'Strictly Prohibited',</div>
-                  <div><span className="text-violet-400">typeSafety:</span> 'Enforced End-to-End',</div>
-                  <div><span className="text-violet-400">deliveryModel:</span> 'Agile Bi-Weekly Deploys',</div>
-                  <div><span className="text-violet-400">securityModel:</span> 'Zero-Trust Multi-Cloud',</div>
-                  <div><span className="text-violet-400">globalAvailability:</span> '99.99% Design Benchmark'</div>
-                </div>
-                <div>&#125;;</div>
+              {/* Isometric 3D Node Graphic (SVG) */}
+              <div className="py-4 flex justify-center">
+                <svg viewBox="0 0 200 160" className="w-48 h-40 filter drop-shadow-[0_10px_20px_rgba(59,130,246,0.3)]">
+                  <defs>
+                    <linearGradient id="isoTop" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#38bdf8" />
+                      <stop offset="100%" stopColor="#818cf8" />
+                    </linearGradient>
+                    <linearGradient id="isoLeft" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#1e40af" />
+                      <stop offset="100%" stopColor="#0f172a" />
+                    </linearGradient>
+                    <linearGradient id="isoRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#4338ca" />
+                      <stop offset="100%" stopColor="#1e1b4b" />
+                    </linearGradient>
+                  </defs>
+                  {/* Central Cube */}
+                  <g transform="translate(100, 75)">
+                    {/* Top Face */}
+                    <polygon points="0,-40 35,-20 0,0 -35,-20" fill="url(#isoTop)" opacity="0.9" />
+                    {/* Left Face */}
+                    <polygon points="-35,-20 0,0 0,40 -35,20" fill="url(#isoLeft)" />
+                    {/* Right Face */}
+                    <polygon points="0,0 35,-20 35,20 0,40" fill="url(#isoRight)" />
+                  </g>
+                  {/* Floating Satellite Nodes */}
+                  <circle cx="45" cy="45" r="7" fill="#38bdf8" opacity="0.8" />
+                  <line x1="45" y1="45" x2="65" y2="55" stroke="#38bdf8" strokeWidth="1" strokeDasharray="2,2" />
+                  <circle cx="155" cy="45" r="7" fill="#c084fc" opacity="0.8" />
+                  <line x1="155" y1="45" x2="135" y2="55" stroke="#c084fc" strokeWidth="1" strokeDasharray="2,2" />
+                  <circle cx="100" cy="135" r="7" fill="#34d399" opacity="0.8" />
+                  <line x1="100" y1="115" x2="100" y2="135" stroke="#34d399" strokeWidth="1" strokeDasharray="2,2" />
+                </svg>
               </div>
 
-              <div className="pt-4 border-t border-white/[0.08] text-xs text-slate-400 leading-normal">
-                "Our guiding metric is system resilience under peak real-world pressure."
+              <div className="space-y-2 font-mono text-xs text-slate-300 leading-relaxed border-t border-white/[0.08] pt-4">
+                <div className="flex justify-between text-slate-400">
+                  <span>Architecture Standard:</span>
+                  <span className="text-white">Hexagonal DDD</span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>IP Ownership:</span>
+                  <span className="text-emerald-400">100% Client Retained</span>
+                </div>
+                <div className="flex justify-between text-slate-400">
+                  <span>Delivery Cadence:</span>
+                  <span className="text-blue-300">Bi-Weekly Sprints</span>
+                </div>
               </div>
             </div>
           </div>
@@ -105,7 +146,7 @@ export const About: React.FC = () => {
 
         {/* Vision & Mission */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-[#0c111e] to-[#07090e] border border-blue-500/30 shadow-xl space-y-4">
+          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c111e] to-[#07090e] border border-blue-500/30 shadow-xl space-y-4">
             <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
               <Compass className="w-6 h-6" />
             </div>
@@ -113,12 +154,12 @@ export const About: React.FC = () => {
             <p className="text-slate-300 text-sm leading-relaxed">
               To pioneer resilient, human-centered digital foundations that empower global enterprises to operate with speed, autonomous intelligence, and absolute security in tomorrow's interconnected digital world.
             </p>
-            <div className="pt-4 text-xs font-mono text-blue-400">
+            <div className="pt-2 text-xs font-mono text-blue-400">
               Focus: Global Interoperability & Durable Architecture
             </div>
           </div>
 
-          <div className="p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-[#0e0f1e] to-[#07090e] border border-violet-500/30 shadow-xl space-y-4">
+          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0e0f1e] to-[#07090e] border border-violet-500/30 shadow-xl space-y-4">
             <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400">
               <Target className="w-6 h-6" />
             </div>
@@ -126,7 +167,7 @@ export const About: React.FC = () => {
             <p className="text-slate-300 text-sm leading-relaxed">
               To eliminate technical friction for international businesses by delivering enterprise software, custom artificial intelligence, and cloud platforms engineered with uncompromising craftsmanship, transparent communication, and rapid turnaround.
             </p>
-            <div className="pt-4 text-xs font-mono text-violet-400">
+            <div className="pt-2 text-xs font-mono text-violet-400">
               Focus: Measurable Impact & Zero Technical Debt
             </div>
           </div>
@@ -186,24 +227,24 @@ export const About: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2">
-              <div className="text-xs font-mono text-blue-400">Region 01</div>
+            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3">
+              <div className="text-xs font-mono text-blue-400">Hub 01</div>
               <div className="text-base font-bold text-white">North America Operations</div>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Coordinated sprint retrospectives and executive architecture consultations across EST & PST timezones.
               </p>
             </div>
-            <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2">
-              <div className="text-xs font-mono text-violet-400">Region 02</div>
+            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3">
+              <div className="text-xs font-mono text-violet-400">Hub 02</div>
               <div className="text-base font-bold text-white">EMEA Strategic Hubs</div>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 UK & European Union time alignment ensuring real-time incident triage and continuous development coverage.
               </p>
             </div>
-            <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2">
-              <div className="text-xs font-mono text-cyan-400">Region 03</div>
+            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3">
+              <div className="text-xs font-mono text-cyan-400">Hub 03</div>
               <div className="text-base font-bold text-white">Asia-Pacific Delivery</div>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 High-throughput automated overnight test verification, automated regression suites, and release engineering.
               </p>
             </div>

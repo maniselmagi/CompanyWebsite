@@ -7,7 +7,8 @@ import {
   ExternalLink, 
   ShieldCheck, 
   ArrowRight,
-  Server
+  Server,
+  Sparkles
 } from 'lucide-react';
 
 export const Portfolio: React.FC = () => {
@@ -33,6 +34,7 @@ export const Portfolio: React.FC = () => {
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto space-y-6 pt-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-semibold text-violet-400">
+            <Sparkles className="w-3.5 h-3.5" />
             <span>ENGINEERING CASE STUDIES & DEMONSTRATION WORK</span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
@@ -41,7 +43,7 @@ export const Portfolio: React.FC = () => {
               System Designs.
             </span>
           </h1>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
             Examine our high-concurrency architectures, enterprise prototypes, and telemetry systems. Representative demonstration systems engineered to validate real-world production stress tolerances.
           </p>
 
@@ -50,7 +52,7 @@ export const Portfolio: React.FC = () => {
             <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
             <div>
               <span className="font-semibold text-white block">Enterprise Demonstration Architecture Notice:</span>
-              To comply with mutual corporate confidentiality agreements (NDAs) governing client IP, specific proprietary projects are withheld. The systems below represent functional demonstration architectures engineered by Nexora to showcase technical benchmarks.
+              To comply with mutual corporate confidentiality agreements (NDAs) governing client IP, proprietary enterprise codebases remain protected. The systems below represent functional demonstration architectures engineered by Nexora to showcase technical benchmarks.
             </div>
           </div>
         </div>

@@ -14,6 +14,7 @@ import {
   Lock,
   ChevronRight,
   Database,
+  ArrowUpRight,
   Globe
 } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
@@ -21,6 +22,7 @@ import { portfolioData } from '../data/portfolioData';
 import { developmentProcessSteps, whyChooseNexoraPoints, verifiedEngagementNotes, companyProfile } from '../data/companyData';
 import { InteractiveDashboardMockup } from '../components/InteractiveDashboardMockup';
 import { CaseStudyModal } from '../components/CaseStudyModal';
+import { ServiceCardSchematic } from '../components/ServiceCardSchematic';
 import type { PortfolioItem } from '../types';
 
 export const Home: React.FC = () => {
@@ -30,51 +32,51 @@ export const Home: React.FC = () => {
     <div className="relative min-h-screen">
       {/* Background Tech Glow & Grid */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[650px] bg-gradient-to-b from-blue-600/10 via-violet-600/5 to-transparent blur-3xl opacity-70"></div>
-        <div className="absolute top-[30%] -left-48 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute top-[60%] -right-48 w-96 h-96 bg-violet-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[650px] bg-gradient-to-b from-blue-600/12 via-violet-600/6 to-transparent blur-3xl opacity-80"></div>
+        <div className="absolute top-[28%] -left-48 w-96 h-96 bg-cyan-500/10 rounded-full blur-[130px] pointer-events-none"></div>
+        <div className="absolute top-[58%] -right-48 w-96 h-96 bg-violet-600/12 rounded-full blur-[140px] pointer-events-none"></div>
         <div className="absolute inset-0 bg-tech-grid opacity-25"></div>
       </div>
 
       <div className="relative z-10">
-        {/* 1. HERO SECTION */}
+        {/* 1. HERO SECTION (Inspired by Screenshot 2) */}
         <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="text-center max-w-4xl mx-auto space-y-8">
             {/* Pill Announcement */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-blue-500/30 text-xs sm:text-sm text-slate-300 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:border-blue-400/50 transition-all">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-blue-500/30 text-xs sm:text-sm text-slate-300 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:border-blue-400/50 transition-all">
               <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
               <span className="font-semibold text-white">NEXORA TECHNOLOGIES</span>
-              <span className="text-slate-400">|</span>
-              <span className="text-blue-300 font-medium">Building Tomorrow's Digital World</span>
+              <span className="text-slate-500">|</span>
+              <span className="text-blue-300 font-medium">Built for regulated & high-volume environments</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-              Engineering Enterprise Software for the{' '}
-              <span className="text-gradient-primary">
-                Autonomous Era.
+              Your systems can't keep up with how you work now.{' '}
+              <span className="text-gradient-cyan-emerald block sm:inline">
+                We build the ones that can.
               </span>
             </h1>
 
             {/* Sub-headline */}
-            <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
-              Nexora Technologies designs, architects, and scales resilient custom software, high-throughput web systems, and cloud infrastructure for international enterprises that demand zero downtime.
+            <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
+              Spreadsheets, legacy tools, manual steps between systems — we replace them with custom software built around the way your company already operates, including in regulated and high-volume environments.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
-                to="/services"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-base font-semibold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:shadow-[0_0_35px_rgba(59,130,246,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 border border-white/20"
+                to="/contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 hover:shadow-[0_0_35px_rgba(52,211,153,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 border border-white/30"
               >
-                <span>Explore Enterprise Services</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Discuss your project</span>
+                <ArrowRight className="w-4 h-4 text-[#07090e]" />
               </Link>
               <Link
-                to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-slate-200 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/25 transition-all duration-200"
+                to="/services"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-slate-200 bg-[#0c101a]/80 hover:bg-white/[0.08] border border-white/10 hover:border-white/25 transition-all duration-200"
               >
-                <span>Book Architecture Consultation</span>
+                <span>Get an architecture estimate</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
             </div>
@@ -113,7 +115,7 @@ export const Home: React.FC = () => {
                 Architected for Scale, Concurrency, and Resilience
               </h2>
               <p className="text-slate-400 text-sm sm:text-base">
-                We bridge high-level domain strategy with low-level systems execution. Every solution is engineered using modern, type-safe paradigms.
+                We bridge high-level business strategy with low-level systems execution. Every solution is engineered using modern, type-safe paradigms.
               </p>
             </div>
 
@@ -166,25 +168,26 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 3. CORE SERVICES PREVIEW */}
+        {/* 3. CORE SERVICES PREVIEW (Inspired by Screenshot 3) */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="space-y-3 max-w-2xl">
-              <div className="text-xs font-bold tracking-widest text-blue-400 uppercase">
-                What We Deliver
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-semibold text-violet-300">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Capabilities</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                Comprehensive Software Engineering Services
+                Services We Offer
               </h2>
               <p className="text-slate-400 text-sm sm:text-base">
-                End-to-end capabilities tailored to solve high-stakes technical challenges from concept to global deployment.
+                Custom software, SaaS platforms, high-velocity mobile engineering, autonomous AI, and cloud architectures.
               </p>
             </div>
             <Link
               to="/services"
               className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors group"
             >
-              <span>View In-Depth Services</span>
+              <span>View Full Service Catalog</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -203,46 +206,57 @@ export const Home: React.FC = () => {
               return (
                 <div 
                   key={service.id}
-                  className="group relative p-8 rounded-2xl bg-[#0c101a]/70 border border-white/[0.08] hover:border-blue-500/40 hover:bg-[#0e1422] transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-[0_15px_35px_rgba(59,130,246,0.15)] hover:-translate-y-1"
+                  className="group relative p-7 rounded-2xl bg-[#0b0f1a]/80 border border-white/[0.08] hover:border-violet-500/40 hover:bg-[#0e1424] transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-[0_15px_35px_rgba(139,92,246,0.15)] hover:-translate-y-1"
                 >
                   <div className="space-y-5">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                      <IconComponent className="w-6 h-6" />
+                    {/* Header with Title and Corner Arrow */}
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 group-hover:bg-violet-600 group-hover:text-white transition-all duration-300">
+                        <IconComponent className="w-5 h-5" />
+                      </div>
+                      <Link 
+                        to={`/services#${service.id}`}
+                        className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:border-violet-400/50 group-hover:bg-violet-500/20 transition-all"
+                        aria-label={`View ${service.title}`}
+                      >
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </Link>
                     </div>
 
                     <div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
+                      <h3 className="text-lg font-bold text-white group-hover:text-violet-300 transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-xs text-blue-400/90 font-medium mt-1">
-                        {service.subtitle}
+                      <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                        {service.shortDescription}
                       </p>
                     </div>
 
-                    <p className="text-sm text-slate-300 leading-relaxed">
-                      {service.shortDescription}
-                    </p>
+                    {/* Embedded UI Schematic (as in screenshot 3) */}
+                    <div className="pt-1">
+                      <ServiceCardSchematic serviceId={service.id} />
+                    </div>
 
-                    <div className="space-y-2 pt-2 border-t border-white/[0.06]">
+                    <div className="space-y-1.5 pt-2 border-t border-white/[0.06]">
                       {service.benefits.slice(0, 2).map((b, i) => (
                         <div key={i} className="flex items-start gap-2 text-xs text-slate-400">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                          <span>{b}</span>
+                          <span className="line-clamp-1">{b}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-slate-400">
+                  <div className="pt-4 mt-4 border-t border-white/[0.06] flex items-center justify-between">
+                    <span className="text-[10px] font-mono text-slate-500">
                       {service.deliveryTimeline.split(';')[0]}
                     </span>
                     <Link
                       to="/services"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 group-hover:text-blue-300 transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-violet-400 group-hover:text-violet-300 transition-colors"
                     >
-                      <span>Details</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      <span>Learn More</span>
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
@@ -441,7 +455,7 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 7. VERIFIED ENTERPRISE ENGAGEMENTS (HONEST, TRANSPARENT TESTIMONIALS) */}
+        {/* 7. VERIFIED ENTERPRISE ENGAGEMENTS */}
         <section className="py-24 border-t border-white/[0.06] bg-[#06080d]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">

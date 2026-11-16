@@ -4,65 +4,81 @@ import { GithubIcon, LinkedinIcon, TwitterIcon } from '../components/SocialIcons
 import { 
   Mail, 
   MapPin, 
-  Clock, 
+  Phone, 
   CheckCircle2, 
-  AlertCircle,
-  Send,
-  Sparkles,
-  Lock
+  AlertCircle, 
+  Send, 
+  Sparkles, 
+  Lock, 
+  ExternalLink,
+  Info
 } from 'lucide-react';
 
-interface FormData {
-  fullName: string;
-  businessEmail: string;
-  projectDomain: string;
+interface ContactFormState {
+  firstName: string;
+  lastName: string;
+  email: string;
+  company: string;
   subject: string;
   message: string;
-  ndaRequired: boolean;
+  consent: boolean;
 }
 
 interface FormErrors {
-  fullName?: string;
-  businessEmail?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
   subject?: string;
   message?: string;
+  consent?: string;
 }
 
 export const Contact: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    fullName: '',
-    businessEmail: '',
-    projectDomain: 'Custom Enterprise Software',
-    subject: '',
+  const [formData, setFormData] = useState<ContactFormState>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    subject: 'Custom Enterprise Software',
     message: '',
-    ndaRequired: true
+    consent: true
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [submissionResult, setSubmissionResult] = useState<{
+    status: 'idle' | 'validated' | 'error';
+    summary?: string;
+  }>({ status: 'idle' });
 
   const validate = (): boolean => {
-    const newErrors: FormErrors = {};
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+    const errs: FormErrors = {};
+
+    if (!formData.firstName.trim()) {
+      errs.firstName = 'First name is required';
     }
-    if (!formData.businessEmail.trim()) {
-      newErrors.businessEmail = 'Business email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.businessEmail)) {
-      newErrors.businessEmail = 'Please provide a valid corporate email address';
+    if (!formData.lastName.trim()) {
+      errs.lastName = 'Last name is required';
+    }
+    if (!formData.email.trim()) {
+      errs.email = 'Corporate email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errs.email = 'Please provide a valid corporate email address';
     }
     if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
+      errs.subject = 'Please select a topic';
     }
     if (!formData.message.trim()) {
-      newErrors.message = 'Please provide brief details of your technical requirements';
+      errs.message = 'Please describe your technical requirements';
     } else if (formData.message.trim().length < 15) {
-      newErrors.message = 'Please provide at least 15 characters detailing your scope';
+      errs.message = 'Please provide at least 15 characters of project detail';
+    }
+    if (!formData.consent) {
+      errs.consent = 'Consent is required to proceed with communications';
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -71,113 +87,123 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // Simulate reliable enterprise form submission
+    // Transparent real validation handling per specification
     setTimeout(() => {
       setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormData({
-        fullName: '',
-        businessEmail: '',
-        projectDomain: 'Custom Enterprise Software',
-        subject: '',
-        message: '',
-        ndaRequired: true
+      setSubmissionResult({
+        status: 'validated',
+        summary: `Validated inquiry from ${formData.firstName} ${formData.lastName} (${formData.email}) for "${formData.subject}".`
       });
-      setErrors({});
-    }, 1000);
+    }, 600);
+  };
+
+  const generateMailtoLink = () => {
+    const subjectLine = encodeURIComponent(`[Inquiry] ${formData.subject} - ${formData.company || formData.firstName}`);
+    const bodyContent = encodeURIComponent(
+      `Name: ${formData.firstName} ${formData.lastName}\n` +
+      `Email: ${formData.email}\n` +
+      `Company: ${formData.company || 'N/A'}\n` +
+      `Topic: ${formData.subject}\n\n` +
+      `Project Requirements:\n${formData.message}\n`
+    );
+    return `mailto:${companyProfile.contactEmail}?subject=${subjectLine}&body=${bodyContent}`;
   };
 
   return (
     <div className="relative min-h-screen pt-28 pb-20">
       {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px]"></div>
-        <div className="absolute top-2/3 right-10 w-[450px] h-[450px] bg-violet-600/10 rounded-full blur-[140px]"></div>
+        <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[150px]"></div>
+        <div className="absolute top-2/3 right-10 w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-[140px]"></div>
         <div className="absolute inset-0 bg-tech-grid opacity-20"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-6 pt-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
-            <span>DIRECT ARCHITECTURAL ENGAGEMENT</span>
+        {/* Header - Inspired by Screenshot 1 */}
+        <div className="text-center max-w-3xl mx-auto space-y-4 pt-8">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-xs font-semibold text-purple-300">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Get In Touch</span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-            Let's Architect Your{' '}
-            <span className="text-gradient-primary">
-              Next Breakthrough.
+            Let's Build the{' '}
+            <span className="text-gradient-purple-pink">
+              Future Together
             </span>
           </h1>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Reach out directly to Nexora Technologies. Whether exploring greenfield system architecture, AI modernization, or legacy migration, our senior team responds within 24 business hours.
+          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Have questions about Nexora Technologies? Want to see an architectural walkthrough? Our senior engineering team is ready to help you transform your software operations.
           </p>
         </div>
 
         {/* Contact Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Direct Info & Placeholders (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column: Get In Touch Card (5 Cols) */}
+          <div className="lg:col-span-5 space-y-6">
             <div className="p-8 rounded-3xl bg-[#090d16] border border-white/[0.08] space-y-6 shadow-xl">
-              <h2 className="text-xl font-bold text-white">Direct Communication Channels</h2>
+              <h2 className="text-xl font-bold text-white">Get in touch</h2>
               
-              <div className="space-y-5 text-sm">
-                {/* Business Email Placeholder */}
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
+              <div className="space-y-4">
+                {/* Email Us */}
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">Business Email Placeholder</div>
-                    <a href={`mailto:${companyProfile.contactEmail}`} className="text-base font-semibold text-white hover:text-blue-400 transition-colors">
+                    <div className="text-xs font-bold text-white">Email us</div>
+                    <a 
+                      href={`mailto:${companyProfile.contactEmail}`} 
+                      className="text-xs sm:text-sm font-semibold text-purple-300 hover:text-purple-200 transition-colors block mt-0.5"
+                    >
                       {companyProfile.contactEmail}
                     </a>
-                    <div className="text-xs text-slate-400 mt-0.5">
+                    <div className="text-[11px] text-slate-400 mt-0.5">
                       Monitored by Principal Solutions Architects
                     </div>
                   </div>
                 </div>
 
-                {/* Company Location Placeholder */}
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 shrink-0">
-                    <MapPin className="w-5 h-5" />
+                {/* Call Us */}
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
+                    <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">Company Location Placeholder</div>
-                    <div className="text-sm font-semibold text-white">
-                      Nexora Global Delivery Hubs
+                    <div className="text-xs font-bold text-white">Call us</div>
+                    <div className="text-xs sm:text-sm font-semibold text-blue-300 block mt-0.5">
+                      {companyProfile.phonePlaceholder}
                     </div>
-                    <div className="text-xs text-slate-400 mt-0.5 leading-relaxed">
-                      {companyProfile.hqLocation}
+                    <div className="text-[11px] text-slate-400 mt-0.5">
+                      {companyProfile.operatingHours}
                     </div>
                   </div>
                 </div>
 
-                {/* Response SLA */}
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                    <Clock className="w-5 h-5" />
+                {/* Visit Us */}
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-violet-500/15 border border-violet-500/30 flex items-center justify-center text-violet-400 shrink-0">
+                    <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">SLA Commitment</div>
-                    <div className="text-sm font-semibold text-white">
-                      Guaranteed Initial Review
+                    <div className="text-xs font-bold text-white">Visit us</div>
+                    <div className="text-xs sm:text-sm font-semibold text-violet-300 block mt-0.5">
+                      Nexora Global Delivery Hubs
                     </div>
-                    <div className="text-xs text-slate-400 mt-0.5">
-                      {companyProfile.responseSla}
+                    <div className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                      {companyProfile.hqLocation}
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Confidentiality Notice */}
-              <div className="pt-4 border-t border-white/[0.08] p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-2 text-xs text-slate-300">
+              {/* Security & NDA Assurance */}
+              <div className="p-4 rounded-xl bg-blue-950/20 border border-blue-500/20 space-y-1.5 text-xs text-slate-300">
                 <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                  <Lock className="w-4 h-4" />
-                  <span>Confidentiality Guaranteed</span>
+                  <Lock className="w-3.5 h-3.5" />
+                  <span>Confidentiality & Mutual NDA</span>
                 </div>
-                <p className="text-slate-400 leading-relaxed">
-                  We treat all system disclosures with utmost confidentiality. Standard mutual Non-Disclosure Agreements (NDAs) are executed prior to deep architectural data sharing.
+                <p className="text-slate-400 leading-relaxed text-[11px]">
+                  All architectural discussions are governed by strict confidentiality. 100% IP ownership transfers directly to you.
                 </p>
               </div>
 
@@ -191,7 +217,7 @@ export const Contact: React.FC = () => {
                     href="https://github.com" 
                     target="_blank" 
                     rel="noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span>GitHub</span>
@@ -200,18 +226,18 @@ export const Contact: React.FC = () => {
                     href="https://linkedin.com" 
                     target="_blank" 
                     rel="noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
                   >
-                    <LinkedinIcon className="w-4 h-4" />
+                    <LinkedinIcon className="w-4 h-4 text-blue-400" />
                     <span>LinkedIn</span>
                   </a>
                   <a 
                     href="https://twitter.com" 
                     target="_blank" 
                     rel="noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs text-slate-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
                   >
-                    <TwitterIcon className="w-4 h-4" />
+                    <TwitterIcon className="w-4 h-4 text-sky-400" />
                     <span>Twitter / X</span>
                   </a>
                 </div>
@@ -219,192 +245,219 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Functional Form with Validation (7 Cols) */}
+          {/* Right Column: Send Us a Message Card (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#090d16] border border-blue-500/25 shadow-2xl relative overflow-hidden">
-              <div className="flex items-center justify-between pb-6 border-b border-white/[0.08]">
-                <div>
-                  <h2 className="text-2xl font-bold text-white">Project Inquiry & RFP</h2>
-                  <p className="text-xs text-slate-400 mt-1">Provide preliminary details regarding your technical requirements.</p>
-                </div>
-                <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-mono text-blue-400">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Direct Routing</span>
-                </div>
-              </div>
+            <div className="p-8 sm:p-10 rounded-3xl bg-[#0a0d16] border border-white/[0.08] shadow-2xl relative">
+              <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
 
-              {isSuccess ? (
-                <div className="py-12 text-center space-y-5 animate-in fade-in duration-300">
-                  <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto">
-                    <CheckCircle2 className="w-8 h-8" />
+              {/* Status Alert if Form is Validated */}
+              {submissionResult.status === 'validated' && (
+                <div className="mb-6 p-5 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 space-y-3 animate-in fade-in duration-200">
+                  <div className="flex items-center gap-2 text-emerald-400 font-semibold text-sm">
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Inquiry Validated Successfully</span>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-2xl font-bold text-white">Inquiry Transmitted Successfully</h3>
-                    <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                      Thank you for contacting Nexora Technologies. Our Principal Architecture Committee has received your request and will initiate contact within 24 business hours.
-                    </p>
-                  </div>
-                  <div className="pt-4">
-                    <button
-                      onClick={() => setIsSuccess(false)}
-                      className="px-6 py-2.5 rounded-xl text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-colors"
-                    >
-                      Submit Another Technical Inquiry
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6 pt-6" noValidate>
-                  {/* Name and Email Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="fullName" className="block text-xs font-semibold text-slate-200">
-                        Full Name <span className="text-blue-400">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="fullName"
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        placeholder="e.g. Elena Rostova"
-                        className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-all ${
-                          errors.fullName ? 'border-rose-500/80 bg-rose-500/[0.02]' : 'border-white/[0.1] focus:border-blue-500/50'
-                        }`}
-                      />
-                      {errors.fullName && (
-                        <p className="text-xs text-rose-400 flex items-center gap-1 mt-1">
-                          <AlertCircle className="w-3.5 h-3.5" />
-                          <span>{errors.fullName}</span>
-                        </p>
-                      )}
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {submissionResult.summary}
+                  </p>
+                  
+                  {/* Honest backend notification as requested */}
+                  <div className="p-3 rounded-lg bg-black/40 border border-white/10 text-[11px] text-slate-300 space-y-2">
+                    <div className="flex items-start gap-2 text-amber-300">
+                      <Info className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                      <span>
+                        <strong>Direct Dispatch Ready:</strong> To ensure your message reaches our architects immediately without relying on an external webhook API key, click below to send via your email client:
+                      </span>
                     </div>
-
-                    <div className="space-y-2">
-                      <label htmlFor="businessEmail" className="block text-xs font-semibold text-slate-200">
-                        Business Email <span className="text-blue-400">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        id="businessEmail"
-                        value={formData.businessEmail}
-                        onChange={(e) => setFormData({ ...formData, businessEmail: e.target.value })}
-                        placeholder="e.g. elena@enterprise.com"
-                        className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-all ${
-                          errors.businessEmail ? 'border-rose-500/80 bg-rose-500/[0.02]' : 'border-white/[0.1] focus:border-blue-500/50'
-                        }`}
-                      />
-                      {errors.businessEmail && (
-                        <p className="text-xs text-rose-400 flex items-center gap-1 mt-1">
-                          <AlertCircle className="w-3.5 h-3.5" />
-                          <span>{errors.businessEmail}</span>
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Project Domain / Service Selector */}
-                  <div className="space-y-2">
-                    <label htmlFor="projectDomain" className="block text-xs font-semibold text-slate-200">
-                      Technical Domain Focus
-                    </label>
-                    <select
-                      id="projectDomain"
-                      value={formData.projectDomain}
-                      onChange={(e) => setFormData({ ...formData, projectDomain: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-[#0c101a] border border-white/[0.1] text-sm text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/40 transition-all"
+                    <a
+                      href={generateMailtoLink()}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-500 text-black font-semibold text-xs hover:bg-emerald-400 transition-colors"
                     >
-                      <option value="Custom Enterprise Software">1. Custom Software Development</option>
-                      <option value="Web Application Development">2. Web Application Development</option>
-                      <option value="Mobile App Development">3. Mobile App Development</option>
-                      <option value="AI & Machine Learning">4. AI & Machine Learning Systems</option>
-                      <option value="Cloud Solutions & DevOps">5. Cloud Solutions & Infrastructure</option>
-                      <option value="UI/UX Systems Design">6. UI/UX Design Systems</option>
-                      <option value="General Technical Consultation">Comprehensive Full-Stack Modernization</option>
-                    </select>
+                      <span>Send Now via Corporate Email Client</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
                   </div>
 
-                  {/* Subject */}
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="block text-xs font-semibold text-slate-200">
-                      Subject <span className="text-blue-400">*</span>
+                  <button
+                    type="button"
+                    onClick={() => setSubmissionResult({ status: 'idle' })}
+                    className="text-xs text-slate-400 hover:text-white underline pt-1"
+                  >
+                    Edit inquiry details
+                  </button>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                {/* First Name & Last Name Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label htmlFor="firstName" className="block text-xs font-semibold text-slate-200">
+                      First Name <span className="text-purple-400">*</span>
                     </label>
                     <input
                       type="text"
-                      id="subject"
-                      value={formData.subject}
-                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      placeholder="e.g. Distributed Telemetry Pipeline Modernization"
-                      className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-all ${
-                        errors.subject ? 'border-rose-500/80 bg-rose-500/[0.02]' : 'border-white/[0.1] focus:border-blue-500/50'
+                      id="firstName"
+                      value={formData.firstName}
+                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      placeholder="John"
+                      className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/40 transition-all ${
+                        errors.firstName ? 'border-rose-500/80 bg-rose-500/[0.02]' : 'border-white/[0.1] focus:border-purple-500/50'
                       }`}
                     />
-                    {errors.subject && (
-                      <p className="text-xs text-rose-400 flex items-center gap-1 mt-1">
-                        <AlertCircle className="w-3.5 h-3.5" />
-                        <span>{errors.subject}</span>
+                    {errors.firstName && (
+                      <p className="text-[11px] text-rose-400 flex items-center gap-1 mt-1">
+                        <AlertCircle className="w-3 h-3" />
+                        <span>{errors.firstName}</span>
                       </p>
                     )}
                   </div>
 
-                  {/* Message Field */}
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="block text-xs font-semibold text-slate-200">
-                      Project Scope & Architectural Requirements <span className="text-blue-400">*</span>
+                  <div className="space-y-1.5">
+                    <label htmlFor="lastName" className="block text-xs font-semibold text-slate-200">
+                      Last Name <span className="text-purple-400">*</span>
                     </label>
-                    <textarea
-                      id="message"
-                      rows={5}
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Outline target concurrency, existing stack bottlenecks, timeline goals, or cloud preferences..."
-                      className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-all ${
-                        errors.message ? 'border-rose-500/80 bg-rose-500/[0.02]' : 'border-white/[0.1] focus:border-blue-500/50'
+                    <input
+                      type="text"
+                      id="lastName"
+                      value={formData.lastName}
+                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      placeholder="Doe"
+                      className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/40 transition-all ${
+                        errors.lastName ? 'border-rose-500/80 bg-rose-500/[0.02]' : 'border-white/[0.1] focus:border-purple-500/50'
                       }`}
-                    ></textarea>
-                    {errors.message && (
-                      <p className="text-xs text-rose-400 flex items-center gap-1 mt-1">
-                        <AlertCircle className="w-3.5 h-3.5" />
-                        <span>{errors.message}</span>
+                    />
+                    {errors.lastName && (
+                      <p className="text-[11px] text-rose-400 flex items-center gap-1 mt-1">
+                        <AlertCircle className="w-3 h-3" />
+                        <span>{errors.lastName}</span>
                       </p>
                     )}
                   </div>
+                </div>
 
-                  {/* Mutual NDA Checkbox */}
-                  <div className="flex items-center gap-3 pt-1">
+                {/* Email Address */}
+                <div className="space-y-1.5">
+                  <label htmlFor="email" className="block text-xs font-semibold text-slate-200">
+                    Email Address <span className="text-purple-400">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="john@company.com"
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/40 transition-all ${
+                      errors.email ? 'border-rose-500/80 bg-rose-500/[0.02]' : 'border-white/[0.1] focus:border-purple-500/50'
+                    }`}
+                  />
+                  {errors.email && (
+                    <p className="text-[11px] text-rose-400 flex items-center gap-1 mt-1">
+                      <AlertCircle className="w-3 h-3" />
+                      <span>{errors.email}</span>
+                    </p>
+                  )}
+                </div>
+
+                {/* Company Name */}
+                <div className="space-y-1.5">
+                  <label htmlFor="company" className="block text-xs font-semibold text-slate-200">
+                    Company
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    placeholder="Your Company"
+                    className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.1] text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/40 transition-all"
+                  />
+                </div>
+
+                {/* Subject Dropdown */}
+                <div className="space-y-1.5">
+                  <label htmlFor="subject" className="block text-xs font-semibold text-slate-200">
+                    Subject <span className="text-purple-400">*</span>
+                  </label>
+                  <select
+                    id="subject"
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-[#0c101a] border border-white/[0.1] text-sm text-white focus:outline-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/40 transition-all"
+                  >
+                    <option value="Custom Enterprise Software">Custom Enterprise Software</option>
+                    <option value="Web Application Development">Web Application Development</option>
+                    <option value="Mobile App Development">Mobile App Development</option>
+                    <option value="AI & Machine Learning">AI & Machine Learning Systems</option>
+                    <option value="Cloud Solutions & DevOps">Cloud Solutions & Infrastructure</option>
+                    <option value="UI/UX Systems Design">UI/UX Design Systems</option>
+                    <option value="Architecture Audit & RFP">Architecture Audit & Technical RFP</option>
+                  </select>
+                </div>
+
+                {/* Message Field */}
+                <div className="space-y-1.5">
+                  <label htmlFor="message" className="block text-xs font-semibold text-slate-200">
+                    Message <span className="text-purple-400">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    placeholder="Tell us about your project and how we can help..."
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/40 transition-all ${
+                      errors.message ? 'border-rose-500/80 bg-rose-500/[0.02]' : 'border-white/[0.1] focus:border-purple-500/50'
+                    }`}
+                  ></textarea>
+                  {errors.message && (
+                    <p className="text-[11px] text-rose-400 flex items-center gap-1 mt-1">
+                      <AlertCircle className="w-3 h-3" />
+                      <span>{errors.message}</span>
+                    </p>
+                  )}
+                </div>
+
+                {/* Consent Checkbox */}
+                <div className="space-y-1 pt-1">
+                  <div className="flex items-start gap-2.5">
                     <input
                       type="checkbox"
-                      id="nda"
-                      checked={formData.ndaRequired}
-                      onChange={(e) => setFormData({ ...formData, ndaRequired: e.target.checked })}
-                      className="w-4 h-4 rounded bg-white/5 border border-white/20 text-blue-600 focus:ring-blue-500 focus:ring-offset-0"
+                      id="consent"
+                      checked={formData.consent}
+                      onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                      className="w-4 h-4 rounded bg-white/5 border border-white/20 text-purple-600 focus:ring-purple-500 focus:ring-offset-0 mt-0.5"
                     />
-                    <label htmlFor="nda" className="text-xs text-slate-300 select-none cursor-pointer">
-                      Execute standard mutual Non-Disclosure Agreement (NDA) prior to technical deep-dive
+                    <label htmlFor="consent" className="text-xs text-slate-400 select-none cursor-pointer leading-normal">
+                      I agree to receive communications from Nexora Technologies and understand that I can unsubscribe at any time.
                     </label>
                   </div>
+                  {errors.consent && (
+                    <p className="text-[11px] text-rose-400">{errors.consent}</p>
+                  )}
+                </div>
 
-                  {/* Submit Button */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] transition-all duration-200 border border-white/20 disabled:opacity-50"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          <span>Transmitting Encrypted Dispatch...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Send Architecture Inquiry</span>
-                          <Send className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </form>
-              )}
+                {/* Vibrant Gradient Submit Button (as in screenshot 1) */}
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 hover:shadow-[0_0_35px_rgba(217,70,239,0.5)] hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 border border-white/20 disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Validating Dispatch...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

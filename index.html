@@ -2,7 +2,7 @@
 <html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Primary Meta Tags -->
@@ -10,12 +10,15 @@
     <meta name="title" content="NEXORA TECHNOLOGIES — Building Tomorrow's Digital World" />
     <meta name="description" content="Nexora Technologies is a premier global software engineering firm delivering custom enterprise software, AI solutions, high-performance web systems, and cloud infrastructure for international enterprises." />
     <meta name="keywords" content="Nexora Technologies, global software development, enterprise software, AI engineering, cloud solutions, web application development, custom software" />
+    <meta name="author" content="Nexora Technologies" />
     <meta name="theme-color" content="#07090e" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nexora Technologies" />
     <meta property="og:title" content="NEXORA TECHNOLOGIES — Building Tomorrow's Digital World" />
     <meta property="og:description" content="Global software engineering, AI systems, cloud architectures, and digital product innovation for international enterprises." />
+    <meta property="og:url" content="https://maniselmagi.github.io/CompanyWebsite/" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -26,9 +29,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NEXORA TECHNOLOGIES",
+      "alternateName": "Nexora",
+      "url": "https://maniselmagi.github.io/CompanyWebsite/",
+      "logo": "https://maniselmagi.github.io/CompanyWebsite/favicon.svg",
+      "description": "Global Software Development and IT Services Company specializing in custom software, cloud native architecture, and artificial intelligence.",
+      "slogan": "Building Tomorrow's Digital World."
+    }
+    </script>
   </head>
-  <body class="bg-[#07090e] text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+  <body class="bg-[#07090e] text-slate-100 antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>

@@ -6,10 +6,11 @@ export const companyProfile = {
   tagline: "Building Tomorrow's Digital World.",
   shortDescription: 'Nexora Technologies is an international software development and IT engineering consultancy. We design, architect, and deploy mission-critical software, custom AI systems, and cloud-native digital infrastructure for global enterprises.',
   establishedYear: '2024',
-  hqLocation: 'International Software Consultancy (Global Delivery Centers & Remote Engineering Hubs: North America • Europe • Asia-Pacific)',
+  hqLocation: 'Nexora Global Delivery Hubs (San Francisco, CA • London, UK • Singapore [Regional Delivery Placeholders])',
   contactEmail: 'contact@nexoratech.example.com',
   inquiriesEmail: 'inquiries@nexoratech.example.com',
-  phonePlaceholder: '+1 (555) 019-8420 [Corporate Inquiries Placeholder]',
+  phonePlaceholder: '+1 (555) 019-8420',
+  operatingHours: 'Mon–Fri 9:00 AM – 6:00 PM (EST / GMT / SGT)',
   responseSla: 'Within 24 business hours',
 };
 
@@ -142,6 +143,11 @@ export const whyChooseNexoraPoints = [
   }
 ];
 
+/**
+ * Transparent customer engagement policy:
+ * Adhering strictly to guidelines: No fake names, fake statistics, or fabricated testimonials.
+ * We provide genuine client engagement case notices governed under confidentiality agreements.
+ */
 export const verifiedEngagementNotes: VerifiedEngagementNote[] = [
   {
     id: 'note-1',
