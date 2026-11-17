@@ -57,8 +57,17 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Right Spacer for Symmetrical Desktop Centering */}
-          <div className="hidden lg:block w-36 lg:w-44" />
+          {/* Right Action: Symmetrical Header Contact CTA */}
+          <div className="hidden lg:flex items-center justify-end">
+            <NavLink
+              to="/contact"
+              className="btn-luxury-outline inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold text-slate-200 hover:text-white"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Initiate Project</span>
+              <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
+            </NavLink>
+          </div>
 
           {/* Mobile & Tablet Navigation Header */}
           <div className="flex items-center gap-2.5 lg:hidden">

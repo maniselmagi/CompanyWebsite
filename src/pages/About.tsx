@@ -96,7 +96,7 @@ export const About: React.FC = () => {
           {/* Right Visual: Isometric Geometric System Schematic */}
           <div className="lg:col-span-5">
             <RevealOnScroll variant="scale-up" delay={150}>
-              <div className="card-spotlight p-8 rounded-3xl bg-[#0a0e18] border border-blue-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.7)] space-y-6 relative overflow-hidden">
+              <div className="bento-card-spotlight p-8 rounded-3xl border border-blue-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.7)] space-y-6 relative overflow-hidden">
                 <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
                   <div className="flex items-center gap-2 font-mono text-xs text-slate-300">
                     <Terminal className="w-4 h-4 text-blue-400" />
@@ -160,13 +160,13 @@ export const About: React.FC = () => {
         {/* Vision & Mission */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <RevealOnScroll variant="fade-up" delay={50}>
-            <div className="card-spotlight p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c111e] to-[#07090e] border border-blue-500/30 shadow-xl space-y-4 h-full">
+            <div className="bento-card-spotlight p-8 sm:p-10 rounded-3xl border border-blue-500/30 shadow-xl space-y-4 h-full">
               <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
                 <Compass className="w-6 h-6" />
               </div>
               <h3 className="text-2xl font-bold text-white">Our Vision</h3>
               <p className="text-slate-300 text-sm leading-relaxed">
-                To pioneer resilient, human-centered digital foundations that empower global enterprises to operate with speed, autonomous intelligence, and absolute security in tomorrow's interconnected digital world.
+                To pioneer resilient, human-centered digital foundations that empower commercial enterprises to operate with speed, operational precision, and absolute durability in tomorrow's interconnected digital world.
               </p>
               <div className="pt-2 text-xs font-mono text-blue-400">
                 Focus: Global Interoperability & Durable Architecture
@@ -175,7 +175,7 @@ export const About: React.FC = () => {
           </RevealOnScroll>
 
           <RevealOnScroll variant="fade-up" delay={150}>
-            <div className="card-spotlight p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0e0f1e] to-[#07090e] border border-violet-500/30 shadow-xl space-y-4 h-full">
+            <div className="bento-card-spotlight p-8 sm:p-10 rounded-3xl border border-violet-500/30 shadow-xl space-y-4 h-full">
               <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400">
                 <Target className="w-6 h-6" />
               </div>
@@ -209,7 +209,7 @@ export const About: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {coreValues.map((value, idx) => (
               <RevealOnScroll key={value.number} variant="fade-up" delay={idx * 70}>
-                <div className="card-spotlight p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-blue-500/40 transition-all flex flex-col justify-between space-y-6 h-full">
+                <div className="bento-card-spotlight p-8 rounded-2xl flex flex-col justify-between space-y-6 h-full shadow-lg">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="text-2xl font-extrabold font-mono text-blue-400">
@@ -248,7 +248,7 @@ export const About: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <RevealOnScroll variant="fade-up" delay={50}>
-              <div className="card-spotlight p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3 h-full">
+              <div className="bento-card-spotlight p-6 rounded-2xl space-y-3 h-full shadow-lg">
                 <div className="text-xs font-mono text-blue-400">Hub 01</div>
                 <div className="text-base font-bold text-white">North America Operations</div>
                 <p className="text-xs text-slate-400 leading-relaxed">
@@ -258,7 +258,7 @@ export const About: React.FC = () => {
             </RevealOnScroll>
 
             <RevealOnScroll variant="fade-up" delay={150}>
-              <div className="card-spotlight p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3 h-full">
+              <div className="bento-card-spotlight p-6 rounded-2xl space-y-3 h-full shadow-lg">
                 <div className="text-xs font-mono text-violet-400">Hub 02</div>
                 <div className="text-base font-bold text-white">EMEA Strategic Hubs</div>
                 <p className="text-xs text-slate-400 leading-relaxed">
@@ -268,7 +268,7 @@ export const About: React.FC = () => {
             </RevealOnScroll>
 
             <RevealOnScroll variant="fade-up" delay={250}>
-              <div className="card-spotlight p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3 h-full">
+              <div className="bento-card-spotlight p-6 rounded-2xl space-y-3 h-full shadow-lg">
                 <div className="text-xs font-mono text-cyan-400">Hub 03</div>
                 <div className="text-base font-bold text-white">Asia-Pacific Delivery</div>
                 <p className="text-xs text-slate-400 leading-relaxed">

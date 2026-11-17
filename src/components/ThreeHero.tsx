@@ -665,6 +665,30 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     floorGlow.position.set(0, -1.8, 1);
     scene.add(floorGlow);
 
+    // --- ATMOSPHERIC 3D VOLUMETRIC EMBERS (LUSION-STYLE AMBIENCE) ---
+    const particleCount = 120;
+    const particleGeo = new THREE.BufferGeometry();
+    const particlePositions = new Float32Array(particleCount * 3);
+    const particleSpeeds = new Float32Array(particleCount);
+
+    for (let i = 0; i < particleCount; i++) {
+      particlePositions[i * 3] = (Math.random() - 0.5) * 8;
+      particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 7;
+      particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 6;
+      particleSpeeds[i] = 0.2 + Math.random() * 0.5;
+    }
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+    const particleMat = new THREE.PointsMaterial({
+      color: 0x38bdf8,
+      size: 0.045,
+      transparent: true,
+      opacity: 0.7,
+      blending: THREE.AdditiveBlending
+    });
+    const particlePoints = new THREE.Points(particleGeo, particleMat);
+    scene.add(particlePoints);
+
     // --- G. INTERACTIVE MOUSE & DRAG ROTATION ---
     const defaultRotationY = -0.15;
     let mouseX = 0;
@@ -860,6 +884,20 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
         // Pulsing Neon Floor Rings
         floorRingMat.opacity = 0.65 + Math.sin(time * 2.5) * 0.25;
         outerHaloMat.opacity = 0.35 + Math.cos(time * 2.0) * 0.15;
+
+        // Dynamic key light parallax tracking
+        keyLight.position.x = 4 + mouseX * 1.5;
+        keyLight.position.y = 5 - mouseY * 1.2;
+
+        // Atmospheric 3D particle drift
+        const posAttr = particleGeo.attributes.position as THREE.BufferAttribute;
+        for (let i = 0; i < particleCount; i++) {
+          let py = posAttr.getY(i);
+          py += particleSpeeds[i] * delta * 0.4;
+          if (py > 3.5) py = -3.5;
+          posAttr.setY(i, py);
+        }
+        posAttr.needsUpdate = true;
       }
 
       renderer.render(scene, camera);
@@ -885,6 +923,8 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       }
       renderer.dispose();
       screenTexture.dispose();
+      particleGeo.dispose();
+      particleMat.dispose();
     };
   }, [hasWebGL]);
 

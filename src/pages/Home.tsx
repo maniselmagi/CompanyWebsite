@@ -85,14 +85,14 @@ export const Home: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 pt-2">
                   <Link
                     to="/portfolio"
-                    className="btn-interactive-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30"
+                    className="btn-luxury-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30"
                   >
                     <span>Explore Smart-Kiosk Showcase</span>
                     <ArrowRight className="w-4 h-4 text-[#07090e]" />
                   </Link>
                   <Link
                     to="/services"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200 bg-[#0c101a]/80 hover:bg-white/[0.08] border border-white/10 hover:border-white/25 transition-all duration-200"
+                    className="btn-luxury-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200"
                   >
                     <span>View Our Capabilities</span>
                     <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -115,6 +115,19 @@ export const Home: React.FC = () => {
                     <Lock className="w-4 h-4 text-violet-400" />
                     <span>Strict Mutual Confidentiality</span>
                   </div>
+                </div>
+
+                {/* Animated Scroll to Architecture Exploration Indicator */}
+                <div className="pt-6 hidden sm:flex items-center justify-center lg:justify-start">
+                  <a
+                    href="#smart-kiosk-spotlight"
+                    className="inline-flex items-center gap-2.5 text-xs font-mono text-slate-400 hover:text-cyan-300 transition-all py-1.5 px-4 rounded-full bg-white/[0.02] border border-white/[0.08] hover:border-cyan-500/40 shadow-sm"
+                  >
+                    <span className="w-2.5 h-4 rounded-full border border-slate-400 flex items-start justify-center p-0.5">
+                      <span className="w-1 h-1 rounded-full bg-cyan-400 animate-scroll-wheel"></span>
+                    </span>
+                    <span className="tracking-wider uppercase text-[11px]">Explore Real-World Hardware & System Architecture</span>
+                  </a>
                 </div>
               </RevealOnScroll>
             </div>
@@ -179,12 +192,12 @@ export const Home: React.FC = () => {
               {/* Verified Product Features Matrix */}
               <div className="lg:col-span-5 space-y-4 text-left">
                 <RevealOnScroll variant="slide-left">
-                  <div className="p-7 rounded-3xl bg-[#090d18] border border-white/[0.08] space-y-5 shadow-xl">
+                  <div className="bento-card-spotlight p-7 rounded-3xl space-y-5 shadow-2xl">
                     <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
                       <span className="text-xs font-bold uppercase tracking-wider text-white">
                         Verified Working Capabilities
                       </span>
-                      <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
+                      <span className="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                         Tested in Source Code
                       </span>
                     </div>
@@ -285,7 +298,7 @@ export const Home: React.FC = () => {
 
               return (
                 <RevealOnScroll key={service.id} variant="fade-up" delay={index * 70}>
-                  <div className="card-spotlight group relative p-7 rounded-2xl bg-[#0b0f1a]/80 border border-white/[0.08] hover:bg-[#0e1424] transition-all duration-300 flex flex-col justify-between shadow-lg h-full">
+                  <div className="bento-card-spotlight group relative p-7 rounded-2xl flex flex-col justify-between shadow-xl h-full">
                     <div className="space-y-5">
                       {/* Header with Title and Corner Arrow */}
                       <div className="flex items-start justify-between gap-4">
@@ -374,7 +387,7 @@ export const Home: React.FC = () => {
 
                 return (
                   <RevealOnScroll key={index} variant="fade-up" delay={index * 60}>
-                    <div className="card-spotlight p-7 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-4 h-full">
+                    <div className="bento-card-spotlight p-7 rounded-2xl space-y-4 h-full shadow-lg">
                       <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
                         <Icon className="w-5 h-5" />
                       </div>
@@ -410,7 +423,7 @@ export const Home: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-left">
               {developmentProcessSteps.map((step, idx) => (
                 <RevealOnScroll key={step.stepNumber} variant="fade-up" delay={idx * 80}>
-                  <div className="card-spotlight relative p-6 rounded-2xl bg-[#0a0d16] border border-white/[0.08] flex flex-col justify-between space-y-4 h-full">
+                  <div className="bento-card-spotlight relative p-6 rounded-2xl flex flex-col justify-between space-y-4 h-full shadow-lg">
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-extrabold font-mono text-blue-400">
@@ -479,7 +492,7 @@ export const Home: React.FC = () => {
 
                 return (
                   <RevealOnScroll key={std.id} variant="fade-up" delay={idx * 100}>
-                    <div className="card-spotlight p-7 rounded-2xl bg-[#0a0e18] border border-white/[0.08] flex flex-col justify-between space-y-5 h-full">
+                    <div className="bento-card-spotlight p-7 rounded-2xl flex flex-col justify-between space-y-5 h-full shadow-lg">
                       <div className="space-y-3">
                         <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
                           <IconComponent className="w-5 h-5" />
@@ -526,14 +539,14 @@ export const Home: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
                   <Link
                     to="/contact"
-                    className="btn-interactive-gradient w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-white/20"
+                    className="btn-luxury-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white bg-blue-600 hover:bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.5)] border border-white/20"
                   >
                     <span>Discuss Your Project</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <Link
                     to="/services"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-slate-300 bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-all duration-200"
+                    className="btn-luxury-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-slate-300"
                   >
                     <span>Explore Our 5 Services</span>
                   </Link>

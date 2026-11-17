@@ -144,7 +144,7 @@ export const Contact: React.FC = () => {
           {/* Left Column: Get In Touch Card (5 Cols) */}
           <div className="lg:col-span-5 space-y-6">
             <RevealOnScroll variant="slide-right">
-              <div className="p-8 rounded-3xl bg-[#090d16] border border-white/[0.08] space-y-6 shadow-xl">
+              <div className="bento-card-spotlight p-8 rounded-3xl space-y-6 shadow-2xl">
                 <h2 className="text-xl font-bold text-white">Get in touch</h2>
                 
                 <div className="space-y-4">
@@ -253,7 +253,7 @@ export const Contact: React.FC = () => {
           {/* Right Column: Send Us a Message Card (7 Cols) */}
           <div className="lg:col-span-7">
             <RevealOnScroll variant="slide-left">
-              <div className="p-8 sm:p-10 rounded-3xl bg-[#0a0d16] border border-white/[0.08] shadow-2xl relative">
+              <div className="bento-card-spotlight p-8 sm:p-10 rounded-3xl shadow-2xl relative">
               <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
 
               {/* Status Alert if Form is Validated */}

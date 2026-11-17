@@ -279,6 +279,95 @@
   box-shadow: 0 0 40px -10px rgba(168, 85, 247, 0.3);
 }
 
+/* =========================================================================
+   LUXURY DESIGN SYSTEM & BENTO SPOTLIGHT STYLES
+   ========================================================================= */
+
+.glass-luxury {
+  background: linear-gradient(180deg, rgba(14, 19, 32, 0.8) 0%, rgba(8, 11, 18, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.bento-card-spotlight {
+  position: relative;
+  background: linear-gradient(180deg, rgba(13, 17, 28, 0.75) 0%, rgba(7, 10, 16, 0.9) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.bento-card-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.35), rgba(139, 92, 246, 0.2), transparent 70%);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.bento-card-spotlight:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(56, 189, 248, 0.18), 0 0 0 1px rgba(56, 189, 248, 0.2);
+}
+
+.bento-card-spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Luxury Interactive Buttons */
+.btn-luxury-primary {
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+}
+
+.btn-luxury-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.5), 0 0 15px rgba(139, 92, 246, 0.35);
+}
+
+.btn-luxury-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-luxury-outline {
+  position: relative;
+  background: rgba(12, 16, 26, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-luxury-outline:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+}
+
+/* Animated Mouse Scroll Indicator */
+@keyframes scrollWheelPulse {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.animate-scroll-wheel {
+  animation: scrollWheelPulse 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

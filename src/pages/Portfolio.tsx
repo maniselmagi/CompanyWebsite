@@ -116,7 +116,7 @@ export const Portfolio: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {mainProject.realScreenshots?.map((shot, idx) => (
-                <div key={idx} className="p-4 rounded-2xl bg-[#090d16] border border-white/[0.08] hover:border-blue-500/40 transition-all space-y-3 shadow-lg">
+                <div key={idx} className="bento-card-spotlight p-4 rounded-2xl space-y-3 shadow-xl">
                   <div className="overflow-hidden rounded-xl border border-white/10 aspect-[4/3] bg-black">
                     <img
                       src={shot.image}
@@ -146,7 +146,7 @@ export const Portfolio: React.FC = () => {
         {/* 4. COMPLETED CAPABILITIES VS ROADMAP */}
         <RevealOnScroll variant="fade-up">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            <div className="p-8 rounded-3xl bg-[#090d16] border border-emerald-500/30 space-y-5 shadow-xl">
+            <div className="bento-card-spotlight p-8 rounded-3xl border border-emerald-500/30 space-y-5 shadow-xl">
               <div className="flex items-center gap-2 text-emerald-400 pb-3 border-b border-white/[0.08]">
                 <CheckCircle2 className="w-5 h-5" />
                 <h3 className="text-base font-bold text-white uppercase tracking-wider">
@@ -163,7 +163,7 @@ export const Portfolio: React.FC = () => {
               </ul>
             </div>
 
-            <div className="p-8 rounded-3xl bg-[#090d16] border border-amber-500/30 space-y-5 shadow-xl">
+            <div className="bento-card-spotlight p-8 rounded-3xl border border-amber-500/30 space-y-5 shadow-xl">
               <div className="flex items-center gap-2 text-amber-400 pb-3 border-b border-white/[0.08]">
                 <Clock className="w-5 h-5" />
                 <h3 className="text-base font-bold text-white uppercase tracking-wider">

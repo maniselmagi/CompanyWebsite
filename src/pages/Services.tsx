@@ -84,7 +84,7 @@ export const Services: React.FC = () => {
               <RevealOnScroll key={service.id} variant="fade-up" delay={index % 2 === 0 ? 0 : 100}>
                 <section 
                   id={service.id}
-                  className="scroll-mt-28 p-8 sm:p-12 rounded-3xl bg-[#090d16] border border-white/[0.08] hover:border-blue-500/40 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 shadow-xl space-y-8"
+                  className="scroll-mt-28 p-8 sm:p-12 rounded-3xl bento-card-spotlight shadow-2xl space-y-8"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                     {/* Left Column (Main Information) */}

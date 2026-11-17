@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { AmbientGlowFollower } from './components/AmbientGlowFollower';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
@@ -14,6 +15,7 @@ export const App: React.FC = () => {
     <Router>
       <div className="min-h-screen bg-[#07090e] text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white antialiased">
         <ScrollToTop />
+        <AmbientGlowFollower />
         <Navbar />
         
         <main className="flex-1">
