@@ -7,7 +7,7 @@ const navItems = [
   { name: 'Home', path: '/' },
   { name: 'About Us', path: '/about' },
   { name: 'Services', path: '/services' },
-  { name: 'Show case', path: '/portfolio' },
+  { name: 'Showcase', path: '/portfolio' },
   { name: 'Contact Us', path: '/contact' },
 ];
 
@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-[#07090e]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_rgba(0,0,0,0.5)] py-3.5' 
+          ? 'bg-[#030508]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_rgba(0,0,0,0.7)] py-3.5' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -38,8 +38,8 @@ export const Navbar: React.FC = () => {
           {/* Logo */}
           <Logo size="md" />
 
-          {/* Desktop Navigation Links (Large Desktop Viewports) */}
-          <nav className="hidden lg:flex items-center gap-1 bg-[#0c101a]/70 border border-white/[0.07] px-3 py-1.5 rounded-full shadow-inner shadow-black/40 backdrop-blur-md">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1 bg-[#090d16]/80 border border-white/[0.08] px-3 py-1.5 rounded-full shadow-inner shadow-black/60 backdrop-blur-md">
             {navItems.map((item) => (
               <NavLink
                 key={item.path}
@@ -47,7 +47,7 @@ export const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   `relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${
                     isActive
-                      ? 'text-white bg-blue-600/20 shadow-[0_0_15px_rgba(59,130,246,0.25)] border border-blue-500/30'
+                      ? 'text-white bg-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.3)] border border-cyan-400/40'
                       : 'text-slate-300 hover:text-white hover:bg-white/[0.05]'
                   }`
                 }
@@ -61,11 +61,11 @@ export const Navbar: React.FC = () => {
           <div className="hidden lg:flex items-center justify-end">
             <NavLink
               to="/contact"
-              className="btn-luxury-outline inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold text-slate-200 hover:text-white"
+              className="btn-luxury-outline inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold text-slate-200 hover:text-white hover:border-cyan-400"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
               <span>Initiate Project</span>
-              <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
+              <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
             </NavLink>
           </div>
 
@@ -73,13 +73,13 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-2.5 lg:hidden">
             <NavLink
               to="/contact"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-colors shadow-md shadow-blue-600/30"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 transition-opacity shadow-md shadow-cyan-500/20"
             >
               Contact
             </NavLink>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-[#0c101a] border border-white/10 text-slate-300 hover:text-white focus:outline-none transition-colors"
+              className="p-2 rounded-xl bg-[#090d16] border border-white/10 text-slate-300 hover:text-white focus:outline-none transition-colors"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -90,11 +90,11 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile & Tablet Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-[#07090e]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-top-4">
+        <div className="lg:hidden fixed inset-x-0 top-full bg-[#030508]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-top-4">
           <div className="px-6 py-6 space-y-3">
             <div className="pb-3 border-b border-white/5 flex items-center justify-between text-xs text-slate-400">
-              <span>NEXORA NAVIGATION</span>
-              <span className="flex items-center gap-1.5 text-emerald-400">
+              <span className="font-mono">NEXORA ARCHITECTURE</span>
+              <span className="flex items-center gap-1.5 text-emerald-400 font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 Operations Live
               </span>
@@ -108,7 +108,7 @@ export const Navbar: React.FC = () => {
                 className={({ isActive }) =>
                   `flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-all ${
                     isActive
-                      ? 'bg-blue-600/20 text-white border border-blue-500/30'
+                      ? 'bg-cyan-500/20 text-white border border-cyan-500/30'
                       : 'text-slate-300 hover:bg-white/5 hover:text-white'
                   }`
                 }
@@ -122,7 +122,7 @@ export const Navbar: React.FC = () => {
               <NavLink
                 to="/contact"
                 onClick={closeMobileMenu}
-                className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg shadow-blue-600/20"
+                className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-black bg-gradient-to-r from-cyan-400 to-emerald-400 shadow-lg shadow-cyan-400/20"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Book Architecture Consultation</span>

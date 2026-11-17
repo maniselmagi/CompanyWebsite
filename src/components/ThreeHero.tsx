@@ -943,8 +943,8 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
   return (
     <div className={`relative w-full ${className}`}>
       {/* 3D WebGL Canvas Container with Cinematic Height & Touch-Action */}
-      <div 
-        ref={mountRef} 
+      <div
+        ref={mountRef}
         className="relative w-full h-[420px] sm:h-[500px] md:h-[580px] lg:h-[640px] cursor-grab active:cursor-grabbing select-none"
         style={{ touchAction: 'pan-y' }}
         title="Click and drag horizontally to rotate the 3D Self-Order Kiosk 360°"
@@ -954,11 +954,10 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 flex items-center gap-1.5 p-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
         <button
           onClick={() => setActiveScreen('order')}
-          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${
-            activeScreen === 'order'
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${activeScreen === 'order'
               ? 'bg-blue-600 text-white shadow-[0_0_12px_rgba(59,130,246,0.5)]'
               : 'text-slate-300 hover:text-white hover:bg-white/10'
-          }`}
+            }`}
           aria-label="Switch to Self-Order Screen"
         >
           <ShoppingBag className="w-3.5 h-3.5" />
@@ -968,11 +967,10 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
         <button
           onClick={() => setActiveScreen('kds')}
-          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${
-            activeScreen === 'kds'
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${activeScreen === 'kds'
               ? 'bg-violet-600 text-white shadow-[0_0_12px_rgba(139,92,246,0.5)]'
               : 'text-slate-300 hover:text-white hover:bg-white/10'
-          }`}
+            }`}
           aria-label="Switch to Kitchen KDS Ticket View"
         >
           <ChefHat className="w-3.5 h-3.5" />

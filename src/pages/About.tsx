@@ -27,16 +27,16 @@ export const About: React.FC = () => {
         {/* Hero / Header */}
         <div className="text-center max-w-4xl mx-auto space-y-6 pt-8">
           <RevealOnScroll variant="fade-down">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-mono font-semibold text-cyan-400">
               <Sparkles className="w-3.5 h-3.5" />
               <span>ABOUT NEXORA TECHNOLOGIES</span>
             </div>
           </RevealOnScroll>
 
           <RevealOnScroll variant="fade-up" delay={100}>
-            <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+            <h1 className="font-editorial text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.05]">
               Engineering the Digital Backbone for{' '}
-              <span className="text-gradient-primary">
+              <span className="text-electric-cyan">
                 Global Scale.
               </span>
             </h1>
