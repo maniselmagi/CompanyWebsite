@@ -63,7 +63,7 @@ export const Home: React.FC = () => {
 
               {/* Main Headline */}
               <RevealOnScroll variant="fade-up" delay={150}>
-                <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.06]">
+                <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
                   Commercial Self-Order Kiosks &{' '}
                   <span className="text-gradient-primary block sm:inline">
                     Next-Gen Software Engineering.
@@ -73,24 +73,24 @@ export const Home: React.FC = () => {
 
               {/* Sub-headline / Company Introduction */}
               <RevealOnScroll variant="fade-up" delay={250}>
-                <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
                   Nexora Technologies engineers commercial self-ordering kiosks, touch terminal operating systems, and high-performance web applications. We replace paper tickets and ordering bottlenecks with real-time, responsive software built for high-volume commercial durability.
                 </p>
               </RevealOnScroll>
 
               {/* Action Buttons */}
               <RevealOnScroll variant="fade-up" delay={350}>
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 pt-2">
                   <Link
                     to="/portfolio"
-                    className="btn-interactive-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30"
+                    className="btn-interactive-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30"
                   >
                     <span>Explore Smart-Kiosk Showcase</span>
                     <ArrowRight className="w-4 h-4 text-[#07090e]" />
                   </Link>
                   <Link
                     to="/services"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-slate-200 bg-[#0c101a]/80 hover:bg-white/[0.08] border border-white/10 hover:border-white/25 transition-all duration-200"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200 bg-[#0c101a]/80 hover:bg-white/[0.08] border border-white/10 hover:border-white/25 transition-all duration-200"
                   >
                     <span>View Our Capabilities</span>
                     <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -100,7 +100,7 @@ export const Home: React.FC = () => {
 
               {/* Engineering Guarantees */}
               <RevealOnScroll variant="fade-in" delay={450}>
-                <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs sm:text-sm text-slate-400">
+                <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-xs sm:text-sm text-slate-400">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span>100% Client Code & IP Ownership</span>
@@ -118,7 +118,7 @@ export const Home: React.FC = () => {
             </div>
 
             {/* Right Column: 3D Interactive WebGL Self-Kiosk Hardware Canvas */}
-            <div className="lg:col-span-5 relative">
+            <div className="lg:col-span-5 relative w-full max-w-lg mx-auto lg:max-w-none">
               <RevealOnScroll variant="scale-up" delay={200}>
                 <div className="relative rounded-3xl bg-gradient-to-br from-[#0c1224] via-[#080d19] to-[#050811] border border-cyan-500/35 p-1.5 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_50px_rgba(6,182,212,0.18)] overflow-hidden">
                   <ThreeHero />

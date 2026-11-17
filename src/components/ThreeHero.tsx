@@ -484,8 +484,6 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     screenTexture.minFilter = THREE.LinearMipmapLinearFilter;
     screenTexture.magFilter = THREE.LinearFilter;
 
-    // Screen geometry: Placed safely in front of totem (totemD/2 = 0.11, screen at 0.115)
-    // Using MeshBasicMaterial with toneMapped: false guarantees 100% full brightness!
     const screenW = 1.82;
     const screenH = 2.65;
     const screenGeo = new THREE.PlaneGeometry(screenW, screenH);
@@ -702,6 +700,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       setTimeout(() => setIsRotatingManually(false), 2500);
     };
 
+    // Responsive Touch Handler with Native Page Scroll Passthrough
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
         isDragging = true;
@@ -714,6 +713,13 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       if (!isDragging || e.touches.length !== 1) return;
       const deltaX = e.touches[0].clientX - prevMouse.x;
       const deltaY = e.touches[0].clientY - prevMouse.y;
+
+      // If user is swiping vertically to scroll down page, release drag!
+      if (Math.abs(deltaY) > Math.abs(deltaX) * 1.25) {
+        isDragging = false;
+        return;
+      }
+
       targetRotationY += deltaX * 0.008;
       targetRotationX = Math.max(-0.25, Math.min(0.25, targetRotationX + deltaY * 0.005));
       prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -731,7 +737,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     container.addEventListener('touchmove', handleTouchMove, { passive: true });
     container.addEventListener('touchend', handleTouchEnd);
 
-    // Responsive Resize Handler
+    // Responsive Resize & Device Viewport Tuning (Mobile, Tablet, Desktop)
     const handleResize = () => {
       if (!container) return;
       const width = container.clientWidth;
@@ -740,10 +746,38 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
 
-      if (width < 640) {
-        camera.position.set(0, 0.1, 7.2);
+      if (width < 480) {
+        // Small Mobile Screens
+        camera.position.set(0, 0.1, 7.8);
+        burgerMesh.position.set(1.05, 1.25, 0.2);
+        burgerMesh.scale.set(0.72, 0.72, 0.72);
+        cupGroup.position.set(-1.05, -1.15, 0.2);
+        cupGroup.scale.set(0.65, 0.65, 0.65);
+        kioskAssembly.scale.set(0.86, 0.86, 0.86);
+      } else if (width < 768) {
+        // Standard Mobile / Phablets
+        camera.position.set(0, 0.12, 6.9);
+        burgerMesh.position.set(1.25, 1.1, 0.3);
+        burgerMesh.scale.set(0.85, 0.85, 0.85);
+        cupGroup.position.set(-1.25, -0.9, 0.3);
+        cupGroup.scale.set(0.75, 0.75, 0.75);
+        kioskAssembly.scale.set(0.92, 0.92, 0.92);
+      } else if (width < 1024) {
+        // Tablet Screens (iPad 768px - 1024px)
+        camera.position.set(0, 0.16, 6.2);
+        burgerMesh.position.set(1.5, 0.8, 0.35);
+        burgerMesh.scale.set(1.0, 1.0, 1.0);
+        cupGroup.position.set(-1.5, -0.6, 0.35);
+        cupGroup.scale.set(0.85, 0.85, 0.85);
+        kioskAssembly.scale.set(0.96, 0.96, 0.96);
       } else {
+        // Desktop Screens (1024px+)
         camera.position.set(0, 0.2, 5.8);
+        burgerMesh.position.set(1.9, 0.6, 0.5);
+        burgerMesh.scale.set(1.2, 1.2, 1.2);
+        cupGroup.position.set(-1.8, -0.4, 0.4);
+        cupGroup.scale.set(1.0, 1.0, 1.0);
+        kioskAssembly.scale.set(1.0, 1.0, 1.0);
       }
     };
 
@@ -833,7 +867,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
   if (!hasWebGL) {
     return (
-      <div className={`relative w-full aspect-[4/5] max-h-[560px] rounded-2xl bg-[#0b1020] border border-blue-500/30 flex flex-col items-center justify-center p-6 text-center ${className}`}>
+      <div className={`relative w-full aspect-[4/5] max-h-[520px] rounded-2xl bg-[#0b1020] border border-blue-500/30 flex flex-col items-center justify-center p-6 text-center ${className}`}>
         <Touchpad className="w-16 h-16 text-blue-400 mb-4 animate-bounce" />
         <h3 className="text-xl font-bold text-white mb-2 font-display">Commercial Self-Order Kiosk</h3>
         <p className="text-sm text-slate-300 max-w-xs">
@@ -845,18 +879,19 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
   return (
     <div className={`relative w-full ${className}`}>
-      {/* 3D WebGL Canvas Container */}
+      {/* 3D WebGL Canvas Container with Responsive Height & Touch-Action */}
       <div 
         ref={mountRef} 
-        className="relative w-full h-[460px] sm:h-[540px] lg:h-[580px] cursor-grab active:cursor-grabbing select-none"
-        title="Click and drag to rotate the 3D Self-Order Kiosk 360°"
+        className="relative w-full h-[380px] sm:h-[460px] md:h-[500px] lg:h-[560px] cursor-grab active:cursor-grabbing select-none"
+        style={{ touchAction: 'pan-y' }}
+        title="Click and drag horizontally to rotate the 3D Self-Order Kiosk 360°"
       />
 
-      {/* Floating Kiosk Controls & Mode Switcher */}
-      <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 p-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
+      {/* Floating Kiosk Controls & Mode Switcher (Fully Responsive) */}
+      <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 flex items-center gap-1.5 p-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
         <button
           onClick={() => setActiveScreen('order')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${
             activeScreen === 'order'
               ? 'bg-blue-600 text-white shadow-[0_0_12px_rgba(59,130,246,0.5)]'
               : 'text-slate-300 hover:text-white hover:bg-white/10'
@@ -864,13 +899,13 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
           aria-label="Switch to Self-Order Screen"
         >
           <ShoppingBag className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Self-Order Kiosk</span>
-          <span className="sm:hidden">Order</span>
+          <span className="hidden xs:inline sm:inline">Self-Order Kiosk</span>
+          <span className="xs:hidden sm:hidden">Order</span>
         </button>
 
         <button
           onClick={() => setActiveScreen('kds')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${
             activeScreen === 'kds'
               ? 'bg-violet-600 text-white shadow-[0_0_12px_rgba(139,92,246,0.5)]'
               : 'text-slate-300 hover:text-white hover:bg-white/10'
@@ -878,13 +913,13 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
           aria-label="Switch to Kitchen KDS Ticket View"
         >
           <ChefHat className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Kitchen KDS</span>
-          <span className="sm:hidden">KDS</span>
+          <span className="hidden xs:inline sm:inline">Kitchen KDS</span>
+          <span className="xs:hidden sm:hidden">KDS</span>
         </button>
       </div>
 
       {/* Floating Interactive Micro-Badge Tags */}
-      <div className="absolute bottom-14 left-4 z-20 hidden sm:flex items-center gap-2 pointer-events-none">
+      <div className="absolute bottom-12 sm:bottom-14 left-3 sm:left-4 z-20 hidden sm:flex items-center gap-2 pointer-events-none">
         <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/70 backdrop-blur-md border border-cyan-500/30 text-[11px] font-semibold text-cyan-300 shadow-md">
           <Sparkles className="w-3 h-3 text-cyan-400" />
           <span>Interactive 3D Self-Order Terminal</span>
@@ -892,9 +927,9 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       </div>
 
       {/* Rotation Hint Bottom Bar */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 pointer-events-none px-4 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[11px] sm:text-xs text-slate-300 font-mono flex items-center gap-2 shadow-xl whitespace-nowrap">
+      <div className="absolute bottom-2.5 sm:bottom-3 left-1/2 -translate-x-1/2 z-20 pointer-events-none px-3.5 sm:px-4 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[10px] sm:text-xs text-slate-300 font-mono flex items-center gap-2 shadow-xl whitespace-nowrap">
         <Rotate3D className="w-3.5 h-3.5 text-cyan-400 animate-spin" style={{ animationDuration: '6s' }} />
-        <span>{isRotatingManually ? 'Rotating 3D Kiosk Station...' : '3D Self-Order Kiosk • Drag to Rotate 360°'}</span>
+        <span>{isRotatingManually ? 'Rotating 3D Kiosk Station...' : '3D Kiosk • Drag to Rotate 360°'}</span>
       </div>
     </div>
   );

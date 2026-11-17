@@ -164,6 +164,12 @@ export const Kiosk3DViewer: React.FC<Kiosk3DViewerProps> = ({
       const deltaX = e.touches[0].clientX - previousMousePosition.x;
       const deltaY = e.touches[0].clientY - previousMousePosition.y;
 
+      // Allow natural vertical page scroll on touchscreens
+      if (Math.abs(deltaY) > Math.abs(deltaX) * 1.25) {
+        isDragging = false;
+        return;
+      }
+
       kioskGroup.rotation.y += deltaX * 0.008;
       kioskGroup.rotation.x = Math.max(-0.4, Math.min(0.4, kioskGroup.rotation.x + deltaY * 0.005));
 
@@ -184,14 +190,25 @@ export const Kiosk3DViewer: React.FC<Kiosk3DViewerProps> = ({
     window.addEventListener('touchmove', onTouchMove, { passive: true });
     window.addEventListener('touchend', onTouchEnd);
 
-    // Resize Handler
+    // Responsive Resize Handler (Mobile, Tablet, Desktop)
     const handleResize = () => {
       if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(width, height);
+
+      if (width < 640) {
+        camera.position.set(0, 0.3, 5.0);
+      } else if (width < 1024) {
+        camera.position.set(0, 0.35, 4.5);
+      } else {
+        camera.position.set(0, 0.4, 4.2);
+      }
     };
     window.addEventListener('resize', handleResize);
+    handleResize();
 
     // Animation Loop
     let animationFrameId: number;
@@ -254,11 +271,11 @@ export const Kiosk3DViewer: React.FC<Kiosk3DViewerProps> = ({
   }, [activeScreen]);
 
   return (
-    <div className={`relative rounded-3xl bg-gradient-to-br from-[#0c1222] to-[#070b16] border border-blue-500/30 shadow-2xl overflow-hidden p-6 ${className}`}>
+    <div className={`relative rounded-3xl bg-gradient-to-br from-[#0c1222] to-[#070b16] border border-blue-500/30 shadow-2xl overflow-hidden p-4 sm:p-6 ${className}`}>
       {/* 3D Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/[0.08] relative z-10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+          <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
             <Rotate3D className="w-5 h-5 animate-pulse" />
           </div>
           <div>
@@ -275,7 +292,7 @@ export const Kiosk3DViewer: React.FC<Kiosk3DViewerProps> = ({
         </div>
 
         {/* Screen View Mode Switcher */}
-        <div className="flex items-center gap-2 bg-black/40 p-1 rounded-xl border border-white/10 text-xs">
+        <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/10 text-xs">
           <button
             onClick={() => setActiveScreen('kiosk')}
             className={`px-3 py-1.5 rounded-lg font-medium transition-all ${
@@ -299,8 +316,12 @@ export const Kiosk3DViewer: React.FC<Kiosk3DViewerProps> = ({
         </div>
       </div>
 
-      {/* 3D Canvas Mount */}
-      <div className="relative w-full h-[320px] sm:h-[400px] cursor-grab active:cursor-grabbing flex items-center justify-center">
+      {/* 3D Canvas Mount with Touch-Action */}
+      <div 
+        ref={mountRef}
+        className="relative w-full h-[280px] sm:h-[360px] md:h-[400px] cursor-grab active:cursor-grabbing flex items-center justify-center select-none"
+        style={{ touchAction: 'pan-y' }}
+      >
         <div ref={mountRef} className="w-full h-full" />
 
         {/* Drag Hint Overlay */}
