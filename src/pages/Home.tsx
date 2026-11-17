@@ -64,9 +64,9 @@ export const Home: React.FC = () => {
               {/* Main Headline */}
               <RevealOnScroll variant="fade-up" delay={150}>
                 <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.06]">
-                  Tablet-Based Self-Ordering Kiosks &{' '}
+                  Commercial Self-Order Kiosks &{' '}
                   <span className="text-gradient-primary block sm:inline">
-                    Modern Software Engineering.
+                    Next-Gen Software Engineering.
                   </span>
                 </h1>
               </RevealOnScroll>
@@ -74,7 +74,7 @@ export const Home: React.FC = () => {
               {/* Sub-headline / Company Introduction */}
               <RevealOnScroll variant="fade-up" delay={250}>
                 <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                  Nexora Technologies engineers commercial tablet-based self-ordering kiosks, interactive touch terminal interfaces, and custom web applications. We replace paper slips and manual friction with real-time, responsive software built for commercial durability.
+                  Nexora Technologies engineers commercial self-ordering kiosks, touch terminal operating systems, and high-performance web applications. We replace paper tickets and ordering bottlenecks with real-time, responsive software built for high-volume commercial durability.
                 </p>
               </RevealOnScroll>
 
