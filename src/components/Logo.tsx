@@ -23,7 +23,7 @@ export const Logo: React.FC<LogoProps> = ({
       icon: 'w-10 h-10 rounded-2xl', 
       text: 'text-xl sm:text-2xl', 
       badge: 'text-[9px] px-2 py-0.5',
-      sub: 'text-[11px]' 
+      sub: 'text-[10px]' 
     },
     lg: { 
       icon: 'w-14 h-14 rounded-2xl', 
@@ -39,98 +39,75 @@ export const Logo: React.FC<LogoProps> = ({
       className={`group flex items-center gap-3.5 transition-all duration-300 hover:opacity-95 ${className}`}
       aria-label="NEXORA TECHNOLOGIES - Building Tomorrow's Digital World"
     >
-      {/* 3D Isometric Faceted Nexus 'N' Logo Mark */}
+      {/* Brand Icon: Iconic 3D Faceted Nexus 'N' Monogram */}
       <div 
-        className={`relative flex items-center justify-center ${sizeClasses.icon} bg-gradient-to-br from-[#0c1224] via-[#090d18] to-[#050811] border border-cyan-500/40 p-2 shadow-[0_0_20px_rgba(6,182,212,0.22)] group-hover:border-cyan-400/80 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.45)] group-hover:scale-105 transition-all duration-300 shrink-0 overflow-hidden`}
+        className={`relative flex items-center justify-center ${sizeClasses.icon} bg-gradient-to-br from-[#0b1020] via-[#080d1a] to-[#040710] border border-cyan-500/40 p-1.5 shadow-[0_0_20px_rgba(6,182,212,0.25)] group-hover:border-cyan-400/80 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] group-hover:scale-105 transition-all duration-300 shrink-0 overflow-hidden`}
       >
-        {/* Subtle Ambient Radial Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(6,182,212,0.25),transparent_70%)] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-violet-600/20 pointer-events-none"></div>
+        {/* Ambient Backlight */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(6,182,212,0.3),transparent_70%)] pointer-events-none"></div>
 
-        {/* Precision 3D Vector Isometric Nexus Glyph */}
+        {/* Clean, Bold, Recognizable 'N' Vector Mark */}
         <svg 
           viewBox="0 0 64 64" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg" 
-          className="w-full h-full relative z-10 filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+          className="w-full h-full relative z-10"
         >
           <defs>
-            {/* Left Pillar Gradient (Cyan to Royal Blue) */}
-            <linearGradient id="nexusLeft" x1="12" y1="12" x2="26" y2="52" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#22d3ee" />
+            {/* Left Pillar: High-Tech Cyan to Royal Blue */}
+            <linearGradient id="logoLeftPillar" x1="12" y1="12" x2="24" y2="52" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#00f2fe" />
               <stop offset="100%" stopColor="#2563eb" />
             </linearGradient>
 
-            {/* Diagonal Bridge Gradient (Royal Blue to Neon Violet) */}
-            <linearGradient id="nexusBridge" x1="18" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+            {/* Diagonal Blade: Electric Blue to Vivid Violet */}
+            <linearGradient id="logoDiagonal" x1="16" y1="12" x2="48" y2="52" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#38bdf8" />
-              <stop offset="50%" stopColor="#6366f1" />
-              <stop offset="100%" stopColor="#a855f7" />
+              <stop offset="50%" stopColor="#4f46e5" />
+              <stop offset="100%" stopColor="#9333ea" />
             </linearGradient>
 
-            {/* Right Pillar Gradient (Neon Violet to Electric Magenta) */}
-            <linearGradient id="nexusRight" x1="38" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#c084fc" />
+            {/* Right Pillar: Vivid Violet to Neon Magenta */}
+            <linearGradient id="logoRightPillar" x1="40" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#a855f7" />
               <stop offset="100%" stopColor="#ec4899" />
-            </linearGradient>
-
-            {/* Specular Edge Highlight */}
-            <linearGradient id="specularGleam" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
             </linearGradient>
           </defs>
 
-          {/* Left Vertical Monolith with Beveled Cap */}
+          {/* Left Vertical Pillar */}
+          <rect x="12" y="12" width="12" height="40" rx="3" fill="url(#logoLeftPillar)" />
+
+          {/* Right Vertical Pillar */}
+          <rect x="40" y="12" width="12" height="40" rx="3" fill="url(#logoRightPillar)" />
+
+          {/* Dynamic 3D Diagonal Cross-Blade Connecting Left & Right */}
           <path 
-            d="M14 50V16.8C14 15.2 15.3 14 16.9 14H24C25.7 14 27 15.3 27 17V50H14Z" 
-            fill="url(#nexusLeft)" 
+            d="M14 15.5L48 48.5H38L12 22.5V15.5H14Z" 
+            fill="url(#logoDiagonal)" 
           />
 
-          {/* Right Vertical Monolith */}
+          {/* Depth Shadow Junction */}
           <path 
-            d="M37 14H47.1C48.7 14 50 15.3 50 17V47.2C50 48.8 48.7 50 47.1 50H40C38.3 50 37 48.7 37 47V14Z" 
-            fill="url(#nexusRight)" 
+            d="M24 25.5L34 35.5V44L24 34V25.5Z" 
+            fill="#030712" 
+            fillOpacity="0.4" 
           />
 
-          {/* Dynamic 3D Isometric Cross-Nexus Blade */}
-          <path 
-            d="M16 16.5L47.5 47.5H38.5L14 23V16.5H16Z" 
-            fill="url(#nexusBridge)" 
-          />
-
-          {/* Inner Depth Shadow Facet */}
-          <path 
-            d="M27 28L37 38V47L27 37V28Z" 
-            fill="#090d18" 
-            fillOpacity="0.45" 
-          />
-
-          {/* Top Specular Edge Highlight */}
-          <path 
-            d="M16 14H24M37 14H47" 
-            stroke="url(#specularGleam)" 
-            strokeWidth="1.5" 
-            strokeLinecap="round" 
-          />
-
-          {/* Floating Luminous Tech Node */}
-          <circle cx="48" cy="16" r="3.2" fill="#22d3ee" className="animate-pulse" />
-          <circle cx="48" cy="16" r="5" stroke="#38bdf8" strokeWidth="1" strokeOpacity="0.6" />
+          {/* Tech Signal Pulse Dot */}
+          <circle cx="48" cy="15" r="3.2" fill="#00f2fe" />
         </svg>
       </div>
 
-      {/* Typography: NEXORA Wordmark & Tech Badge */}
+      {/* Brand Wordmark & Sub-Badge */}
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <span 
-            className={`font-display font-extrabold tracking-[0.16em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-300 group-hover:from-white group-hover:via-cyan-100 group-hover:to-violet-200 transition-all duration-300 ${sizeClasses.text}`}
+            className={`font-display font-black tracking-[0.16em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-300 group-hover:from-white group-hover:via-cyan-100 group-hover:to-violet-200 transition-all duration-300 ${sizeClasses.text}`}
           >
             NEXORA
           </span>
           <span 
-            className={`inline-flex items-center gap-1 font-mono font-bold uppercase tracking-widest rounded-full bg-gradient-to-r from-cyan-950/70 via-blue-950/70 to-purple-950/70 border border-cyan-500/35 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.25)] ${sizeClasses.badge}`}
+            className={`inline-flex items-center gap-1 font-mono font-bold uppercase tracking-widest rounded-md bg-gradient-to-r from-cyan-950/70 via-blue-950/70 to-purple-950/70 border border-cyan-500/35 text-cyan-300 shadow-[0_0_10px_rgba(6,182,212,0.2)] ${sizeClasses.badge}`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
             <span>TECH</span>
