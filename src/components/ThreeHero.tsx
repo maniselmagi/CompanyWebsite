@@ -19,25 +19,6 @@ const checkWebGLSupport = (): boolean => {
   }
 };
 
-/**
- * Creates a rounded rectangle 3D Shape for authentic tablet chassis
- */
-function createRoundedRectShape(width: number, height: number, radius: number): THREE.Shape {
-  const shape = new THREE.Shape();
-  const x = -width / 2;
-  const y = -height / 2;
-  shape.moveTo(x + radius, y);
-  shape.lineTo(x + width - radius, y);
-  shape.quadraticCurveTo(x + width, y, x + width, y + radius);
-  shape.lineTo(x + width, y + height - radius);
-  shape.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  shape.lineTo(x + radius, y + height);
-  shape.quadraticCurveTo(x, y + height, x, y + height - radius);
-  shape.lineTo(x, y + radius);
-  shape.quadraticCurveTo(x, y, x + radius, y);
-  return shape;
-}
-
 export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const [hasWebGL] = useState<boolean>(() => checkWebGLSupport());
@@ -57,18 +38,18 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. Three.js Scene Setup
+    // 1. Scene Setup
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x060913, 0.035);
 
-    // 2. Camera: Positioned to capture tablet at tabletop eye-level
+    // 2. Camera Setup (Tuned for tabletop tablet viewing)
     const camera = new THREE.PerspectiveCamera(
       38,
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
-    camera.position.set(0, 0.3, 4.6);
+    camera.position.set(0, 0.25, 4.4);
 
     // 3. Renderer
     let renderer: THREE.WebGLRenderer;
@@ -89,78 +70,58 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
     // 4. Main Tablet Kiosk Group
     const tabletKioskGroup = new THREE.Group();
-    // Natural tabletop angled perspective
     tabletKioskGroup.position.set(0, -0.15, 0);
-    tabletKioskGroup.rotation.y = -0.32; // 3/4 welcoming angle
-    tabletKioskGroup.rotation.x = 0.15;  // 15° tabletop tilt toward customer
+    tabletKioskGroup.rotation.y = -0.32; // Welcoming 3/4 perspective
+    tabletKioskGroup.rotation.x = 0.12;  // Natural tabletop ergonomic tilt
     scene.add(tabletKioskGroup);
 
-    // --- A. AUTHENTIC TABLET HARDWARE UNIBODY (16:10 Landscape) ---
-    const tabletW = 2.8;
-    const tabletH = 1.75;
-    const cornerR = 0.12;
+    // --- A. AUTHENTIC TABLET HARDWARE UNIBODY (Landscape 16:10) ---
+    const tabletW = 2.85;
+    const tabletH = 1.78;
+    const tabletD = 0.08;
 
-    const tabletShape = createRoundedRectShape(tabletW, tabletH, cornerR);
-    const extrudeSettings: THREE.ExtrudeGeometryOptions = {
-      depth: 0.07,
-      bevelEnabled: true,
-      bevelSegments: 4,
-      steps: 1,
-      bevelSize: 0.02,
-      bevelThickness: 0.02
-    };
-
-    const tabletBodyGeo = new THREE.ExtrudeGeometry(tabletShape, extrudeSettings);
-    tabletBodyGeo.center(); // Center geometry
-
-    // Dark titanium / aluminum unibody material
+    // Tablet Chassis Body
+    const tabletBodyGeo = new THREE.BoxGeometry(tabletW, tabletH, tabletD);
     const tabletBodyMat = new THREE.MeshStandardMaterial({
-      color: 0x111827,
-      metalness: 0.88,
-      roughness: 0.25
+      color: 0x0f172a,
+      metalness: 0.9,
+      roughness: 0.22
     });
     const tabletBody = new THREE.Mesh(tabletBodyGeo, tabletBodyMat);
     tabletKioskGroup.add(tabletBody);
 
-    // Subtle edge highlight on tablet perimeter
-    const tabletEdgeLines = new THREE.LineSegments(
-      new THREE.EdgesGeometry(tabletBodyGeo, 25),
-      new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.45 })
-    );
-    tabletKioskGroup.add(tabletEdgeLines);
+    // Clean Chamfered Bezel Edge
+    const bezelEdges = new THREE.EdgesGeometry(tabletBodyGeo);
+    const bezelMat = new THREE.LineBasicMaterial({
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.55
+    });
+    const bezelLines = new THREE.LineSegments(bezelEdges, bezelMat);
+    tabletKioskGroup.add(bezelLines);
 
-    // Front Camera / Ambient Light Sensor Dot on Top Bezel
+    // Front Camera / Optical Sensor on Top Bezel
     const camGeo = new THREE.CircleGeometry(0.02, 16);
     const camMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee });
     const camMesh = new THREE.Mesh(camGeo, camMat);
-    camMesh.position.set(0, tabletH / 2 - 0.05, 0.056);
+    camMesh.position.set(0, tabletH / 2 - 0.038, tabletD / 2 + 0.005);
     tabletKioskGroup.add(camMesh);
 
-    // Side Card Reader Attachment (Contactless NFC / Magnetic Swipe)
-    const readerGeo = new THREE.BoxGeometry(0.06, 0.45, 0.08);
+    // Side Card Reader Attachment (Contactless NFC / Magnetic Swipe Slot)
+    const readerGeo = new THREE.BoxGeometry(0.06, 0.45, 0.07);
     const readerMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.85, roughness: 0.3 });
     const readerMesh = new THREE.Mesh(readerGeo, readerMat);
     readerMesh.position.set(tabletW / 2 + 0.03, 0, 0);
     tabletKioskGroup.add(readerMesh);
 
-    // Reader Status Indicator Light
-    const readerLedGeo = new THREE.BoxGeometry(0.02, 0.12, 0.02);
+    // Reader Active Green LED Strip
+    const readerLedGeo = new THREE.BoxGeometry(0.015, 0.16, 0.02);
     const readerLedMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
     const readerLed = new THREE.Mesh(readerLedGeo, readerLedMat);
     readerLed.position.set(tabletW / 2 + 0.062, 0, 0.02);
     tabletKioskGroup.add(readerLed);
 
-    // --- B. TABLET SCREEN TEXTURE WITH REAL FOOD PHOTOGRAPHY ---
-    const textureLoader = new THREE.TextureLoader();
-    const kioskPhotoTexture = textureLoader.load('./assets/smart_kiosk/restaurant_food_welcome.jpg');
-    kioskPhotoTexture.generateMipmaps = true;
-    kioskPhotoTexture.minFilter = THREE.LinearMipmapLinearFilter;
-
-    const kdsPhotoTexture = textureLoader.load('./assets/smart_kiosk/chef_plating_welcome.jpg');
-    kdsPhotoTexture.generateMipmaps = true;
-    kdsPhotoTexture.minFilter = THREE.LinearMipmapLinearFilter;
-
-    // Procedural Screen Canvas Overlay with Crisp Vector UI Elements
+    // --- B. VIBRANT HIGH-RES TABLET DISPLAY CANVAS (GUARANTEED VISIBLE) ---
     const screenCanvas = document.createElement('canvas');
     screenCanvas.width = 1400;
     screenCanvas.height = 875;
@@ -168,15 +129,20 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
     const dynamicScreenTexture = new THREE.CanvasTexture(screenCanvas);
     dynamicScreenTexture.generateMipmaps = true;
+    dynamicScreenTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    dynamicScreenTexture.magFilter = THREE.LinearFilter;
 
-    // Load background image for canvas rendering
+    // Resolve Asset Paths reliably across Vite & GitHub Pages
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+
     const welcomeImg = new Image();
     welcomeImg.crossOrigin = 'anonymous';
-    welcomeImg.src = './assets/smart_kiosk/restaurant_food_welcome.jpg';
+    welcomeImg.src = `${cleanBase}assets/smart_kiosk/restaurant_food_welcome.jpg`;
 
     const kdsImg = new Image();
     kdsImg.crossOrigin = 'anonymous';
-    kdsImg.src = './assets/smart_kiosk/chef_plating_welcome.jpg';
+    kdsImg.src = `${cleanBase}assets/smart_kiosk/chef_plating_welcome.jpg`;
 
     let pulsePhase = 0;
 
@@ -185,118 +151,120 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       const isOrder = activeScreenRef.current === 'kiosk';
       const bgImg = isOrder ? welcomeImg : kdsImg;
 
+      // Base background: ALWAYS drawn first so screen is NEVER black or empty
+      const baseGrad = ctx.createLinearGradient(0, 0, 1400, 875);
+      baseGrad.addColorStop(0, '#0a0f1d');
+      baseGrad.addColorStop(0.5, '#0f172a');
+      baseGrad.addColorStop(1, '#080d19');
+      ctx.fillStyle = baseGrad;
+      ctx.fillRect(0, 0, 1400, 875);
+
+      // If photo is loaded, composite it with rich luxury overlay
       if (bgImg.complete && bgImg.naturalWidth > 0) {
         ctx.drawImage(bgImg, 0, 0, 1400, 875);
-      } else {
-        // Fallback dark gradient
-        const bgGrad = ctx.createLinearGradient(0, 0, 1400, 875);
-        bgGrad.addColorStop(0, '#090d18');
-        bgGrad.addColorStop(1, '#0c1326');
-        ctx.fillStyle = bgGrad;
+
+        // Dark luxury vignette for high contrast readability
+        const vignette = ctx.createLinearGradient(0, 0, 0, 875);
+        vignette.addColorStop(0, 'rgba(7, 10, 20, 0.90)');
+        vignette.addColorStop(0.4, 'rgba(7, 10, 20, 0.55)');
+        vignette.addColorStop(0.7, 'rgba(7, 10, 20, 0.75)');
+        vignette.addColorStop(1, 'rgba(7, 10, 20, 0.95)');
+        ctx.fillStyle = vignette;
         ctx.fillRect(0, 0, 1400, 875);
       }
 
-      // Vignette Overlay to ensure text readability
-      const vignette = ctx.createLinearGradient(0, 0, 0, 875);
-      vignette.addColorStop(0, 'rgba(7, 10, 19, 0.88)');
-      vignette.addColorStop(0.35, 'rgba(7, 10, 19, 0.45)');
-      vignette.addColorStop(0.7, 'rgba(7, 10, 19, 0.7)');
-      vignette.addColorStop(1, 'rgba(7, 10, 19, 0.95)');
-      ctx.fillStyle = vignette;
-      ctx.fillRect(0, 0, 1400, 875);
-
       if (isOrder) {
-        // --- TABLET KIOSK ORDERING UI ---
-        // Top Header
+        // --- 1. TABLET ORDERING INTERFACE ---
+        // Top Navigation Header
         ctx.fillStyle = '#0f172a';
-        ctx.fillRect(0, 0, 1400, 75);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-        ctx.fillRect(0, 74, 1400, 1.5);
+        ctx.fillRect(0, 0, 1400, 80);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.fillRect(0, 79, 1400, 1.5);
 
-        // Brand & Status
-        ctx.font = 'bold 28px "Plus Jakarta Sans", sans-serif';
+        // Brand Title
+        ctx.font = 'bold 30px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#ffffff';
-        ctx.fillText('NEXORA OrderEase™ Tablet Kiosk', 40, 48);
+        ctx.fillText('NEXORA OrderEase™ Tablet Kiosk', 40, 52);
 
-        // Table 04 Pill
-        ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
+        // Table 04 Badge
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.25)';
         ctx.beginPath();
-        ctx.roundRect(620, 16, 170, 44, 22);
+        ctx.roundRect(620, 18, 170, 44, 22);
         ctx.fill();
-        ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)';
+        ctx.strokeStyle = '#38bdf8';
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
         ctx.font = 'bold 20px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#38bdf8';
         ctx.textAlign = 'center';
-        ctx.fillText('TABLE 04', 705, 45);
+        ctx.fillText('TABLE 04', 705, 47);
         ctx.textAlign = 'left';
 
-        // Online Pulse
+        // Online Indicator
         ctx.fillStyle = '#10b981';
         ctx.beginPath();
-        ctx.arc(825, 38, 7, 0, Math.PI * 2);
+        ctx.arc(825, 40, 7, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#34d399';
-        ctx.fillText('ONLINE • 5 LANGUAGES', 842, 45);
+        ctx.fillText('READY TO ORDER • 5 LANGUAGES', 842, 47);
 
         // Call Waiter Button
-        ctx.fillStyle = 'rgba(239, 68, 68, 0.2)';
+        ctx.fillStyle = 'rgba(239, 68, 68, 0.25)';
         ctx.beginPath();
-        ctx.roundRect(1180, 16, 180, 44, 22);
+        ctx.roundRect(1180, 18, 180, 44, 22);
         ctx.fill();
-        ctx.strokeStyle = 'rgba(239, 68, 68, 0.5)';
+        ctx.strokeStyle = '#ef4444';
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
         ctx.font = 'bold 17px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#f87171';
         ctx.textAlign = 'center';
-        ctx.fillText('🛎️ Call Waiter', 1270, 44);
+        ctx.fillText('🛎️ Call Waiter', 1270, 46);
         ctx.textAlign = 'left';
 
-        // Center Welcome Hero Card
+        // Welcome Hero Banner
         ctx.font = 'bold 24px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#f59e0b';
-        ctx.fillText('WELCOME TO YOUR TABLE-SIDE KIOSK', 40, 140);
+        ctx.fillText('WELCOME TO YOUR TABLE-SIDE SELF-ORDER KIOSK', 40, 145);
 
-        ctx.font = 'extrabold 48px "Plus Jakarta Sans", sans-serif';
+        ctx.font = 'extrabold 50px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#ffffff';
-        ctx.fillText('Experience Modern Dining.', 40, 200);
+        ctx.fillText('Experience Modern Dining.', 40, 208);
 
         ctx.font = '500 22px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#cbd5e1';
-        ctx.fillText('Browse the culinary menu, customize spice levels & send orders directly to the chef.', 40, 240);
+        ctx.fillText('Browse dishes, customize spice levels & send orders instantly to the kitchen display.', 40, 248);
 
-        // Category Pills Row
-        const categories = ['🍔 Gourmet Burgers', '🍕 Artisan Pizza', '🥗 Healthy Bowls', '🍹 Cocktails & Drinks'];
+        // Category Pills
+        const categories = ['🍔 Gourmet Burgers', '🍕 Artisan Pizza', '🥗 Healthy Bowls', '🍹 Drinks & Cocktails'];
         let cx = 40;
         categories.forEach((cat, idx) => {
           const active = idx === 0;
           ctx.beginPath();
-          ctx.roundRect(cx, 280, 290, 52, 26);
-          ctx.fillStyle = active ? 'rgba(59, 130, 246, 0.9)' : 'rgba(255, 255, 255, 0.08)';
+          ctx.roundRect(cx, 285, 290, 52, 26);
+          ctx.fillStyle = active ? 'rgba(37, 99, 235, 0.95)' : 'rgba(255, 255, 255, 0.1)';
           ctx.fill();
-          ctx.strokeStyle = active ? '#38bdf8' : 'rgba(255, 255, 255, 0.15)';
+          ctx.strokeStyle = active ? '#38bdf8' : 'rgba(255, 255, 255, 0.2)';
           ctx.lineWidth = 1.5;
           ctx.stroke();
 
           ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
           ctx.fillStyle = '#ffffff';
           ctx.textAlign = 'center';
-          ctx.fillText(cat, cx + 145, 312);
+          ctx.fillText(cat, cx + 145, 318);
           ctx.textAlign = 'left';
           cx += 310;
         });
 
-        // Prominent Tablet Touch Button (Animated Breathing Pulse)
-        const btnY = 380;
-        const pulse = 0.5 + Math.sin(pulsePhase) * 0.4;
+        // Large Prominent Touch Button (Pulsing Glow)
+        const btnY = 385;
+        const pulse = 0.55 + Math.sin(pulsePhase) * 0.4;
         ctx.shadowColor = `rgba(34, 211, 238, ${pulse})`;
-        ctx.shadowBlur = 32;
+        ctx.shadowBlur = 35;
 
         const btnGrad = ctx.createLinearGradient(40, btnY, 1360, btnY + 120);
         btnGrad.addColorStop(0, '#00f2fe');
@@ -307,7 +275,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
         ctx.roundRect(40, btnY, 1320, 120, 32);
         ctx.fillStyle = btnGrad;
         ctx.fill();
-        ctx.shadowBlur = 0;
+        ctx.shadowBlur = 0; // reset
 
         ctx.font = 'extrabold 36px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#ffffff';
@@ -315,34 +283,38 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
         ctx.fillText('👆 TOUCH SCREEN TO START ORDERING • EXPLORE MENU', 700, btnY + 74);
         ctx.textAlign = 'left';
 
-        // Bottom Tray Summary
+        // Bottom Table Tray Summary Card
         ctx.beginPath();
-        ctx.roundRect(40, 540, 1320, 290, 28);
-        ctx.fillStyle = 'rgba(11, 16, 28, 0.9)';
+        ctx.roundRect(40, 545, 1320, 285, 26);
+        ctx.fillStyle = 'rgba(11, 16, 28, 0.92)';
         ctx.fill();
-        ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
         ctx.lineWidth = 2;
         ctx.stroke();
 
         ctx.font = 'bold 24px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#38bdf8';
-        ctx.fillText('🛒 Current Table Tray (Table 04)', 75, 590);
+        ctx.fillText('🛒 Current Table Tray (Table 04)', 75, 595);
 
         ctx.font = 'bold 22px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#ffffff';
-        ctx.fillText('• 2x Wagyu Truffle Burger (Medium Spicy)', 75, 640);
-        ctx.fillText('• 1x Garlic Herb Truffle Fries', 75, 680);
-        ctx.fillText('• 2x Handcrafted Citrus Soda', 75, 720);
+        ctx.fillText('• 2x Wagyu Truffle Burger (Medium Spicy)', 75, 642);
+        ctx.fillText('• 1x Garlic Herb Truffle Fries', 75, 682);
+        ctx.fillText('• 2x Handcrafted Citrus Soda', 75, 722);
 
         ctx.font = 'extrabold 32px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#34d399';
         ctx.fillText('Subtotal: $38.50', 75, 785);
 
         // Action Buttons inside tray
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
         ctx.beginPath();
         ctx.roundRect(820, 735, 230, 60, 20);
         ctx.fill();
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
         ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#38bdf8';
         ctx.textAlign = 'center';
@@ -357,7 +329,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
         ctx.textAlign = 'left';
 
       } else {
-        // --- KITCHEN KDS MODE ---
+        // --- 2. KITCHEN KDS MODE ---
         ctx.fillStyle = '#0f172a';
         ctx.fillRect(0, 0, 1400, 80);
         ctx.font = 'bold 28px "Plus Jakarta Sans", sans-serif';
@@ -414,48 +386,33 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
     welcomeImg.onload = () => renderTabletScreen();
     kdsImg.onload = () => renderTabletScreen();
+    // Render immediately on initial execution so screen is NEVER blank
     renderTabletScreen();
 
-    // Screen Mesh placed on tablet unibody face
-    const screenGeo = new THREE.PlaneGeometry(tabletW - 0.12, tabletH - 0.12);
+    // Screen Mesh: Placed safely IN FRONT of tablet body (tabletD / 2 = 0.04, screen at +0.045)
+    // Using MeshBasicMaterial with toneMapped: false guarantees 100% full illumination
+    const screenGeo = new THREE.PlaneGeometry(tabletW - 0.16, tabletH - 0.16);
     const screenMat = new THREE.MeshBasicMaterial({
       map: dynamicScreenTexture,
       toneMapped: false
     });
     const screenMesh = new THREE.Mesh(screenGeo, screenMat);
-    screenMesh.position.z = 0.054;
+    screenMesh.position.set(0, 0, tabletD / 2 + 0.005);
     tabletKioskGroup.add(screenMesh);
 
-    // Front Tablet Glass with reflection
-    const glassGeo = new THREE.PlaneGeometry(tabletW - 0.1, tabletH - 0.1);
-    const glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff,
-      transmission: 0.9,
-      opacity: 0.16,
-      transparent: true,
-      roughness: 0.05,
-      metalness: 0.1,
-      reflectivity: 0.95,
-      clearcoat: 1.0
-    });
-    const glassMesh = new THREE.Mesh(glassGeo, glassMat);
-    glassMesh.position.z = 0.058;
-    tabletKioskGroup.add(glassMesh);
-
-    // --- C. COMMERCIAL TABLETOP POS WEDGE CRADLE (NOT A PC MONITOR!) ---
-    // In restaurant table kiosks (like Ziosk/Toast/Bouncepad), the tablet rests on an angled tabletop wedge dock!
+    // --- C. COMMERCIAL TABLETOP POS WEDGE CRADLE (NO PC MONITOR POLE) ---
     const dockGroup = new THREE.Group();
     tabletKioskGroup.add(dockGroup);
 
-    // Rear Mounting Plate on Tablet Back
+    // Rear Mounting Plate
     const backMountGeo = new THREE.BoxGeometry(1.6, 1.0, 0.08);
     const backMountMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.85, roughness: 0.3 });
     const backMount = new THREE.Mesh(backMountGeo, backMountMat);
     backMount.position.set(0, 0, -0.06);
     dockGroup.add(backMount);
 
-    // Heavy Angled Tabletop Easel Wedge (props the tablet up naturally on the table)
-    const wedgeGeo = new THREE.CylinderGeometry(0.55, 0.75, 0.9, 4); // 4-sided pyramid wedge
+    // Angled Tabletop Easel Wedge
+    const wedgeGeo = new THREE.CylinderGeometry(0.55, 0.75, 0.9, 4);
     const wedgeMat = new THREE.MeshStandardMaterial({
       color: 0x0d1322,
       metalness: 0.92,
@@ -555,7 +512,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     let mouseX = 0;
     let mouseY = 0;
     let targetRotationY = -0.32;
-    let targetRotationX = 0.15;
+    let targetRotationX = 0.12;
     let isDragging = false;
     let prevMouse = { x: 0, y: 0 };
 
@@ -625,9 +582,9 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       renderer.setSize(width, height);
 
       if (width < 640) {
-        camera.position.set(0, 0.2, 5.5);
+        camera.position.set(0, 0.2, 5.2);
       } else {
-        camera.position.set(0, 0.3, 4.6);
+        camera.position.set(0, 0.25, 4.4);
       }
     };
 
@@ -644,7 +601,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       const delta = clock.getDelta();
       const time = clock.getElapsedTime();
 
-      // Periodic screen pulse update
+      // Periodic screen pulse update (keeps breathing effect active)
       if (time - lastPulseUpdate > 0.08) {
         lastPulseUpdate = time;
         pulsePhase += 0.12;
@@ -652,18 +609,15 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       }
 
       if (!prefersReducedMotion) {
-        // Natural hover response when not manually dragging
         if (!isDragging) {
           tabletKioskGroup.rotation.y += (targetRotationY + mouseX * 0.32 - tabletKioskGroup.rotation.y) * 0.06;
           tabletKioskGroup.rotation.x += (targetRotationX - mouseY * 0.18 - tabletKioskGroup.rotation.x) * 0.06;
-          // Gentle tabletop breathing float
           tabletKioskGroup.position.y = -0.15 + Math.sin(time * 1.5) * 0.03;
         } else {
           tabletKioskGroup.rotation.y += (targetRotationY - tabletKioskGroup.rotation.y) * 0.15;
           tabletKioskGroup.rotation.x += (targetRotationX - tabletKioskGroup.rotation.x) * 0.15;
         }
 
-        // Orbiting Nodes
         orbitalNodes.forEach((node) => {
           node.angle += node.speed * delta;
           node.mesh.position.x = Math.cos(node.angle) * node.radius;
@@ -673,7 +627,6 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
           node.mesh.rotation.y += delta * 1.1;
         });
 
-        // Pulsing Neon Floor Rings
         tableRimMat.opacity = 0.65 + Math.sin(time * 2.5) * 0.25;
         outerHaloMat.opacity = 0.35 + Math.cos(time * 2.0) * 0.15;
       }
@@ -699,8 +652,6 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       }
       renderer.dispose();
       dynamicScreenTexture.dispose();
-      kioskPhotoTexture.dispose();
-      kdsPhotoTexture.dispose();
     };
   }, [hasWebGL]);
 
