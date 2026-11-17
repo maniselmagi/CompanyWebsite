@@ -123,14 +123,14 @@ export const Contact: React.FC = () => {
         {/* Header - Inspired by Screenshot 1 */}
         <RevealOnScroll variant="fade-up">
           <div className="text-center max-w-3xl mx-auto space-y-4 pt-8">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-xs font-mono font-semibold text-cyan-300">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-xs font-semibold text-purple-300">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>DIRECT ENGINEERING INQUIRIES</span>
+              <span>Get In Touch</span>
             </div>
-            <h1 className="font-editorial text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.05]">
+            <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
               Let's Build the{' '}
-              <span className="text-electric-cyan">
-                Future Together.
+              <span className="text-gradient-purple-pink">
+                Future Together
               </span>
             </h1>
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">

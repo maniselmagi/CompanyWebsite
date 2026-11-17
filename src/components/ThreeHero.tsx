@@ -665,30 +665,6 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     floorGlow.position.set(0, -1.8, 1);
     scene.add(floorGlow);
 
-    // --- ATMOSPHERIC 3D VOLUMETRIC EMBERS (LUSION-STYLE AMBIENCE) ---
-    const particleCount = 120;
-    const particleGeo = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-    const particleSpeeds = new Float32Array(particleCount);
-
-    for (let i = 0; i < particleCount; i++) {
-      particlePositions[i * 3] = (Math.random() - 0.5) * 8;
-      particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 7;
-      particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 6;
-      particleSpeeds[i] = 0.2 + Math.random() * 0.5;
-    }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-
-    const particleMat = new THREE.PointsMaterial({
-      color: 0x38bdf8,
-      size: 0.045,
-      transparent: true,
-      opacity: 0.7,
-      blending: THREE.AdditiveBlending
-    });
-    const particlePoints = new THREE.Points(particleGeo, particleMat);
-    scene.add(particlePoints);
-
     // --- G. INTERACTIVE MOUSE & DRAG ROTATION ---
     const defaultRotationY = -0.15;
     let mouseX = 0;
@@ -884,20 +860,6 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
         // Pulsing Neon Floor Rings
         floorRingMat.opacity = 0.65 + Math.sin(time * 2.5) * 0.25;
         outerHaloMat.opacity = 0.35 + Math.cos(time * 2.0) * 0.15;
-
-        // Dynamic key light parallax tracking
-        keyLight.position.x = 4 + mouseX * 1.5;
-        keyLight.position.y = 5 - mouseY * 1.2;
-
-        // Atmospheric 3D particle drift
-        const posAttr = particleGeo.attributes.position as THREE.BufferAttribute;
-        for (let i = 0; i < particleCount; i++) {
-          let py = posAttr.getY(i);
-          py += particleSpeeds[i] * delta * 0.4;
-          if (py > 3.5) py = -3.5;
-          posAttr.setY(i, py);
-        }
-        posAttr.needsUpdate = true;
       }
 
       renderer.render(scene, camera);
@@ -923,8 +885,6 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       }
       renderer.dispose();
       screenTexture.dispose();
-      particleGeo.dispose();
-      particleMat.dispose();
     };
   }, [hasWebGL]);
 
@@ -942,10 +902,10 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
   return (
     <div className={`relative w-full ${className}`}>
-      {/* 3D WebGL Canvas Container with Cinematic Height & Touch-Action */}
-      <div
-        ref={mountRef}
-        className="relative w-full h-[420px] sm:h-[500px] md:h-[580px] lg:h-[640px] cursor-grab active:cursor-grabbing select-none"
+      {/* 3D WebGL Canvas Container with Responsive Height & Touch-Action */}
+      <div 
+        ref={mountRef} 
+        className="relative w-full h-[380px] sm:h-[460px] md:h-[500px] lg:h-[560px] cursor-grab active:cursor-grabbing select-none"
         style={{ touchAction: 'pan-y' }}
         title="Click and drag horizontally to rotate the 3D Self-Order Kiosk 360°"
       />
@@ -954,10 +914,11 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 flex items-center gap-1.5 p-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
         <button
           onClick={() => setActiveScreen('order')}
-          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${activeScreen === 'order'
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${
+            activeScreen === 'order'
               ? 'bg-blue-600 text-white shadow-[0_0_12px_rgba(59,130,246,0.5)]'
               : 'text-slate-300 hover:text-white hover:bg-white/10'
-            }`}
+          }`}
           aria-label="Switch to Self-Order Screen"
         >
           <ShoppingBag className="w-3.5 h-3.5" />
@@ -967,10 +928,11 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
         <button
           onClick={() => setActiveScreen('kds')}
-          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${activeScreen === 'kds'
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold transition-all ${
+            activeScreen === 'kds'
               ? 'bg-violet-600 text-white shadow-[0_0_12px_rgba(139,92,246,0.5)]'
               : 'text-slate-300 hover:text-white hover:bg-white/10'
-            }`}
+          }`}
           aria-label="Switch to Kitchen KDS Ticket View"
         >
           <ChefHat className="w-3.5 h-3.5" />
