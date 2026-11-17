@@ -53,18 +53,18 @@ export const Home: React.FC = () => {
             <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
               {/* Brand Announcement Pill */}
               <RevealOnScroll variant="fade-down" delay={50}>
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-blue-500/30 text-xs sm:text-sm text-slate-300 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:border-blue-400/50 transition-all">
-                  <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
-                  <span className="font-semibold text-white">NEXORA TECHNOLOGIES</span>
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-950/60 via-purple-950/40 to-cyan-950/60 border border-cyan-500/35 text-xs sm:text-sm text-slate-300 shadow-[0_0_20px_rgba(6,182,212,0.18)] hover:border-cyan-400/60 transition-all">
+                  <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                  <span className="font-display font-bold tracking-wider text-white">NEXORA TECHNOLOGIES</span>
                   <span className="text-slate-500">|</span>
-                  <span className="text-blue-300 font-medium">Building Tomorrow's Digital World.</span>
+                  <span className="text-cyan-300 font-medium">Building Tomorrow's Digital World.</span>
                 </div>
               </RevealOnScroll>
 
               {/* Main Headline */}
               <RevealOnScroll variant="fade-up" delay={150}>
-                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-                  Commercial Kiosk Systems &{' '}
+                <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.06]">
+                  Commercial Self-Kiosk Systems &{' '}
                   <span className="text-gradient-primary block sm:inline">
                     Modern Software Engineering.
                   </span>
@@ -117,14 +117,11 @@ export const Home: React.FC = () => {
               </RevealOnScroll>
             </div>
 
-            {/* Right Column: 3D Interactive WebGL Monolith Canvas */}
+            {/* Right Column: 3D Interactive WebGL Self-Kiosk Hardware Canvas */}
             <div className="lg:col-span-5 relative">
               <RevealOnScroll variant="scale-up" delay={200}>
-                <div className="relative rounded-3xl bg-gradient-to-br from-[#0c1224] to-[#070b16] border border-blue-500/30 p-2 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(59,130,246,0.15)] overflow-hidden">
+                <div className="relative rounded-3xl bg-gradient-to-br from-[#0c1224] via-[#080d19] to-[#050811] border border-cyan-500/35 p-1.5 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_50px_rgba(6,182,212,0.18)] overflow-hidden">
                   <ThreeHero />
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none px-3.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] text-slate-300 font-mono">
-                    3D Digital Architecture • Move Cursor to Orbit
-                  </div>
                 </div>
               </RevealOnScroll>
             </div>

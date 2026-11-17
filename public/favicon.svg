@@ -1,25 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <defs>
-    <linearGradient id="nexoraGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="45%" stop-color="#3b82f6"/>
-      <stop offset="100%" stop-color="#8b5cf6"/>
+    <linearGradient id="nexusLeft" x1="12" y1="12" x2="26" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#2563eb" />
     </linearGradient>
-    <linearGradient id="accentGrad" x1="64" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#06b6d4"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
+    <linearGradient id="nexusBridge" x1="18" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
+    <linearGradient id="nexusRight" x1="38" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#07090e" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <!-- Background Dark Rounded Hexagon/Squircle -->
-  <rect width="64" height="64" rx="16" fill="#07090e" stroke="rgba(59, 130, 246, 0.4)" stroke-width="1.5"/>
-  <!-- Glowing Background Accent -->
-  <circle cx="32" cy="32" r="20" fill="url(#nexoraGrad)" opacity="0.15" filter="url(#glow)"/>
-  <!-- Precision Stylized Nexora 'N' Geometry -->
-  <path d="M18 46 L18 18 L27 18 L40 38 L40 18 L46 18 L46 46 L37 46 L24 26 L24 46 Z" fill="url(#nexoraGrad)"/>
-  <!-- Tech Core Dot -->
-  <circle cx="43" cy="21" r="2.5" fill="#38bdf8" />
+  <!-- Background Squircle Enclosure -->
+  <rect width="64" height="64" rx="16" fill="#07090e" stroke="rgba(34, 211, 238, 0.4)" stroke-width="1.5"/>
+  <circle cx="32" cy="32" r="24" fill="url(#bgGlow)"/>
+  <!-- Left Pillar -->
+  <path d="M14 50V16.8C14 15.2 15.3 14 16.9 14H24C25.7 14 27 15.3 27 17V50H14Z" fill="url(#nexusLeft)"/>
+  <!-- Right Pillar -->
+  <path d="M37 14H47.1C48.7 14 50 15.3 50 17V47.2C50 48.8 48.7 50 47.1 50H40C38.3 50 37 48.7 37 47V14Z" fill="url(#nexusRight)"/>
+  <!-- Cross Nexus Blade -->
+  <path d="M16 16.5L47.5 47.5H38.5L14 23V16.5H16Z" fill="url(#nexusBridge)"/>
+  <!-- Tech Core Node -->
+  <circle cx="48" cy="16" r="3.5" fill="#22d3ee" />
+  <circle cx="48" cy="16" r="5.5" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.7" />
 </svg>
