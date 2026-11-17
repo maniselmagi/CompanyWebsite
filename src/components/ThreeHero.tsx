@@ -448,7 +448,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     // 4. Main Kiosk Assembly Group
     const kioskAssembly = new THREE.Group();
     kioskAssembly.position.set(0, -0.3, 0);
-    kioskAssembly.rotation.y = -0.35; // Welcoming 3/4 commercial angle
+    kioskAssembly.rotation.y = -0.15; // Welcoming angle displaying touchscreen front & center
     scene.add(kioskAssembly);
 
     // --- A. COMMERCIAL STANDING SELF-ORDER KIOSK TOTEM ---
@@ -666,12 +666,14 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     scene.add(floorGlow);
 
     // --- G. INTERACTIVE MOUSE & DRAG ROTATION ---
+    const defaultRotationY = -0.15;
     let mouseX = 0;
     let mouseY = 0;
-    let targetRotationY = -0.35;
+    let targetRotationY = defaultRotationY;
     let targetRotationX = 0;
     let isDragging = false;
     let prevMouse = { x: 0, y: 0 };
+    let resetTimer: ReturnType<typeof setTimeout> | null = null;
 
     const handleMouseMoveWindow = (e: MouseEvent) => {
       if (isDragging) {
@@ -690,6 +692,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     };
 
     const handleMouseDown = (e: MouseEvent) => {
+      if (resetTimer) clearTimeout(resetTimer);
       isDragging = true;
       setIsRotatingManually(true);
       prevMouse = { x: e.clientX, y: e.clientY };
@@ -697,12 +700,24 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
     const handleMouseUp = () => {
       isDragging = false;
-      setTimeout(() => setIsRotatingManually(false), 2500);
+      if (resetTimer) clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => {
+        setIsRotatingManually(false);
+        targetRotationY = defaultRotationY;
+        targetRotationX = 0;
+      }, 3500);
+    };
+
+    const handleDblClick = () => {
+      targetRotationY = defaultRotationY;
+      targetRotationX = 0;
+      setIsRotatingManually(false);
     };
 
     // Responsive Touch Handler with Native Page Scroll Passthrough
     const handleTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
+        if (resetTimer) clearTimeout(resetTimer);
         isDragging = true;
         setIsRotatingManually(true);
         prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -727,10 +742,16 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
     const handleTouchEnd = () => {
       isDragging = false;
-      setTimeout(() => setIsRotatingManually(false), 2500);
+      if (resetTimer) clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => {
+        setIsRotatingManually(false);
+        targetRotationY = defaultRotationY;
+        targetRotationX = 0;
+      }, 3500);
     };
 
     container.addEventListener('mousedown', handleMouseDown);
+    container.addEventListener('dblclick', handleDblClick);
     window.addEventListener('mousemove', handleMouseMoveWindow);
     window.addEventListener('mouseup', handleMouseUp);
     container.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -849,7 +870,9 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     // Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
+      if (resetTimer) clearTimeout(resetTimer);
       container.removeEventListener('mousedown', handleMouseDown);
+      container.removeEventListener('dblclick', handleDblClick);
       window.removeEventListener('mousemove', handleMouseMoveWindow);
       window.removeEventListener('mouseup', handleMouseUp);
       container.removeEventListener('touchstart', handleTouchStart);

@@ -61,12 +61,14 @@ export const Home: React.FC = () => {
                 </div>
               </RevealOnScroll>
 
-              {/* Main Headline */}
+              {/* Main Headline with 3D Dimensional Styling */}
               <RevealOnScroll variant="fade-up" delay={150}>
-                <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-                  Commercial Self-Order Kiosks &{' '}
-                  <span className="text-gradient-primary block sm:inline">
-                    Next-Gen Software Engineering.
+                <h1 className="font-display text-2xl sm:text-4xl md:text-[38px] lg:text-[44px] xl:text-[48px] font-black tracking-tight leading-[1.18]">
+                  <span className="text-3d-chrome block">
+                    Commercial <span className="whitespace-nowrap">Self-Order</span> Kiosks
+                  </span>
+                  <span className="text-3d-hologram block mt-1 sm:mt-2">
+                    &amp; <span className="whitespace-nowrap">Next-Gen</span> Software Engineering.
                   </span>
                 </h1>
               </RevealOnScroll>
