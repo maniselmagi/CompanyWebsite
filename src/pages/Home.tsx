@@ -23,7 +23,6 @@ import {
   companyProfile
 } from '../data/companyData';
 import { ThreeHero } from '../components/ThreeHero';
-import { Hero3DText } from '../components/Hero3DText';
 import { Kiosk3DViewer } from '../components/Kiosk3DViewer';
 import { InteractiveDashboardMockup } from '../components/InteractiveDashboardMockup';
 import { CaseStudyModal } from '../components/CaseStudyModal';
@@ -47,10 +46,10 @@ export const Home: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        {/* 1. CINEMATIC SIDE-BY-SIDE HERO SECTION (3D KINETIC TYPOGRAPHY + 3D TABLET KIOSK) */}
+        {/* 1. CINEMATIC SIDE-BY-SIDE HERO SECTION (PRODUCT-FOCUSED TECH TYPOGRAPHY + 3D KIOSK DEMO) */}
         <section className="pt-28 pb-14 md:pt-36 md:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
-            {/* Left Column: 3D Kinetic Headline, Value Proposition & Actions */}
+            {/* Left Column: Clean Tech Typography, Product-Driven Proposition & Actions */}
             <div className="lg:col-span-6 xl:col-span-6 space-y-6 text-center lg:text-left">
               {/* Brand Announcement Beacon */}
               <RevealOnScroll variant="fade-down" delay={50}>
@@ -62,15 +61,22 @@ export const Home: React.FC = () => {
                 </div>
               </RevealOnScroll>
 
-              {/* Interactive 3D Kinetic Animated Headline */}
+              {/* Clean Modern Product-Based Headline (No Heavy 3D Block Extrusions) */}
               <RevealOnScroll variant="fade-up" delay={120}>
-                <Hero3DText />
+                <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[48px] xl:text-[54px] font-extrabold tracking-tight leading-[1.12] text-white">
+                  <span className="block text-white">
+                    Intelligent Digital Products
+                  </span>
+                  <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300">
+                    &amp; Custom Software Engineering.
+                  </span>
+                </h1>
               </RevealOnScroll>
 
-              {/* Sub-headline / Company Introduction */}
+              {/* Sub-headline / Company Product-Based Introduction */}
               <RevealOnScroll variant="fade-up" delay={200}>
                 <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                  Nexora Technologies engineers commercial self-ordering kiosks, touch terminal operating systems, and high-performance web applications. We replace paper tickets and ordering bottlenecks with real-time, responsive software built for high-volume commercial durability.
+                  Nexora Technologies is a product-driven software engineering firm architecting intelligent commercial touch platforms, bespoke business systems, and high-performance web applications. We build durable, scalable digital products designed for mission-critical reliability.
                 </p>
               </RevealOnScroll>
 
@@ -79,9 +85,9 @@ export const Home: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                   <Link
                     to="/portfolio"
-                    className="btn-luxury-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30 shadow-[0_0_35px_rgba(52,211,153,0.45)] hover:scale-[1.02] transition-transform"
+                    className="btn-luxury-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30 shadow-[0_0_35px_rgba(52,211,153,0.45)] hover:scale-[1.02] transition-transform"
                   >
-                    <span>Explore Smart-Kiosk Showcase</span>
+                    <span>Explore</span>
                     <ArrowRight className="w-4 h-4 text-[#07090e]" />
                   </Link>
                   <Link
@@ -98,16 +104,16 @@ export const Home: React.FC = () => {
               <RevealOnScroll variant="fade-up" delay={340}>
                 <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-left">
                   <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
-                    <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">&lt; 50ms Real-Time</div>
-                    <div className="text-xs font-semibold text-white mt-0.5">Dual-Screen Sync</div>
+                    <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">Enterprise Scale</div>
+                    <div className="text-xs font-semibold text-white mt-0.5">Full-Stack Architecture</div>
                   </div>
                   <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
                     <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">100% Transfer</div>
                     <div className="text-xs font-semibold text-white mt-0.5">Client Code &amp; IP</div>
                   </div>
                   <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
-                    <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">5-Language</div>
-                    <div className="text-xs font-semibold text-white mt-0.5">Multilingual Touch</div>
+                    <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">Multi-Platform</div>
+                    <div className="text-xs font-semibold text-white mt-0.5">Touch, Web &amp; Cloud</div>
                   </div>
                 </div>
               </RevealOnScroll>
@@ -119,13 +125,13 @@ export const Home: React.FC = () => {
                 <div className="relative rounded-3xl bg-gradient-to-b from-[#0e1428] via-[#080d19] to-[#04060c] border border-cyan-500/35 p-1.5 sm:p-2.5 shadow-[0_25px_80px_rgba(0,0,0,0.95),0_0_70px_rgba(6,182,212,0.22)] overflow-hidden">
                   {/* Floating Compact Telemetry Chips */}
                   <div className="hidden sm:block absolute top-4 left-4 z-20 px-3 py-1.5 rounded-xl bg-[#080d19]/90 backdrop-blur-md border border-cyan-500/30 shadow-lg text-left pointer-events-none">
-                    <div className="text-[9px] font-mono text-cyan-400 uppercase tracking-wider font-bold">01 / DUAL-SCREEN SYNC</div>
-                    <div className="text-xs font-bold text-white">&lt; 50ms Real-Time Event Bus</div>
+                    <div className="text-[9px] font-mono text-cyan-400 uppercase tracking-wider font-bold">01 / FEATURED PRODUCT</div>
+                    <div className="text-xs font-bold text-white">Commercial Kiosk &amp; POS</div>
                   </div>
 
                   <div className="hidden sm:block absolute bottom-14 right-4 z-20 px-3 py-1.5 rounded-xl bg-[#080d19]/90 backdrop-blur-md border border-violet-500/30 shadow-lg text-left pointer-events-none">
-                    <div className="text-[9px] font-mono text-violet-400 uppercase tracking-wider font-bold">02 / POS HARDWARE</div>
-                    <div className="text-xs font-bold text-white">Contactless Tap &amp; Dispenser</div>
+                    <div className="text-[9px] font-mono text-violet-400 uppercase tracking-wider font-bold">02 / HARDWARE SYNC</div>
+                    <div className="text-xs font-bold text-white">Dual-Screen &amp; Tap-to-Pay</div>
                   </div>
 
                   {/* Main 3D Canvas */}
