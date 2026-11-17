@@ -942,10 +942,10 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
   return (
     <div className={`relative w-full ${className}`}>
-      {/* 3D WebGL Canvas Container with Responsive Height & Touch-Action */}
+      {/* 3D WebGL Canvas Container with Cinematic Height & Touch-Action */}
       <div 
         ref={mountRef} 
-        className="relative w-full h-[380px] sm:h-[460px] md:h-[500px] lg:h-[560px] cursor-grab active:cursor-grabbing select-none"
+        className="relative w-full h-[420px] sm:h-[500px] md:h-[580px] lg:h-[640px] cursor-grab active:cursor-grabbing select-none"
         style={{ touchAction: 'pan-y' }}
         title="Click and drag horizontally to rotate the 3D Self-Order Kiosk 360°"
       />

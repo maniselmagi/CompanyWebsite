@@ -46,101 +46,122 @@ export const Home: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        {/* 1. HERO SECTION WITH 3D WEBGL TECHNOLOGY EXPERIENCE */}
-        <section className="pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Heading & Value Proposition */}
-            <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
-              {/* Brand Announcement Pill */}
-              <RevealOnScroll variant="fade-down" delay={50}>
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-950/60 via-purple-950/40 to-cyan-950/60 border border-cyan-500/35 text-xs sm:text-sm text-slate-300 shadow-[0_0_20px_rgba(6,182,212,0.18)] hover:border-cyan-400/60 transition-all">
-                  <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                  <span className="font-display font-bold tracking-wider text-white">NEXORA TECHNOLOGIES</span>
-                  <span className="text-slate-500">|</span>
-                  <span className="text-cyan-300 font-medium">Building Tomorrow's Digital World.</span>
-                </div>
-              </RevealOnScroll>
-
-              {/* Main Headline with 3D Dimensional Styling */}
-              <RevealOnScroll variant="fade-up" delay={150}>
-                <h1 className="font-display text-2xl sm:text-4xl md:text-[38px] lg:text-[44px] xl:text-[48px] font-black tracking-tight leading-[1.18]">
-                  <span className="text-3d-chrome block">
-                    Commercial <span className="whitespace-nowrap">Self-Order</span> Kiosks
-                  </span>
-                  <span className="text-3d-hologram block mt-1 sm:mt-2">
-                    &amp; <span className="whitespace-nowrap">Next-Gen</span> Software Engineering.
-                  </span>
-                </h1>
-              </RevealOnScroll>
-
-              {/* Sub-headline / Company Introduction */}
-              <RevealOnScroll variant="fade-up" delay={250}>
-                <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-                  Nexora Technologies engineers commercial self-ordering kiosks, touch terminal operating systems, and high-performance web applications. We replace paper tickets and ordering bottlenecks with real-time, responsive software built for high-volume commercial durability.
-                </p>
-              </RevealOnScroll>
-
-              {/* Action Buttons */}
-              <RevealOnScroll variant="fade-up" delay={350}>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 pt-2">
-                  <Link
-                    to="/portfolio"
-                    className="btn-luxury-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30"
-                  >
-                    <span>Explore Smart-Kiosk Showcase</span>
-                    <ArrowRight className="w-4 h-4 text-[#07090e]" />
-                  </Link>
-                  <Link
-                    to="/services"
-                    className="btn-luxury-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200"
-                  >
-                    <span>View Our Capabilities</span>
-                    <ChevronRight className="w-4 h-4 text-slate-400" />
-                  </Link>
-                </div>
-              </RevealOnScroll>
-
-              {/* Engineering Guarantees */}
-              <RevealOnScroll variant="fade-in" delay={450}>
-                <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-xs sm:text-sm text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    <span>100% Client Code & IP Ownership</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-blue-400" />
-                    <span>Real Working Software Experience</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Lock className="w-4 h-4 text-violet-400" />
-                    <span>Strict Mutual Confidentiality</span>
-                  </div>
-                </div>
-
-                {/* Animated Scroll to Architecture Exploration Indicator */}
-                <div className="pt-6 hidden sm:flex items-center justify-center lg:justify-start">
-                  <a
-                    href="#smart-kiosk-spotlight"
-                    className="inline-flex items-center gap-2.5 text-xs font-mono text-slate-400 hover:text-cyan-300 transition-all py-1.5 px-4 rounded-full bg-white/[0.02] border border-white/[0.08] hover:border-cyan-500/40 shadow-sm"
-                  >
-                    <span className="w-2.5 h-4 rounded-full border border-slate-400 flex items-start justify-center p-0.5">
-                      <span className="w-1 h-1 rounded-full bg-cyan-400 animate-scroll-wheel"></span>
-                    </span>
-                    <span className="tracking-wider uppercase text-[11px]">Explore Real-World Hardware & System Architecture</span>
-                  </a>
-                </div>
-              </RevealOnScroll>
+        {/* 1. CINEMATIC FULL-SCALE HERO SECTION (LUSION / APPLE STYLE) */}
+        <section className="pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+          {/* Brand Announcement Beacon */}
+          <RevealOnScroll variant="fade-down" delay={50}>
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-950/70 via-purple-950/50 to-cyan-950/70 border border-cyan-500/40 text-xs sm:text-sm text-slate-300 shadow-[0_0_25px_rgba(6,182,212,0.25)] hover:border-cyan-400 transition-all">
+              <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span className="font-display font-bold tracking-widest text-white uppercase">NEXORA TECHNOLOGIES</span>
+              <span className="text-slate-500">|</span>
+              <span className="text-cyan-300 font-medium">Building Tomorrow's Digital World.</span>
             </div>
+          </RevealOnScroll>
 
-            {/* Right Column: 3D Interactive WebGL Self-Kiosk Hardware Canvas */}
-            <div className="lg:col-span-5 relative w-full max-w-lg mx-auto lg:max-w-none">
-              <RevealOnScroll variant="scale-up" delay={200}>
-                <div className="relative rounded-3xl bg-gradient-to-br from-[#0c1224] via-[#080d19] to-[#050811] border border-cyan-500/35 p-1.5 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_50px_rgba(6,182,212,0.18)] overflow-hidden">
-                  <ThreeHero />
-                </div>
-              </RevealOnScroll>
+          {/* Majestic Centered Headline with 3D Dimensional Styling */}
+          <RevealOnScroll variant="fade-up" delay={150}>
+            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[64px] font-black tracking-tight leading-[1.08] max-w-5xl mx-auto mt-6">
+              <span className="text-3d-chrome block">
+                Commercial <span className="whitespace-nowrap">Self-Order</span> Kiosks
+              </span>
+              <span className="text-3d-hologram block mt-2 sm:mt-3">
+                &amp; <span className="whitespace-nowrap">Next-Gen</span> Software Engineering.
+              </span>
+            </h1>
+          </RevealOnScroll>
+
+          {/* Sub-headline / Company Introduction */}
+          <RevealOnScroll variant="fade-up" delay={250}>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal mt-6">
+              Nexora Technologies engineers commercial self-ordering kiosks, touch terminal operating systems, and high-performance web applications. We replace paper tickets and ordering bottlenecks with real-time, responsive software built for high-volume commercial durability.
+            </p>
+          </RevealOnScroll>
+
+          {/* Action Buttons */}
+          <RevealOnScroll variant="fade-up" delay={350}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+              <Link
+                to="/portfolio"
+                className="btn-luxury-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30 shadow-[0_0_35px_rgba(52,211,153,0.45)]"
+              >
+                <span>Explore Smart-Kiosk Showcase</span>
+                <ArrowRight className="w-4 h-4 text-[#07090e]" />
+              </Link>
+              <Link
+                to="/services"
+                className="btn-luxury-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200"
+              >
+                <span>View Our Capabilities</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </Link>
             </div>
+          </RevealOnScroll>
+
+          {/* THE 3D WEBGL HERO STAGE (Lusion / Apple Cinematic Hardware Stage) */}
+          <div className="relative mt-10 w-full max-w-6xl mx-auto">
+            <RevealOnScroll variant="scale-up" delay={200}>
+              <div className="relative rounded-3xl bg-gradient-to-b from-[#0e1428] via-[#080d19] to-[#04060c] border border-cyan-500/35 p-2 sm:p-3 shadow-[0_25px_80px_rgba(0,0,0,0.95),0_0_70px_rgba(6,182,212,0.22)] overflow-hidden">
+                {/* Floating HUD Telemetry Spec Callouts (Desktop / Tablet) */}
+                <div className="hidden lg:block absolute top-8 left-8 z-20 p-4 rounded-2xl bg-[#080d19]/85 backdrop-blur-xl border border-cyan-500/30 shadow-2xl max-w-xs text-left">
+                  <div className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold">01 / DUAL-SCREEN SYNC</div>
+                  <div className="text-sm font-bold text-white mt-1">&lt; 50ms Real-Time Event Bus</div>
+                  <div className="text-xs text-slate-300 mt-1 leading-relaxed">BroadcastChannel ticket pipeline connecting customer table kiosks with kitchen KDS displays without cloud latency.</div>
+                </div>
+
+                <div className="hidden lg:block absolute top-8 right-8 z-20 p-4 rounded-2xl bg-[#080d19]/85 backdrop-blur-xl border border-violet-500/30 shadow-2xl max-w-xs text-left">
+                  <div className="text-[10px] font-mono text-violet-400 uppercase tracking-widest font-bold">02 / MULTILINGUAL TOUCH</div>
+                  <div className="text-sm font-bold text-white mt-1">5-Language Instant Switcher</div>
+                  <div className="text-xs text-slate-300 mt-1 leading-relaxed">Live localized menu translations in English, Tamil, Hindi, Telugu, and Spanish for diverse customer dining.</div>
+                </div>
+
+                <div className="hidden lg:block absolute bottom-16 left-8 z-20 p-4 rounded-2xl bg-[#080d19]/85 backdrop-blur-xl border border-blue-500/30 shadow-2xl max-w-xs text-left">
+                  <div className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-bold">03 / COMMERCIAL HARDWARE</div>
+                  <div className="text-sm font-bold text-white mt-1">8"–12" Tablets &amp; Totems</div>
+                  <div className="text-xs text-slate-300 mt-1 leading-relaxed">Ergonomic touch targets (&gt;48px) validated on physical Android and desktop touchscreen hardware terminals.</div>
+                </div>
+
+                <div className="hidden lg:block absolute bottom-16 right-8 z-20 p-4 rounded-2xl bg-[#080d19]/85 backdrop-blur-xl border border-emerald-500/30 shadow-2xl max-w-xs text-left">
+                  <div className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold">04 / ZERO VENDOR LOCK-IN</div>
+                  <div className="text-sm font-bold text-white mt-1">100% Client Code Ownership</div>
+                  <div className="text-xs text-slate-300 mt-1 leading-relaxed">Full proprietary source code transfer, transparent Git commits, and zero vendor gatekeeping.</div>
+                </div>
+
+                {/* Main 3D Canvas */}
+                <ThreeHero />
+              </div>
+            </RevealOnScroll>
           </div>
+
+          {/* Engineering Guarantees Banner below 3D Stage */}
+          <RevealOnScroll variant="fade-in" delay={450}>
+            <div className="pt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-slate-400">
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08]">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>100% Client Code &amp; IP Ownership</span>
+              </div>
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08]">
+                <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                <span>Real Working Software Experience</span>
+              </div>
+              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08]">
+                <Lock className="w-4 h-4 text-violet-400" />
+                <span>Strict Mutual Confidentiality</span>
+              </div>
+            </div>
+
+            {/* Animated Scroll to Architecture Exploration Indicator */}
+            <div className="pt-8 flex items-center justify-center">
+              <a
+                href="#smart-kiosk-spotlight"
+                className="inline-flex items-center gap-2.5 text-xs font-mono text-slate-400 hover:text-cyan-300 transition-all py-2 px-5 rounded-full bg-white/[0.02] border border-white/[0.08] hover:border-cyan-500/40 shadow-sm"
+              >
+                <span className="w-2.5 h-4 rounded-full border border-slate-400 flex items-start justify-center p-0.5">
+                  <span className="w-1 h-1 rounded-full bg-cyan-400 animate-scroll-wheel"></span>
+                </span>
+                <span className="tracking-wider uppercase text-[11px]">SCROLL TO EXPLORE ARCHITECTURE</span>
+              </a>
+            </div>
+          </RevealOnScroll>
         </section>
 
         {/* 2. REAL PROJECT SHOWCASE: SMART-KIOSK (ORDEREASE) */}
@@ -177,6 +198,30 @@ export const Home: React.FC = () => {
                   >
                     <span>Technical Architecture Specs</span>
                   </button>
+                </div>
+              </div>
+
+              {/* Apple-Style 4-Metric Keynote Bar */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
+                <div className="p-5 rounded-2xl bg-[#090e1c]/80 border border-cyan-500/25 shadow-lg text-left">
+                  <div className="text-2xl sm:text-3xl font-black font-mono text-cyan-400">&lt; 50ms</div>
+                  <div className="text-xs font-semibold text-white mt-1">Cross-Screen Sync</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">BroadcastChannel Event Bus</div>
+                </div>
+                <div className="p-5 rounded-2xl bg-[#090e1c]/80 border border-violet-500/25 shadow-lg text-left">
+                  <div className="text-2xl sm:text-3xl font-black font-mono text-violet-400">5 Langs</div>
+                  <div className="text-xs font-semibold text-white mt-1">Multilingual Engine</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">EN, TA, HI, TE, ES</div>
+                </div>
+                <div className="p-5 rounded-2xl bg-[#090e1c]/80 border border-blue-500/25 shadow-lg text-left">
+                  <div className="text-2xl sm:text-3xl font-black font-mono text-blue-400">8"–12"</div>
+                  <div className="text-xs font-semibold text-white mt-1">Hardware Optimized</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">Tablets &amp; Commercial Totems</div>
+                </div>
+                <div className="p-5 rounded-2xl bg-[#090e1c]/80 border border-emerald-500/25 shadow-lg text-left">
+                  <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400">100% Real</div>
+                  <div className="text-xs font-semibold text-white mt-1">Production Prototype</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">Verified Working Codebase</div>
                 </div>
               </div>
             </RevealOnScroll>
@@ -296,18 +341,26 @@ export const Home: React.FC = () => {
                 Layout: Layout
               }[service.iconName] || Cpu;
 
+              const isWide = index === 0 || index === 3;
+              const isFull = index === 4;
+              const colSpanClass = isFull 
+                ? 'lg:col-span-3' 
+                : isWide 
+                ? 'lg:col-span-2' 
+                : 'lg:col-span-1';
+
               return (
-                <RevealOnScroll key={service.id} variant="fade-up" delay={index * 70}>
-                  <div className="bento-card-spotlight group relative p-7 rounded-2xl flex flex-col justify-between shadow-xl h-full">
+                <RevealOnScroll key={service.id} variant="fade-up" delay={index * 70} className={colSpanClass}>
+                  <div className="bento-card-spotlight group relative p-7 sm:p-8 rounded-3xl flex flex-col justify-between shadow-2xl h-full border border-white/[0.08]">
                     <div className="space-y-5">
                       {/* Header with Title and Corner Arrow */}
                       <div className="flex items-start justify-between gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 group-hover:bg-violet-600 group-hover:text-white transition-all duration-300">
-                          <IconComponent className="w-5 h-5" />
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/20 to-violet-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:text-cyan-300 transition-all duration-300 shadow-md">
+                          <IconComponent className="w-6 h-6" />
                         </div>
                         <Link 
                           to={`/services#${service.id}`}
-                          className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:border-violet-400/50 group-hover:bg-violet-500/20 transition-all"
+                          className="w-9 h-9 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:border-cyan-400/50 group-hover:bg-cyan-500/20 transition-all"
                           aria-label={`View ${service.title}`}
                         >
                           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -315,39 +368,42 @@ export const Home: React.FC = () => {
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-bold text-white group-hover:text-violet-300 transition-colors">
+                        <div className="text-[11px] font-mono text-cyan-400 font-semibold uppercase tracking-wider mb-1">
+                          Service 0{index + 1}
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                           {service.title}
                         </h3>
-                        <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
                           {service.shortDescription}
                         </p>
                       </div>
 
                       {/* Embedded UI Schematic */}
-                      <div className="pt-1">
+                      <div className="pt-2">
                         <ServiceCardSchematic serviceId={service.id} />
                       </div>
 
-                      <div className="space-y-1.5 pt-2 border-t border-white/[0.06]">
-                        {service.benefits.slice(0, 2).map((b, i) => (
-                          <div key={i} className="flex items-start gap-2 text-xs text-slate-400">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                            <span className="line-clamp-1">{b}</span>
+                      <div className="space-y-2 pt-3 border-t border-white/[0.06]">
+                        {service.benefits.slice(0, 3).map((b, i) => (
+                          <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                            <span>{b}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="pt-4 mt-4 border-t border-white/[0.06] flex items-center justify-between">
-                      <span className="text-[10px] font-mono text-slate-500">
+                    <div className="pt-5 mt-5 border-t border-white/[0.06] flex items-center justify-between">
+                      <span className="text-[11px] font-mono text-slate-400 bg-white/[0.03] px-2.5 py-1 rounded-md border border-white/[0.05]">
                         {service.deliveryTimeline.split(';')[0]}
                       </span>
                       <Link
                         to="/services"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-violet-400 group-hover:text-violet-300 transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors"
                       >
-                        <span>Learn More</span>
-                        <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                        <span>Deep Dive Specifications</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                       </Link>
                     </div>
                   </div>
@@ -419,6 +475,15 @@ export const Home: React.FC = () => {
                 </p>
               </div>
             </RevealOnScroll>
+
+            <div className="hidden md:flex items-center justify-between mb-8 px-12 relative">
+              <div className="absolute left-16 right-16 top-1/2 -translate-y-1/2 h-[2px] bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 opacity-50"></div>
+              {['01', '02', '03', '04', '05'].map((num, i) => (
+                <div key={i} className="relative z-10 w-8 h-8 rounded-full bg-[#080d1a] border-2 border-cyan-400 flex items-center justify-center font-mono text-xs font-bold text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+                  {num}
+                </div>
+              ))}
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-left">
               {developmentProcessSteps.map((step, idx) => (
