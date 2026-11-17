@@ -23,6 +23,7 @@ import {
   companyProfile
 } from '../data/companyData';
 import { ThreeHero } from '../components/ThreeHero';
+import { Hero3DText } from '../components/Hero3DText';
 import { Kiosk3DViewer } from '../components/Kiosk3DViewer';
 import { InteractiveDashboardMockup } from '../components/InteractiveDashboardMockup';
 import { CaseStudyModal } from '../components/CaseStudyModal';
@@ -46,95 +47,97 @@ export const Home: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        {/* 1. CINEMATIC FULL-SCALE HERO SECTION (LUSION / APPLE STYLE) */}
-        <section className="pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-          {/* Brand Announcement Beacon */}
-          <RevealOnScroll variant="fade-down" delay={50}>
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-950/70 via-purple-950/50 to-cyan-950/70 border border-cyan-500/40 text-xs sm:text-sm text-slate-300 shadow-[0_0_25px_rgba(6,182,212,0.25)] hover:border-cyan-400 transition-all">
-              <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
-              <span className="font-display font-bold tracking-widest text-white uppercase">NEXORA TECHNOLOGIES</span>
-              <span className="text-slate-500">|</span>
-              <span className="text-cyan-300 font-medium">Building Tomorrow's Digital World.</span>
+        {/* 1. CINEMATIC SIDE-BY-SIDE HERO SECTION (3D KINETIC TYPOGRAPHY + 3D TABLET KIOSK) */}
+        <section className="pt-28 pb-14 md:pt-36 md:pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
+            {/* Left Column: 3D Kinetic Headline, Value Proposition & Actions */}
+            <div className="lg:col-span-6 xl:col-span-6 space-y-6 text-center lg:text-left">
+              {/* Brand Announcement Beacon */}
+              <RevealOnScroll variant="fade-down" delay={50}>
+                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-blue-950/70 via-purple-950/50 to-cyan-950/70 border border-cyan-500/40 text-xs sm:text-sm text-slate-300 shadow-[0_0_25px_rgba(6,182,212,0.25)] hover:border-cyan-400 transition-all">
+                  <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                  <span className="font-display font-bold tracking-widest text-white uppercase">NEXORA TECHNOLOGIES</span>
+                  <span className="text-slate-500">|</span>
+                  <span className="text-cyan-300 font-medium">Building Tomorrow's Digital World.</span>
+                </div>
+              </RevealOnScroll>
+
+              {/* Interactive 3D Kinetic Animated Headline */}
+              <RevealOnScroll variant="fade-up" delay={120}>
+                <Hero3DText />
+              </RevealOnScroll>
+
+              {/* Sub-headline / Company Introduction */}
+              <RevealOnScroll variant="fade-up" delay={200}>
+                <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                  Nexora Technologies engineers commercial self-ordering kiosks, touch terminal operating systems, and high-performance web applications. We replace paper tickets and ordering bottlenecks with real-time, responsive software built for high-volume commercial durability.
+                </p>
+              </RevealOnScroll>
+
+              {/* Action Buttons */}
+              <RevealOnScroll variant="fade-up" delay={280}>
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                  <Link
+                    to="/portfolio"
+                    className="btn-luxury-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30 shadow-[0_0_35px_rgba(52,211,153,0.45)] hover:scale-[1.02] transition-transform"
+                  >
+                    <span>Explore Smart-Kiosk Showcase</span>
+                    <ArrowRight className="w-4 h-4 text-[#07090e]" />
+                  </Link>
+                  <Link
+                    to="/services"
+                    className="btn-luxury-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm sm:text-base font-semibold text-slate-200 hover:text-white"
+                  >
+                    <span>View Our Capabilities</span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+                </div>
+              </RevealOnScroll>
+
+              {/* Key Technical Highlights Pill Strip */}
+              <RevealOnScroll variant="fade-up" delay={340}>
+                <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-left">
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
+                    <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">&lt; 50ms Real-Time</div>
+                    <div className="text-xs font-semibold text-white mt-0.5">Dual-Screen Sync</div>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
+                    <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">100% Transfer</div>
+                    <div className="text-xs font-semibold text-white mt-0.5">Client Code &amp; IP</div>
+                  </div>
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
+                    <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">5-Language</div>
+                    <div className="text-xs font-semibold text-white mt-0.5">Multilingual Touch</div>
+                  </div>
+                </div>
+              </RevealOnScroll>
             </div>
-          </RevealOnScroll>
 
-          {/* Majestic Centered Headline with 3D Dimensional Styling */}
-          <RevealOnScroll variant="fade-up" delay={150}>
-            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[64px] font-black tracking-tight leading-[1.08] max-w-5xl mx-auto mt-6">
-              <span className="text-3d-chrome block">
-                Commercial <span className="whitespace-nowrap">Self-Order</span> Kiosks
-              </span>
-              <span className="text-3d-hologram block mt-2 sm:mt-3">
-                &amp; <span className="whitespace-nowrap">Next-Gen</span> Software Engineering.
-              </span>
-            </h1>
-          </RevealOnScroll>
+            {/* Right Column: 3D Tablet Kiosk Animation Viewport */}
+            <div className="lg:col-span-6 xl:col-span-6 relative">
+              <RevealOnScroll variant="scale-up" delay={150}>
+                <div className="relative rounded-3xl bg-gradient-to-b from-[#0e1428] via-[#080d19] to-[#04060c] border border-cyan-500/35 p-1.5 sm:p-2.5 shadow-[0_25px_80px_rgba(0,0,0,0.95),0_0_70px_rgba(6,182,212,0.22)] overflow-hidden">
+                  {/* Floating Compact Telemetry Chips */}
+                  <div className="hidden sm:block absolute top-4 left-4 z-20 px-3 py-1.5 rounded-xl bg-[#080d19]/90 backdrop-blur-md border border-cyan-500/30 shadow-lg text-left pointer-events-none">
+                    <div className="text-[9px] font-mono text-cyan-400 uppercase tracking-wider font-bold">01 / DUAL-SCREEN SYNC</div>
+                    <div className="text-xs font-bold text-white">&lt; 50ms Real-Time Event Bus</div>
+                  </div>
 
-          {/* Sub-headline / Company Introduction */}
-          <RevealOnScroll variant="fade-up" delay={250}>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal mt-6">
-              Nexora Technologies engineers commercial self-ordering kiosks, touch terminal operating systems, and high-performance web applications. We replace paper tickets and ordering bottlenecks with real-time, responsive software built for high-volume commercial durability.
-            </p>
-          </RevealOnScroll>
+                  <div className="hidden sm:block absolute bottom-14 right-4 z-20 px-3 py-1.5 rounded-xl bg-[#080d19]/90 backdrop-blur-md border border-violet-500/30 shadow-lg text-left pointer-events-none">
+                    <div className="text-[9px] font-mono text-violet-400 uppercase tracking-wider font-bold">02 / POS HARDWARE</div>
+                    <div className="text-xs font-bold text-white">Contactless Tap &amp; Dispenser</div>
+                  </div>
 
-          {/* Action Buttons */}
-          <RevealOnScroll variant="fade-up" delay={350}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
-              <Link
-                to="/portfolio"
-                className="btn-luxury-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-sm sm:text-base font-bold text-[#07090e] bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 border border-white/30 shadow-[0_0_35px_rgba(52,211,153,0.45)]"
-              >
-                <span>Explore Smart-Kiosk Showcase</span>
-                <ArrowRight className="w-4 h-4 text-[#07090e]" />
-              </Link>
-              <Link
-                to="/services"
-                className="btn-luxury-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm sm:text-base font-semibold text-slate-200"
-              >
-                <span>View Our Capabilities</span>
-                <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
+                  {/* Main 3D Canvas */}
+                  <ThreeHero />
+                </div>
+              </RevealOnScroll>
             </div>
-          </RevealOnScroll>
-
-          {/* THE 3D WEBGL HERO STAGE (Lusion / Apple Cinematic Hardware Stage) */}
-          <div className="relative mt-10 w-full max-w-6xl mx-auto">
-            <RevealOnScroll variant="scale-up" delay={200}>
-              <div className="relative rounded-3xl bg-gradient-to-b from-[#0e1428] via-[#080d19] to-[#04060c] border border-cyan-500/35 p-2 sm:p-3 shadow-[0_25px_80px_rgba(0,0,0,0.95),0_0_70px_rgba(6,182,212,0.22)] overflow-hidden">
-                {/* Floating HUD Telemetry Spec Callouts (Desktop / Tablet) */}
-                <div className="hidden lg:block absolute top-8 left-8 z-20 p-4 rounded-2xl bg-[#080d19]/85 backdrop-blur-xl border border-cyan-500/30 shadow-2xl max-w-xs text-left">
-                  <div className="text-[10px] font-mono text-cyan-400 uppercase tracking-widest font-bold">01 / DUAL-SCREEN SYNC</div>
-                  <div className="text-sm font-bold text-white mt-1">&lt; 50ms Real-Time Event Bus</div>
-                  <div className="text-xs text-slate-300 mt-1 leading-relaxed">BroadcastChannel ticket pipeline connecting customer table kiosks with kitchen KDS displays without cloud latency.</div>
-                </div>
-
-                <div className="hidden lg:block absolute top-8 right-8 z-20 p-4 rounded-2xl bg-[#080d19]/85 backdrop-blur-xl border border-violet-500/30 shadow-2xl max-w-xs text-left">
-                  <div className="text-[10px] font-mono text-violet-400 uppercase tracking-widest font-bold">02 / MULTILINGUAL TOUCH</div>
-                  <div className="text-sm font-bold text-white mt-1">5-Language Instant Switcher</div>
-                  <div className="text-xs text-slate-300 mt-1 leading-relaxed">Live localized menu translations in English, Tamil, Hindi, Telugu, and Spanish for diverse customer dining.</div>
-                </div>
-
-                <div className="hidden lg:block absolute bottom-16 left-8 z-20 p-4 rounded-2xl bg-[#080d19]/85 backdrop-blur-xl border border-blue-500/30 shadow-2xl max-w-xs text-left">
-                  <div className="text-[10px] font-mono text-blue-400 uppercase tracking-widest font-bold">03 / COMMERCIAL HARDWARE</div>
-                  <div className="text-sm font-bold text-white mt-1">8"–12" Tablets &amp; Totems</div>
-                  <div className="text-xs text-slate-300 mt-1 leading-relaxed">Ergonomic touch targets (&gt;48px) validated on physical Android and desktop touchscreen hardware terminals.</div>
-                </div>
-
-                <div className="hidden lg:block absolute bottom-16 right-8 z-20 p-4 rounded-2xl bg-[#080d19]/85 backdrop-blur-xl border border-emerald-500/30 shadow-2xl max-w-xs text-left">
-                  <div className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-bold">04 / ZERO VENDOR LOCK-IN</div>
-                  <div className="text-sm font-bold text-white mt-1">100% Client Code Ownership</div>
-                  <div className="text-xs text-slate-300 mt-1 leading-relaxed">Full proprietary source code transfer, transparent Git commits, and zero vendor gatekeeping.</div>
-                </div>
-
-                {/* Main 3D Canvas */}
-                <ThreeHero />
-              </div>
-            </RevealOnScroll>
           </div>
 
           {/* Engineering Guarantees Banner below 3D Stage */}
-          <RevealOnScroll variant="fade-in" delay={450}>
-            <div className="pt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-slate-400">
+          <RevealOnScroll variant="fade-in" delay={420}>
+            <div className="pt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-slate-400">
               <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08]">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>100% Client Code &amp; IP Ownership</span>
@@ -150,7 +153,7 @@ export const Home: React.FC = () => {
             </div>
 
             {/* Animated Scroll to Architecture Exploration Indicator */}
-            <div className="pt-8 flex items-center justify-center">
+            <div className="pt-6 flex items-center justify-center">
               <a
                 href="#smart-kiosk-spotlight"
                 className="inline-flex items-center gap-2.5 text-xs font-mono text-slate-400 hover:text-cyan-300 transition-all py-2 px-5 rounded-full bg-white/[0.02] border border-white/[0.08] hover:border-cyan-500/40 shadow-sm"

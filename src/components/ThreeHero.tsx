@@ -769,35 +769,27 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
 
       if (width < 480) {
         // Small Mobile Screens
-        camera.position.set(0, 0.1, 7.8);
+        camera.position.set(0, 0.1, 7.2);
         burgerMesh.position.set(1.05, 1.25, 0.2);
         burgerMesh.scale.set(0.72, 0.72, 0.72);
         cupGroup.position.set(-1.05, -1.15, 0.2);
         cupGroup.scale.set(0.65, 0.65, 0.65);
-        kioskAssembly.scale.set(0.86, 0.86, 0.86);
-      } else if (width < 768) {
+        kioskAssembly.scale.set(0.88, 0.88, 0.88);
+      } else if (width < 640) {
         // Standard Mobile / Phablets
-        camera.position.set(0, 0.12, 6.9);
+        camera.position.set(0, 0.14, 6.4);
         burgerMesh.position.set(1.25, 1.1, 0.3);
         burgerMesh.scale.set(0.85, 0.85, 0.85);
         cupGroup.position.set(-1.25, -0.9, 0.3);
         cupGroup.scale.set(0.75, 0.75, 0.75);
-        kioskAssembly.scale.set(0.92, 0.92, 0.92);
-      } else if (width < 1024) {
-        // Tablet Screens (iPad 768px - 1024px)
-        camera.position.set(0, 0.16, 6.2);
-        burgerMesh.position.set(1.5, 0.8, 0.35);
-        burgerMesh.scale.set(1.0, 1.0, 1.0);
-        cupGroup.position.set(-1.5, -0.6, 0.35);
-        cupGroup.scale.set(0.85, 0.85, 0.85);
-        kioskAssembly.scale.set(0.96, 0.96, 0.96);
+        kioskAssembly.scale.set(0.94, 0.94, 0.94);
       } else {
-        // Desktop Screens (1024px+)
-        camera.position.set(0, 0.2, 5.8);
-        burgerMesh.position.set(1.9, 0.6, 0.5);
-        burgerMesh.scale.set(1.2, 1.2, 1.2);
-        cupGroup.position.set(-1.8, -0.4, 0.4);
-        cupGroup.scale.set(1.0, 1.0, 1.0);
+        // Desktop / Split Column (500px - 1400px)
+        camera.position.set(0, 0.18, 5.9);
+        burgerMesh.position.set(1.45, 0.85, 0.35);
+        burgerMesh.scale.set(1.05, 1.05, 1.05);
+        cupGroup.position.set(-1.45, -0.65, 0.35);
+        cupGroup.scale.set(0.9, 0.9, 0.9);
         kioskAssembly.scale.set(1.0, 1.0, 1.0);
       }
     };
@@ -905,7 +897,7 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       {/* 3D WebGL Canvas Container with Responsive Height & Touch-Action */}
       <div 
         ref={mountRef} 
-        className="relative w-full h-[380px] sm:h-[460px] md:h-[500px] lg:h-[560px] cursor-grab active:cursor-grabbing select-none"
+        className="relative w-full h-[400px] sm:h-[480px] md:h-[520px] lg:h-[580px] xl:h-[620px] cursor-grab active:cursor-grabbing select-none"
         style={{ touchAction: 'pan-y' }}
         title="Click and drag horizontally to rotate the 3D Self-Order Kiosk 360°"
       />
