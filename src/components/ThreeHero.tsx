@@ -22,7 +22,7 @@ const checkWebGLSupport = (): boolean => {
 /**
  * Creates the high-DPI vertical touchscreen display canvas for the standing self-order kiosk
  */
-function createKioskScreen(mode: 'order' | 'kds', pulsePhase: number = 0): HTMLCanvasElement {
+function createKioskScreen(mode: 'order' | 'kds'): HTMLCanvasElement {
   const canvas = document.createElement('canvas');
   canvas.width = 960;
   canvas.height = 1440;
@@ -189,11 +189,10 @@ function createKioskScreen(mode: 'order' | 'kds', pulsePhase: number = 0): HTMLC
       spX += 175;
     });
 
-    // 6. Large Animated "TOUCH TO ORDER" Button (Pulsing Glow)
+    // 6. Large Animated "TOUCH TO ORDER" Button
     const btnY = 900;
-    const pulseAlpha = 0.55 + Math.sin(pulsePhase) * 0.4;
-    ctx.shadowColor = `rgba(34, 211, 238, ${pulseAlpha})`;
-    ctx.shadowBlur = 38;
+    ctx.shadowColor = 'rgba(34, 211, 238, 0.7)';
+    ctx.shadowBlur = 35;
 
     const btnGrad = ctx.createLinearGradient(45, btnY, 915, btnY + 130);
     btnGrad.addColorStop(0, '#00f2fe');
@@ -441,7 +440,8 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     }
 
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const isMobileDevice = window.innerWidth < 768;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobileDevice ? 1.25 : 1.75));
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
@@ -477,18 +477,23 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     kioskAssembly.add(totemEdgeLines);
 
     // --- B. VIBRANT SELF-ILLUMINATING PORTRAIT TOUCHSCREEN ---
-    let pulsePhase = 0;
-    const initialCanvas = createKioskScreen(activeScreenRef.current, pulsePhase);
-    const screenTexture = new THREE.CanvasTexture(initialCanvas);
-    screenTexture.generateMipmaps = true;
-    screenTexture.minFilter = THREE.LinearMipmapLinearFilter;
-    screenTexture.magFilter = THREE.LinearFilter;
+    // Pre-render order and KDS screens once for zero-alloc high-speed rendering
+    const orderCanvas = createKioskScreen('order');
+    const kdsCanvas = createKioskScreen('kds');
+    const orderTexture = new THREE.CanvasTexture(orderCanvas);
+    const kdsTexture = new THREE.CanvasTexture(kdsCanvas);
+    orderTexture.generateMipmaps = false;
+    orderTexture.minFilter = THREE.LinearFilter;
+    orderTexture.magFilter = THREE.LinearFilter;
+    kdsTexture.generateMipmaps = false;
+    kdsTexture.minFilter = THREE.LinearFilter;
+    kdsTexture.magFilter = THREE.LinearFilter;
 
     const screenW = 1.82;
     const screenH = 2.65;
     const screenGeo = new THREE.PlaneGeometry(screenW, screenH);
     const screenMat = new THREE.MeshBasicMaterial({
-      map: screenTexture,
+      map: activeScreenRef.current === 'order' ? orderTexture : kdsTexture,
       toneMapped: false
     });
     const screenMesh = new THREE.Mesh(screenGeo, screenMat);
@@ -797,27 +802,29 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
     window.addEventListener('resize', handleResize);
     handleResize();
 
-    // Screen Texture Update Mechanism
-    let lastCanvasUpdate = 0;
     let currentMode = activeScreenRef.current;
 
-    // --- H. ANIMATION LOOP ---
-    let animationFrameId: number;
+    // --- H. ANIMATION LOOP & VISIBILITY PAUSING ---
+    let animationFrameId = 0;
     let clock = new THREE.Clock();
+    let isIntersecting = true;
 
     const animate = () => {
+      // Pause completely if scrolled out of view, tab is hidden, or mobile menu is active
+      if (!isIntersecting || document.hidden || document.body.classList.contains('mobile-menu-active')) {
+        animationFrameId = 0;
+        return;
+      }
+
       animationFrameId = requestAnimationFrame(animate);
-      const delta = clock.getDelta();
+      const delta = Math.min(clock.getDelta(), 0.1);
       const time = clock.getElapsedTime();
 
-      // Check if screen mode toggled or periodic pulse
-      if (currentMode !== activeScreenRef.current || time - lastCanvasUpdate > 0.08) {
+      // Check if screen mode toggled
+      if (currentMode !== activeScreenRef.current) {
         currentMode = activeScreenRef.current;
-        lastCanvasUpdate = time;
-        pulsePhase += 0.12;
-        const updatedCanvas = createKioskScreen(currentMode, pulsePhase);
-        screenTexture.image = updatedCanvas;
-        screenTexture.needsUpdate = true;
+        screenMat.map = currentMode === 'order' ? orderTexture : kdsTexture;
+        screenMat.needsUpdate = true;
       }
 
       if (!prefersReducedMotion) {
@@ -857,11 +864,42 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
       renderer.render(scene, camera);
     };
 
+    // IntersectionObserver: Pause rendering when scrolled out of viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting && !animationFrameId) {
+          clock.start();
+          animate();
+        } else if (!isIntersecting && animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = 0;
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = 0;
+        }
+      } else if (isIntersecting && !animationFrameId) {
+        clock.start();
+        animate();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
     animate();
 
     // Cleanup
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       if (resetTimer) clearTimeout(resetTimer);
       container.removeEventListener('mousedown', handleMouseDown);
       container.removeEventListener('dblclick', handleDblClick);
@@ -876,7 +914,8 @@ export const ThreeHero: React.FC<ThreeHeroProps> = ({ className = '' }) => {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
-      screenTexture.dispose();
+      orderTexture.dispose();
+      kdsTexture.dispose();
     };
   }, [hasWebGL]);
 

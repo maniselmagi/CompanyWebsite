@@ -19,9 +19,20 @@ export const Navbar: React.FC = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('mobile-menu-active');
+    } else {
+      document.body.classList.remove('mobile-menu-active');
+    }
+    return () => {
+      document.body.classList.remove('mobile-menu-active');
+    };
+  }, [mobileMenuOpen]);
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
@@ -78,8 +89,10 @@ export const Navbar: React.FC = () => {
               Contact
             </NavLink>
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-[#0c101a] border border-white/10 text-slate-300 hover:text-white focus:outline-none transition-colors"
+              type="button"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              style={{ touchAction: 'manipulation' }}
+              className="p-2.5 rounded-xl bg-[#0c101a] border border-white/10 text-slate-200 hover:text-white active:scale-95 focus:outline-none transition-transform"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -90,7 +103,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile & Tablet Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-[#07090e]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl transition-all duration-300 animate-in fade-in slide-in-from-top-4">
+        <div className="lg:hidden fixed inset-x-0 top-full bg-[#07090e]/98 backdrop-blur-md border-b border-white/10 shadow-2xl transition-all duration-200 animate-in fade-in slide-in-from-top-2">
           <div className="px-6 py-6 space-y-3">
             <div className="pb-3 border-b border-white/5 flex items-center justify-between text-xs text-slate-400">
               <span>NEXORA NAVIGATION</span>

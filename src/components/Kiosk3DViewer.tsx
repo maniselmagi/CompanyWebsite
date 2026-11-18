@@ -41,7 +41,8 @@ export const Kiosk3DViewer: React.FC<Kiosk3DViewerProps> = ({
     }
 
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const isMobileDevice = window.innerWidth < 768;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobileDevice ? 1.25 : 1.75));
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
@@ -210,11 +211,17 @@ export const Kiosk3DViewer: React.FC<Kiosk3DViewerProps> = ({
     window.addEventListener('resize', handleResize);
     handleResize();
 
-    // Animation Loop
-    let animationFrameId: number;
+    // Animation Loop with Visibility Pausing
+    let animationFrameId = 0;
     let clock = new THREE.Clock();
+    let isIntersecting = false;
 
     const animate = () => {
+      if (!isIntersecting || document.hidden || document.body.classList.contains('mobile-menu-active')) {
+        animationFrameId = 0;
+        return;
+      }
+
       animationFrameId = requestAnimationFrame(animate);
 
       if (!isDragging && !prefersReducedMotion) {
@@ -235,10 +242,38 @@ export const Kiosk3DViewer: React.FC<Kiosk3DViewerProps> = ({
       renderer.render(scene, camera);
     };
 
-    animate();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting && !animationFrameId) {
+          clock.start();
+          animate();
+        } else if (!isIntersecting && animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = 0;
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = 0;
+        }
+      } else if (isIntersecting && !animationFrameId) {
+        clock.start();
+        animate();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       domElement.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseup', onMouseUp);

@@ -336,6 +336,27 @@
   animation: scrollWheelPulse 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  .animate-ambient-glow {
+    animation: none !important;
+    opacity: 0.65;
+  }
+  .animate-subtle-float {
+    animation: none !important;
+  }
+  /* Reduce extreme blur filters on mobile to prevent GPU compositing stalls */
+  .blur-3xl {
+    filter: blur(28px) !important;
+  }
+  .blur-\[130px\],
+  .blur-\[140px\],
+  .blur-\[150px\],
+  .blur-\[160px\] {
+    filter: blur(36px) !important;
+  }
+}
+
 /* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

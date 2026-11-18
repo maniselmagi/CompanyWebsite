@@ -1,45 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 /**
  * AmbientGlowFollower
- * Luxury interactive cursor aura inspired by Lusion.co and Awwwards sites.
- * Creates an ultra-subtle, GPU-accelerated radial light that softly follows the pointer on desktop,
- * illuminating glass card borders and background grids without causing layout thrash or mobile drag.
+ * High-performance pointer illumination for desktop displays with fine pointer.
+ * Completely disables itself on mobile/touch screens (zero CPU/memory footprint).
+ * Uses direct transform styling on a ref without triggering React component re-renders.
  */
 export const AmbientGlowFollower: React.FC = () => {
-  const [position, setPosition] = useState({ x: -400, y: -400 });
-  const [isVisible, setIsVisible] = useState(false);
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Only mount on devices with a fine pointer (desktop / laptop mice)
     if (typeof window === 'undefined') return;
-    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+    // Completely disable on mobile, touch, or reduced motion devices
+    const isTouchOrMobile = window.innerWidth < 1024 || !window.matchMedia('(pointer: fine)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!isFinePointer || prefersReducedMotion) return;
+    if (isTouchOrMobile || prefersReducedMotion) return;
+
+    const el = glowRef.current;
+    if (!el) return;
 
     let rafId: number;
-    let targetX = -400;
-    let targetY = -400;
-    let currentX = -400;
-    let currentY = -400;
+    let targetX = -500;
+    let targetY = -500;
+    let currentX = -500;
+    let currentY = -500;
+    let isVisible = false;
 
     const onMouseMove = (e: MouseEvent) => {
       targetX = e.clientX;
       targetY = e.clientY;
-      if (!isVisible) setIsVisible(true);
+      if (!isVisible) {
+        isVisible = true;
+        el.style.opacity = '1';
+      }
     };
 
     const onMouseLeave = () => {
-      setIsVisible(false);
+      isVisible = false;
+      el.style.opacity = '0';
     };
 
     const animate = () => {
-      // Smooth lerp (linear interpolation) for organic fluid cursor trailing
-      currentX += (targetX - currentX) * 0.12;
-      currentY += (targetY - currentY) * 0.12;
+      currentX += (targetX - currentX) * 0.15;
+      currentY += (targetY - currentY) * 0.15;
 
-      setPosition({ x: currentX, y: currentY });
+      el.style.transform = `translate3d(${currentX - 260}px, ${currentY - 260}px, 0)`;
       rafId = requestAnimationFrame(animate);
     };
 
@@ -52,24 +59,20 @@ export const AmbientGlowFollower: React.FC = () => {
       document.removeEventListener('mouseleave', onMouseLeave);
       cancelAnimationFrame(rafId);
     };
-  }, [isVisible]);
+  }, []);
 
-  if (!isVisible) return null;
-
+  // Hidden on touch/mobile via CSS as well as JS
   return (
     <div
+      ref={glowRef}
       aria-hidden="true"
-      className="fixed pointer-events-none z-30 hidden lg:block -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 ease-out"
+      className="fixed pointer-events-none z-30 hidden lg:block opacity-0 transition-opacity duration-300 ease-out will-change-transform"
       style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
         width: '520px',
         height: '520px',
-        background: 'radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(139, 92, 246, 0.04) 40%, rgba(0, 0, 0, 0) 70%)',
+        background: 'radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(139, 92, 246, 0.03) 40%, rgba(0, 0, 0, 0) 70%)',
         filter: 'blur(35px)',
-        opacity: isVisible ? 1 : 0,
       }}
     />
   );
 };
-
