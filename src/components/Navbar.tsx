@@ -39,8 +39,8 @@ export const Navbar: React.FC = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-[#07090e]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_rgba(0,0,0,0.5)] py-3.5' 
+        isScrolled || mobileMenuOpen
+          ? 'bg-[#07090e] border-b border-white/[0.08] shadow-[0_10px_30px_rgba(0,0,0,0.5)] py-3.5' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -80,14 +80,8 @@ export const Navbar: React.FC = () => {
             </NavLink>
           </div>
 
-          {/* Mobile & Tablet Navigation Header */}
-          <div className="flex items-center gap-2.5 lg:hidden">
-            <NavLink
-              to="/contact"
-              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-colors shadow-md shadow-blue-600/30"
-            >
-              Contact
-            </NavLink>
+          {/* Mobile & Tablet Navigation Header Toggle (Clean Single Button) */}
+          <div className="flex items-center lg:hidden">
             <button
               type="button"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -103,7 +97,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile & Tablet Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-[#07090e]/98 backdrop-blur-md border-b border-white/10 shadow-2xl transition-all duration-200 animate-in fade-in slide-in-from-top-2">
+        <div className="lg:hidden absolute top-full left-0 right-0 w-full bg-[#07090e] border-b border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.9)] max-h-[calc(100vh-70px)] overflow-y-auto animate-menu-slide-down">
           <div className="px-6 py-6 space-y-3">
             <div className="pb-3 border-b border-white/5 flex items-center justify-between text-xs text-slate-400">
               <span>NEXORA NAVIGATION</span>
